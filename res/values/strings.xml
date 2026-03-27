@@ -98,6 +98,9 @@
     <string name="button_setting_txt">Settings</string>
     <string name="button_verify_txt">OK</string>
     <string name="check_apk_update_message">A new phone app version of HandShaker is available. For the sake of stability, it is recommended that you upgrade to the new version. Do you want to upgrade?</string>
+    <string name="community_edition_badge_subtitle">Android 16 compatibility</string>
+    <string name="community_edition_badge_title">Unofficial Maintained Build</string>
+    <string name="community_edition_badge_version">v0.1.0 · 2026-03-28</string>
     <string name="connect_info_usb_show_name">Computer</string>
     <string name="connect_info_usb_tip">Connected to computer by USB</string>
     <string name="connect_info_wifi_tip">Connected to %s</string>

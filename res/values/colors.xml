@@ -47,6 +47,9 @@
     <color name="combined_view_account_color_7">#ff6b64c4</color>
     <color name="combined_view_account_color_8">#ff738359</color>
     <color name="combined_view_account_color_9">#ff9d50a4</color>
+    <color name="community_edition_card_bg">#eef4ff</color>
+    <color name="community_edition_subtitle_text">#6c8cd5</color>
+    <color name="community_edition_title_text">#5079d9</color>
     <color name="connectting_fragment_background">#fcfcfc</color>
     <color name="copyright_info_color">#808080</color>
     <color name="crypt_keeper_clock_background">#ff9a9a9a</color>
