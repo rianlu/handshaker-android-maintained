@@ -52,13 +52,13 @@
 .end method
 
 .method public static b(Landroid/content/Context;)Ljava/lang/String;
-    .locals 4
+    .locals 5
 
     .prologue
-    const/4 v3, 0x1
+    const/4 v4, 0x1
 
     .line 58
-    if-eqz p0, :cond_1
+    if-eqz p0, :cond_2
 
     .line 59
     const-string v0, "connectivity"
@@ -75,13 +75,13 @@
     move-result-object v0
 
     .line 62
-    if-eqz v0, :cond_1
+    if-eqz v0, :cond_2
 
     invoke-virtual {v0}, Landroid/net/NetworkInfo;->getType()I
 
     move-result v0
 
-    if-ne v0, v3, :cond_1
+    if-ne v0, v4, :cond_2
 
     .line 63
     const-string v0, "wifi"
@@ -97,12 +97,16 @@
 
     move-result-object v0
 
-    .line 65
-    new-instance v1, Ljava/lang/StringBuilder;
+    if-eqz v0, :cond_2
 
+    .line 65
     invoke-virtual {v0}, Landroid/net/wifi/WifiInfo;->getSSID()Ljava/lang/String;
 
     move-result-object v0
+
+    if-eqz v0, :cond_2
+
+    new-instance v1, Ljava/lang/StringBuilder;
 
     invoke-direct {v1, v0}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
 
@@ -115,21 +119,21 @@
 
     invoke-virtual {v0, v2}, Ljava/lang/String;->endsWith(Ljava/lang/String;)Z
 
-    move-result v0
+    move-result v2
 
-    if-eqz v0, :cond_0
+    if-eqz v2, :cond_0
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object v0
+    move-result-object v2
 
-    const-string v2, "\""
+    const-string v3, "\""
 
-    invoke-virtual {v0, v2}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+    invoke-virtual {v2, v3}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
 
-    move-result v0
+    move-result v2
 
-    if-eqz v0, :cond_0
+    if-eqz v2, :cond_0
 
     .line 68
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->length()I
@@ -138,7 +142,7 @@
 
     add-int/lit8 v0, v0, -0x1
 
-    invoke-virtual {v1, v3, v0}, Ljava/lang/StringBuilder;->subSequence(II)Ljava/lang/CharSequence;
+    invoke-virtual {v1, v4, v0}, Ljava/lang/StringBuilder;->subSequence(II)Ljava/lang/CharSequence;
 
     move-result-object v0
 
@@ -146,23 +150,28 @@
 
     move-result-object v0
 
-    .line 74
-    :goto_0
-    return-object v0
-
-    .line 70
+    .line 71
     :cond_0
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    const-string v1, "<unknown ssid>"
 
-    move-result-object v0
+    invoke-virtual {v1, v0}, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z
 
-    goto :goto_0
+    move-result v1
+
+    if-eqz v1, :cond_1
+
+    .line 72
+    const-string v0, ""
 
     .line 74
     :cond_1
+    return-object v0
+
+    .line 77
+    :cond_2
     const-string v0, ""
 
-    goto :goto_0
+    return-object v0
 .end method
 
 .method public static c(Landroid/content/Context;)Ljava/lang/String;

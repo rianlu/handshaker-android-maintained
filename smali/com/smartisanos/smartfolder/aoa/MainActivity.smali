@@ -526,6 +526,70 @@
     return-void
 .end method
 
+.method private l()V
+    .locals 5
+
+    .prologue
+    .line 571
+    sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
+
+    const/16 v1, 0x17
+
+    if-lt v0, v1, :cond_2
+
+    .line 572
+    const-string v0, "android.permission.ACCESS_FINE_LOCATION"
+
+    invoke-static {p0, v0}, Landroid/support/v4/content/a;->a(Landroid/content/Context;Ljava/lang/String;)I
+
+    move-result v0
+
+    if-eqz v0, :cond_2
+
+    .line 573
+    const-string v0, "android.permission.ACCESS_COARSE_LOCATION"
+
+    invoke-static {p0, v0}, Landroid/support/v4/content/a;->a(Landroid/content/Context;Ljava/lang/String;)I
+
+    move-result v0
+
+    if-nez v0, :cond_0
+
+    goto :goto_0
+
+    .line 577
+    :cond_0
+    const/4 v0, 0x2
+
+    new-array v0, v0, [Ljava/lang/String;
+
+    const/4 v1, 0x0
+
+    const-string v2, "android.permission.ACCESS_FINE_LOCATION"
+
+    aput-object v2, v0, v1
+
+    const/4 v1, 0x1
+
+    const-string v2, "android.permission.ACCESS_COARSE_LOCATION"
+
+    aput-object v2, v0, v1
+
+    .line 578
+    const/16 v1, 0x3ea
+
+    invoke-static {p0, v0, v1}, Landroid/support/v4/app/a;->a(Landroid/app/Activity;[Ljava/lang/String;I)V
+
+    .line 580
+    :cond_1
+    return-void
+
+    .line 574
+    :cond_2
+    :goto_0
+    return-void
+.end method
+
 
 # virtual methods
 .method public final a()V
@@ -1396,9 +1460,12 @@
     invoke-virtual {p0, v0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->setContentView(I)V
 
     .line 193
-    invoke-virtual {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->b()V
+    invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->l()V
 
     .line 194
+    invoke-virtual {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->b()V
+
+    .line 195
     invoke-static {}, Lcom/smartisanos/smartfolder/aoa/g/e;->a()Lcom/smartisanos/smartfolder/aoa/g/e;
 
     move-result-object v0
