@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:background="@drawable/background" android:layout_width="wrap_content" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ScrollView android:id="@id/scroll_view" android:scrollbars="vertical" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_marginTop="@dimen/setting_margin_top" android:overScrollMode="always">
+        <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
+            <TextView android:textSize="@dimen/setting_item_text_size" android:textColor="@color/settings_item_color_bg" android:gravity="center_vertical" android:id="@id/setting_share" android:background="@drawable/selector_setting_sub_item_bg_top" android:paddingLeft="@dimen/setting_item_text_left" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/setting_share_margin_top" android:text="@string/settings_share_app" />
+            <RelativeLayout android:orientation="horizontal" android:id="@id/setting_help" android:background="@drawable/settings_item_middle" android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:textSize="@dimen/setting_item_text_size" android:textColor="@color/settings_item_color_bg" android:paddingLeft="@dimen/setting_item_text_left" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/settings_help" android:layout_centerVertical="true" />
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/setting_next" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+            </RelativeLayout>
+            <RelativeLayout android:orientation="horizontal" android:id="@id/setting_check_update" android:background="@drawable/settings_item_middle" android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:textSize="@dimen/setting_item_text_size" android:textColor="@color/settings_item_color_bg" android:paddingLeft="@dimen/setting_item_text_left" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/settings_check_update" android:layout_centerVertical="true" />
+                <TextView android:textSize="@dimen/more_text_size_15" android:textColor="@drawable/settings_item_right_color_bg" android:id="@id/setting_version_txt" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="@dimen/settings_item_text_right" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+                <ProgressBar android:id="@id/update_progress_bar" android:visibility="gone" android:duplicateParentState="true" android:layout_width="@dimen/settings_progress_bar_width" android:layout_height="@dimen/settings_progress_bar_height" android:layout_marginRight="@dimen/settings_item_text_right" android:indeterminateDrawable="@drawable/common_progress_item" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+            </RelativeLayout>
+            <RelativeLayout android:orientation="horizontal" android:id="@id/setting_switch_language" android:background="@drawable/settings_item_middle" android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:textSize="@dimen/setting_item_text_size" android:textColor="@color/settings_item_color_bg" android:id="@id/language_text" android:paddingLeft="@dimen/setting_item_text_left" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/setting_switch_language_txt" android:layout_centerVertical="true" />
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/setting_next" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+                <TextView android:textSize="@dimen/setting_item_current_language_size" android:textColor="@color/current_language_text_color" android:ellipsize="end" android:gravity="right" android:id="@id/current_language" android:paddingRight="@dimen/setting_item_text_account_right" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+            </RelativeLayout>
+            <RelativeLayout android:orientation="horizontal" android:id="@id/setting_feedback" android:background="@drawable/settings_item_middle" android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:textSize="@dimen/setting_item_text_size" android:textColor="@color/settings_item_color_bg" android:paddingLeft="@dimen/setting_item_text_left" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/setting_feedback_txt" android:layout_centerVertical="true" />
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/setting_next" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+            </RelativeLayout>
+            <RelativeLayout android:orientation="horizontal" android:id="@id/setting_user_experience" android:background="@drawable/selector_setting_sub_item_bg_bottom" android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:textSize="@dimen/setting_item_text_size" android:textColor="@color/settings_item_color_bg" android:paddingLeft="@dimen/setting_item_text_left" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/setting_user_experience_txt" android:layout_centerVertical="true" />
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/setting_next" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+            </RelativeLayout>
+            <com.smartisan.moreapps.AppsView android:id="@id/setting_more_product" android:layout_width="match_parent" android:layout_height="wrap_content" />
+            <include android:layout_width="match_parent" android:layout_height="wrap_content" layout="@layout/layout_follow_view" />
+            <RelativeLayout android:orientation="horizontal" android:id="@id/setting_language_bar" android:background="@drawable/setting_item_single_background" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/setting_item_top" android:layout_marginBottom="@dimen/setting_item_top">
+                <ImageView android:paddingLeft="@dimen/setting_item_text_left" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/language_switch_icon" android:layout_centerVertical="true" />
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/setting_next" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+    <com.smartisanos.smartfolder.aoa.view.TitleBar android:id="@id/titlebar" android:layout_width="match_parent" android:layout_height="wrap_content" />
+</FrameLayout>

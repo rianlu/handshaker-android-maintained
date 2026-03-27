@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="zxing_app_name">QRコードスキャナー</string>
+    <string name="zxing_button_ok">OK</string>
+    <string name="zxing_msg_camera_framework_bug">Androidのカメラに問題が発生しました。デバイスを再起動する必要があります。</string>
+    <string name="zxing_msg_default_status">QRコードを画面の読み取り範囲内に写すとスキャンします。</string>
+    <string name="app_install_txt">インストール</string>
+    <string name="app_open_txt">開く</string>
+    <string name="auto_update_var_wifi">%sは自動アップデートしています。少々お待ち下さい…</string>
+    <string name="calendar_app_txt">Smartisan Calendar</string>
+    <string name="calendar_des_txt">美しく、使い易いカレンダーアプリ</string>
+    <string name="cancel_text">キャンセル</string>
+    <string name="check_update">アップデートを確認</string>
+    <string name="check_update_fail">アップデートの確認失敗</string>
+    <string name="clock_app_txt">Smartisan Clock</string>
+    <string name="clock_des_txt">おそらく史上最も美しい時計アプリ</string>
+    <string name="download_dialog_cancel">キャンセル</string>
+    <string name="download_dialog_download">ダウンロード</string>
+    <string name="download_dialog_message">現在モバイルネットワークを使いダウンロードしています。通信費用が発生する可能性がありますが、続けますか？</string>
+    <string name="download_dialog_title">ヒント</string>
+    <string name="download_no_net">ネット接続に失敗、ダウンロードはネット接続後に自動再開されます</string>
+    <string name="downloading_message">ダウンロードを開始しています...</string>
+    <string name="email_app_txt">Smartisan Mail</string>
+    <string name="email_des_txt">シンプルで美しいメールアプリ</string>
+    <string name="feedback_add_err_pic">この画像を読み込めません</string>
+    <string name="feedback_add_pic_err_type">ファイルタイプが違います。画像ファイルを選択してください。</string>
+    <string name="feedback_add_pic_limit">申し訳ございません。画像添付は５枚までです。</string>
+    <string name="feedback_description_limit">問題の内容が 1000 字を超えています。修正してから提出してください。</string>
+    <string name="feedback_uploading_report">送信中...</string>
+    <string name="force_update__var_mobile" formatted="false">新しいバージョン%s(v%s)があります。ファイルサイズは %s MB、モバイルデータ通信を使用しています。通信費が発生する可能性がありますが、アップデートしますか？</string>
+    <string name="force_update__var_wifi" formatted="false">新しいバージョン%s(v%s)があります。ファイルサイズは %s MB、最新バージョンにアップデートすると引き続き使用できるようになります。</string>
+    <string name="launcher_app_txt">Smartisan Launcher</string>
+    <string name="launcher_des_txt">今までになく美しく使いやすいランチャーアプリ</string>
+    <string name="more_apps_title">その他のSmartisanアプリ</string>
+    <string name="mover_app_txt">スマイルクラウド</string>
+    <string name="mover_des_txt">シンプルで使い易いクラウドツール</string>
+    <string name="network_error_message">ネットワーク接続が失敗し、後で再試行してください。</string>
+    <string name="no_network">ネットに接続されていません。</string>
+    <string name="no_updated_version">最新バージョンです</string>
+    <string name="notes_app_txt">Smartisan Notes</string>
+    <string name="notes_des_txt">おそらく史上最も美しいメモアプリ</string>
+    <string name="ota_upate_hint">%sは安定性のアップした新バージョンがあります。使いやすさを更に増すために、“設定-システムアップデート” で最新バージョンにアップデートしてください。</string>
+    <string name="problem_description_button_next">提出</string>
+    <string name="problem_description_dialog_cancel">破棄</string>
+    <string name="problem_description_dialog_info">まだ提出していないフィードバックを破棄しますか？</string>
+    <string name="problem_description_dialog_ok">キャンセル</string>
+    <string name="problem_description_hint">起こった問題を具体的に書いてください（ 1000 字以内）</string>
+    <string name="problem_description_image_introduction">画像添付</string>
+    <string name="problem_description_select_same_file">選択したファイルはすでに存在します。</string>
+    <string name="problem_network_toast">使用可能なネットがありません。接続してからお試しください</string>
+    <string name="problem_user_info_email">メール（任意）</string>
+    <string name="reader_app_txt">Smartisan Reader</string>
+    <string name="reader_des_txt">時代を刻む情報をシンプルなリーダーで読む</string>
+    <string name="report_failed_notification">提出失敗、ネットに接続してからお試しください</string>
+    <string name="report_success_notification">提出成功</string>
+    <string name="system_downloader_err">コンテンツをダウンロードすることができません。ダウンロードマネージャがオフになっています。</string>
+    <string name="system_downloader_error">ダウンロードできない、システムダウンロードをチェックしてください</string>
+    <string name="title_button_text_back">戻る</string>
+    <string name="update_cancel">アップデートをキャンセル</string>
+    <string name="update_download">ダウンロードしてインストール</string>
+    <string name="update_install">アップデート</string>
+    <string name="user_feedback">フィードバック</string>
+</resources>

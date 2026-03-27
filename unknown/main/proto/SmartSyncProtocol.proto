@@ -1,0 +1,742 @@
+/*
+这个文件定义了 Smartisan HandShaker 手机端和电脑端直接的交互协议。
+*/
+syntax = "proto2";
+package smartsync;
+
+option java_package = "com.smartisanos.smartfolder.protocol";
+option java_outer_classname = "SmartSyncProtocolProtos";
+
+//基本数据结构定义
+//定义里出现的 timestamp 都是标准 unix timestamp
+//定义中出现的文件大小单位是 byte
+//文件
+message SSPFile {
+    optional string path = 1;
+    optional uint64 file_size = 2;
+    optional uint64 created_timestamp = 3;
+    optional uint64 modified_timestamp = 4;
+    optional bool isDirectory = 6;
+    optional string checksum = 7;
+    optional SSPFileType file_type = 8;
+    optional string prefixMd5 = 9;
+    optional string ext_data = 10;
+    optional bool is_trash = 11;    //是否移动到回收站，用于文件删除请求
+    optional bool succeed = 12;     //删除是否成功，用于响应文件删除请求
+    optional SSPFileIOError error_code = 13; //删除错误码，用于响应文件删除请求
+    optional uint64 id = 14;        //在手机媒体库中的文件id
+}
+
+message SSPImageFile {
+    optional string path = 1;
+    optional uint64 file_size = 2;
+    optional uint64 created_timestamp = 3;
+    optional uint64 modified_timestamp = 4;
+    optional uint32 width = 5;//单位 px
+    optional uint32 height = 6;//单位 px
+    optional uint32 orientation = 7;//Exif Orientation Value - http://sylvana.net/jpegcrop/exif_orientation.html
+    optional uint64 media_id = 8;
+    optional uint64 album_id = 9;
+    optional string mime_type = 10;
+    optional bytes thumbnail = 11;
+    optional string album_name = 12;
+    optional uint64 date_taken = 13;
+    optional string latitude = 14;
+    optional string longitude = 15;
+    optional string mini_thumb_magic = 16;
+    optional string title = 17;
+    optional bool get_thumbnail_error = 18;
+    optional bool starred = 19; // 是否为加星图片
+}
+
+message SSPImageAlbum {
+    optional string album_path = 1;     //_data 去掉文件名
+    optional uint64 album_id = 2;       //bucket_id
+    optional string album_name = 3;     //bucket_display_name
+    optional SSPImageFile cover_image = 4; //来自 _data
+}
+
+message SSPAudioFile {
+    optional string path = 1;//文件路径
+    optional uint64 file_size = 2;//文件大小
+    optional uint64 created_timestamp = 3;//文件建立时间
+    optional uint64 modified_timestamp = 4;//文件修改时间
+    optional uint64 media_id = 5;//歌曲 id
+    optional uint64 album_id = 6;//专辑 id
+    optional string title = 7;//歌曲名
+    optional string mime_type = 8;//mimetype
+    optional uint64 artist_id = 9;//演唱者
+    optional string artist = 10;//演唱者
+    optional string composer = 11;//作曲
+    optional uint32 genre = 12;//类别 http://id3.org/id3v2.3.0#Appendix_A_-_Genre_List_from_ID3v1
+    optional string comment = 13;//评论
+    optional string copyright = 14;//copyright
+    optional string audio_codec = 15;//编码类型
+    optional uint32 track = 16;//音轨
+    optional double duration = 17;//时长 second. apk传回的值是 ms。需要/1000.0
+    optional double start_offset = 18;//start offset, 例如：如果音乐是 ape 音轨类型，那么我们需要知道这首歌曲的 start offset; 0 表示不是音轨文件，是普通的单文件音乐
+    optional uint32 year = 19;//发行年份
+    optional uint32 bitrate = 20;//位速率 kbps  e.g. 256 kbps
+    optional double sample_rate = 21;//采样速率 kHz  e.g. 14400.00 kHz
+    optional uint32 play_count = 22;//播放次数
+    optional double rating = 23;//用户评分
+    optional uint32 total_frames = 24;//总 frames 数量
+    optional uint32 bitspersample = 25;//采样bit数  e.g. 16, 32, 64
+    optional uint32 channels = 26;//频道数 e.g  1(mono), 2
+    optional string genre_name = 27; //风格
+}
+
+message SSPAudioAlbum {
+    optional string album_path = 1;     //_data 去掉文件名
+    optional uint64 album_id = 2;
+    optional string album_name = 3;
+    optional uint64 artist_id = 4;//演唱者
+    optional string artist = 5;//演唱者
+    optional uint32 year = 6;//专辑发行年份
+    optional bytes thumbnail = 7;
+    optional bool get_thumbnail_error = 8;
+}
+
+
+message SSPVideoFile {
+    optional string path = 1;
+    optional uint64 file_size = 2;
+    optional uint32 created_timestamp = 3;
+    optional uint32 modified_timestamp = 4;
+    optional uint32 width = 5;
+    optional uint32 height = 6;
+    optional uint32 orientation = 7;
+    optional uint64 media_id = 8;
+    optional uint64 album_id = 9;
+    optional string mime_type = 10;
+    optional bytes thumbnail = 11;
+    optional bool get_thumbnail_error = 12;
+    optional double duration = 13;//时长 second
+}
+
+message SSPVideoAlbum {
+    optional string album_path = 1;     //_data 去掉文件名
+    optional uint64 album_id = 2;
+    optional string album_name = 3;
+}
+
+message SSPDataRange {
+    optional uint64 offset = 1;
+    optional uint64 length = 2;
+}
+
+//文件变更回调的对象
+message SSPFileEvent {
+    optional SSPFile file = 1;//事件主体
+    optional SSPFileEventType event = 2;//事件
+}
+
+//请求命令类型定义
+enum SSPRequestType {
+    HEART_BEAT_REQUEST = 1;                     //心跳请求
+    GET_DEVICE_INFO_REQUEST = 2;                //获取固定设备信息
+    GET_THUMBNAIL_REQUEST = 3;                  //获取缩略图请求
+    GET_PHOTO_LIB_REQUEST = 4;                  //获取图库请求
+    GET_VIDEO_LIB_REQUEST = 5;                  //获取视频库请求
+    GET_AUDIO_LIB_REQUEST = 6;                  //获取乐库请求
+    GET_DIR_FILES_REQUEST = 7;                  //获取文件请求
+    GET_FILE_COUNT_REQUEST = 8;                 //获取目录下文件数量请求
+    GET_FILE_EXIST_REQUEST = 9;                 //检测文件是否存在
+    GET_CREATE_FOLDER_REQUEST = 10;             //建立目录请求
+    GET_RENAME_FILE_REQUEST = 11;               //重命名文件请求
+    GET_DOWNLOAD_FILE_REQUEST = 12;             //下载请求
+    GET_DOWNLOAD_FILE_RESPONSE_HEADER = 13;     //下载文件响应头
+    GET_DOWNLOAD_FILE_RESPONSE_BODY = 14;       //下载文件响应主体
+    GET_UPLOAD_FILE_REQUEST_HEADER = 15;        //上传文件请求头
+    GET_UPLOAD_FILE_RESPONSE_HEADER = 16;       //上传文件头响应
+    GET_UPLOAD_FILE_REQUEST_BODY = 17;          //上传文件主体
+    GET_UPLOAD_FILE_RESPONSE = 18;              //上传文件主体响应
+    GET_DELETE_FILE_REQUEST = 19;               //删除文件请求
+    PHOTO_LIB_CHANGE = 20;                      //图片库变更
+    AUDIO_LIB_CHANGE = 21;                      //音频库变更
+    VIDEO_LIB_CHANGE = 22;                      //视频库变更
+    MONITOR_FOLDER_REQUEST = 23;                //目录监控请求
+    MONITOR_FOLDER_RESPONSE_HEADER = 24;        //目录监控确认结果，主机端发送 MONITOR_FOLDER_REQUEST 后，先返回这个结果用来确认是否监控成功
+    MONITOR_FOLDER_RESPONSE = 25;               //目录监控回调。如果监控成功，这个是实际文件变更的回调结果。
+    GET_CLIPBOARD_REQUEST= 26;                  //获取剪切板请求
+    POST_CLIPBOARD_REQUEST= 27;                 //发送剪切板请求
+    CLEAR_CLIPBOARD_REQUEST= 28;                //清空剪切板请求
+    DELETE_CLIPBOARD_REQUEST= 29;               //删除剪切板请求
+    CLIPBOARD_CHANGE = 30;                      //剪切板变更
+    HANDSHAKE_REQUEST_01 = 31;                  //握手请求 01
+    HANDSHAKE_RESPONSE_01 = 32;                 //握手响应 01
+    HANDSHAKE_REQUEST_02 = 33;                  //握手请求 02
+    HANDSHAKE_RESPONSE_02 = 34;                 //握手响应 02
+    QUIT_REQUEST = 35;                          //退出握手
+    CANCEL_REQUEST = 36;                        //取消请求
+    PHOTO_SYNC_REQUEST = 37;                    //照片同步请求
+    FILE_CHANGE = 38;                           //文件变更
+    SYNC_MONITOR_REQUEST = 39;                  //实时同步请求
+    UPDATE_FILE_INFO = 40;                      //更新文件信息
+    UPDATE_FILE_INFO_RESPONSE = 41;             //更新文件信息响应
+}
+
+//文件变更事件类型定义
+//参见 http://developer.android.com/reference/android/os/FileObserver.html
+enum SSPFileEventType {
+    FILE_EVENT_CREATE = 1;                      //A new file or subdirectory was created under the monitored directory
+    FILE_EVENT_DELETE = 2;                      //A file was deleted from the monitored directory
+    FILE_EVENT_CLOSE_WRITE = 3;                 //Event type: Someone had a file or directory open for writing, and closed it
+    FILE_EVENT_MOVED_FROM = 4;                  //A file or subdirectory was moved from the monitored directory
+    FILE_EVENT_MOVED_TO = 5;                    //A file or subdirectory was moved to the monitored directory
+    FILE_EVENT_DELETE_SELF = 6;                 //The monitored file or directory was deleted; monitoring effectively stops
+    FILE_EVENT_MOVE_SELF = 7;                   //The monitored file or directory was moved; monitoring continues
+    FILE_EVENT_DIR_CHANGED = 8;                 //The monitored directory was changed; monitoring continues
+}
+
+//文件操作错误类型定义
+enum SSPFileIOError {
+    FILE_IO_UNKNOW_ERROR = 1;                           //未知文件 IO 失败
+    FILE_IO_INVALID_NAME = 2;                           //无效文件名
+    FILE_IO_INVALID_SOURCE = 3;                         //操作目标无效，例如，需要重命名的文件不存在
+    FILE_IO_TARGET_ALREADY_EXIST = 4;                   //同名文件已存在
+    FILE_IO_PERMISSION_ERROR = 5;                       //权限错误
+    FILE_IO_INSUFFICIENT_DISK_SPACE_ERROR = 6;          //磁盘空间不足
+    FILE_IO_MD5_CHECK_ERROR = 7;                        //MD5 校验失败
+    FILE_IO_SYSTEM_FILE = 8;                            //系统文件，无法修改
+    FILE_IO_SDCARD_REMOVED = 9;                         //SD卡被拔出
+    FILE_IO_SDCARD_NO_PERMISSION = 10;                  //当Android版本低于5.0,时，读写SD卡文件时返回的值
+    FILE_IO_PATH_OR_NAME_TOO_LONG = 11;                 //文件名长度：255，路径：4096，有一个超长，返回该错误码
+    FILE_IO_CANCEL_ACTION = 12;                         //取消相关操作，如：删除
+}
+
+enum SSPFileIOPermission {
+    ALLOW_NONE = 0;                //无权限
+    ALLOW_READ = 1;                //可读
+    ALLOW_WRITE = 2;               //可写
+    ALLOW_READ_WRITE = 3;          //可读写 = ALLOW_READ | ALLOW_WRITE
+}
+
+message SSPRequest {
+    optional SSPRequestType type = 1;
+}
+
+/*
+握手请求
+*/
+//信任类型定义
+enum SSPHandShakeTrustType {
+    TRUST_WAITING = 1;                //等待用户回复信任对话框
+    TRUST_UNKNOW = 2;                 //信任状态不存在
+    TRUST_NO = 3;                     //不信任
+    TRUST_ONCE = 4;                   //信任一次
+    TRUST_ALWAYS = 5;                 //总是信任
+    TRUST_REMOVE = 6;                 //信任已经失效，需要清理掉信任条目
+}
+
+//
+// 第 1 轮握手请求，主要任务是为了交换 uuid 和名称
+//
+//握手请求 01
+message SSPHandShakeRequest01 {
+    optional SSPRequestType type = 1 [default = HANDSHAKE_REQUEST_01];
+    optional string host_uuid = 2;      //主机端 uuid，例如，可以是 MAC 地址
+    optional string host_name = 3;      //主机端电脑名称
+    optional uint64 host_timestamp = 4; //host 端时间戳
+    optional string host_smart_sync_protocol_version = 5;     //协议版本号
+    optional string host_app_version = 6;              //主机端软件版本号
+    optional string host_min_client_version = 7;       //主机端需求的最小 apk 版本号
+    optional bytes md5 = 8;                            //MD5 of ENCKEY
+    optional bytes enckey = 9;                         //ENCKEY
+    optional string host_model = 10;     //主机端电脑类型，例如 iMac12,2  
+    optional uint64 heartbeat_timeout_second = 11;     //判断心跳停止的超时上限，单位 s。  10 表示如果心跳间隔 > 10s 就算连接死掉。
+}
+
+//握手请求响应 01，这个响应只返回1次。
+message SSPHandShakeResponse01 {
+    optional SSPRequestType type = 1 [default = HANDSHAKE_RESPONSE_01];
+    optional string apk_version = 2;                            //apk 版本号
+    optional string apk_version_name = 3;                       //apk 版本名称
+    optional uint64 client_timestamp = 4;                       //apk 端时间戳
+    optional string client_smart_sync_protocol_version = 5;     //apk 端 SSP 协议版本号
+    optional string client_min_host_version = 6;                //客户端需求的最小 app 版本号
+    optional string device_uuid = 7;                            //设备端 uuid
+    optional string device_name = 8;                            //设备端名称
+    optional string usb_serial = 9;                             // usb serial number。 getprop ro.serialno 或者 getprop ro.boot.serialno
+    optional bool is_smartisan_device = 10;                     //是否是锤子手机
+    optional uint64 client_min_host_version_code = 11;          //客户端需求的最小 app 版本号
+}
+
+//
+// 第 2 轮握手，主要任务是校验 derived_key 或者移除信任数据。
+//
+//握手请求 02， 如果电脑端没有发现 device_uuid，那么说是一个新手机，需要发送握手请求02
+message SSPHandShakeRequest02 {
+    optional SSPRequestType type = 1 [default = HANDSHAKE_REQUEST_02];
+    optional string host_uuid = 2;                      //主机端 uuid，例如，可以是 MAC 地址
+    optional bytes derived_key = 3;                     //设备端生成 derived key。 
+    optional SSPHandShakeTrustType trust_type = 4;      //信任状态，如果电脑端发现信任手机已经删掉，那么 TRUST_REMOVE
+}
+
+//握手请求响应 02，这个响应，可能返回多次。最后一次必须包含 result
+message SSPHandShakeResponse02 {
+    optional SSPRequestType type = 1 [default = HANDSHAKE_RESPONSE_02];
+    optional SSPHandShakeTrustType trust_type = 2;      //信任状态
+    optional string device_uuid = 3;                    //设备端 uuid
+    optional string device_name = 4;                    //设备端名称
+    optional bytes derived_key = 5;                     //生成 derived key
+    optional string result = 6;                         //握手结果, ‘failed’ 字符串代表握手请求失败。‘locked’ 字符串代表手机处于锁屏状态。‘needauth’ 字符串代表手机处于授权窗口状态。 base64_enc(RSA_enc(‘ok’)) 字符串代表握手成功。注意：‘ok’ 字符串是用 RSA 公钥加密过的数据再经过 base64 得到的字符串，HandShaker 解密成功后拿到 ‘ok’ 字符串才算握手成功。
+}
+
+
+
+/*
+基本请求
+*/
+//心跳请求
+message SSPHeartBeatRequest {
+    optional SSPRequestType type = 1 [default = HEART_BEAT_REQUEST];
+    optional uint64 host_timestamp = 2;
+}
+message SSPHeartBeatResponse {
+    optional SSPRequestType type = 1 [default = HEART_BEAT_REQUEST];
+    optional uint64 host_timestamp = 2;
+    optional uint64 client_timestamp = 3;
+}
+
+/*
+退出请求，这个命令可以是从 app 发到 apk ，也可以从 apk 发到 app
+*/
+message SSPQuitRequest {
+    optional SSPRequestType type = 1 [default = QUIT_REQUEST];
+}
+
+//获取设备信息请求
+message SSPGetDeviceInfoRequest {
+    optional SSPRequestType type = 1 [default = GET_DEVICE_INFO_REQUEST];
+    optional uint64 host_timestamp = 2; //host 端时间戳
+    optional string host_smart_sync_protocol_version = 3;     //协议版本号
+    optional bool need_device_info_callback = 4;     //指明是否需要 DeviceInfo 监控回调
+    optional bool need_photo_library_callback = 5;     //指明是否需要图片库监控回调
+    optional bool need_audio_library_callback = 6;     //指明是否需要音频库监控回调
+    optional bool need_video_library_callback = 7;     //指明是否需要视频库监控回调
+    optional string host_app_version = 8;              //主机端软件版本号
+    optional string host_min_client_version = 9;       //主机端需求的最小 apk 版本号
+    optional uint32 host_type = 10 [default = 1];       //主机端类型: mac(1) or windows(2)
+    optional uint32 host_app_version_code = 11;         //主机端软件版本号
+}
+
+message SSPGetDeviceInfoResponse {
+    optional SSPRequestType type = 1 [default = GET_DEVICE_INFO_REQUEST];
+    optional uint64 host_timestamp = 2;                         //直接复制 SSPGetDeviceInfoRequest 里的 host 端时间戳
+    optional string host_smart_sync_protocol_version = 3;       //直接复制 SSPGetDeviceInfoRequest 里的 host 端协议版本号
+    optional string apk_version = 4;                            //apk version code
+    optional uint64 client_timestamp = 5;                       //apk 端时间戳
+    optional string client_smart_sync_protocol_version = 6;     //apk 端 SSP 协议版本号
+    optional string host_app_version = 7;                   //主机端软件版本号
+    optional string host_min_client_version = 8;            //主机端需求的最小 apk 版本号
+
+    optional string phone_model = 9;                 //手机型号 getprop ro.product.name
+    optional string phone_color = 10;                //颜色
+    optional uint64 disk_size = 11;                  //磁盘容量
+    optional uint64 ram_size = 12;                   //运存容量
+    optional double battery_capacity = 13;           //电池容量
+    optional uint32 battery_percentage = 14;         //当前电池电量
+    optional string phone_name = 15;                 //用户自定义手机名称
+    optional uint64 used_disk_size = 16;             //磁盘使用空间
+    optional string root_path = 17;                  //根目录
+    optional string product_brand = 18;              //手机品牌 getprop ro.product.brand
+    optional string product_manufacturer = 19;       //手机制造商  getprop ro.product.manufacturer
+    optional string smartisan_version = 20;          //Smartisan OS version  getprop ro.smartisan.version
+    optional bool phone_locked = 21;                 //手机屏幕是否锁着
+    optional string client_min_host_version = 22;     //客户端需求的最小 app 版本号
+    optional string apk_version_name = 23;            //apk version name
+    optional string external_storage_path = 24;       //附加 sdcard 目录
+    optional SSPFileIOPermission external_storage_permission = 25; //附加 sdcard 的权限
+    optional uint64 ext_disk_size = 26;                //外置 Sdcard 容量
+    optional uint64 ext_used_disk_size = 27;           //外置 Sdcard 使用空间
+    optional string phone_id = 28;                     //手机id
+    optional int64 audio_size = 29;                    //音频文件占用空间
+    optional int64 pic_video_size = 30;                //图片、视频文件占用空间
+    optional int64 download_size = 31;                 //下载文件占用空间
+    optional int64 other_size = 32;                    //其他文件占用空间
+    optional int64 app_size = 33;                      //应用占用空间
+    optional int64 cache_size = 34;                    //缓存占用空间
+    optional string debug_build_time = 35;             //app的编译时间，只有debug版本的app才有
+    optional int64 client_min_host_version_code = 36;  //客户端需求的最小 app 版本号
+}
+
+/*
+文件和目录相关的请求
+*/
+//获取文件请求
+message SSPGetDirFilesRequest {
+    optional SSPRequestType type = 1 [default = GET_DIR_FILES_REQUEST];
+    optional SSPFile dir = 2;
+    optional uint32 maxdepth = 3;   //需要递归的深度。maxdepth = 1 表示只取当前目录内容
+}
+message SSPGetDirFilesResponse {
+    optional SSPRequestType type = 1 [default = GET_DIR_FILES_REQUEST];
+    optional SSPFile dir = 2;
+    optional uint32 maxdepth = 3;   //需要递归的深度。
+    optional uint32 timecost = 4;   //获取全部数据花费的时间单位 ms
+    repeated SSPFile file = 5;
+}
+
+//获取目录下文件数量请求
+message SSPGetFileCountRequest {
+    optional SSPRequestType type = 1 [default = GET_FILE_COUNT_REQUEST];
+    optional SSPFile dir = 2;
+    optional uint32 maxdepth = 3;
+    repeated string exclusion_pattern = 4;
+}
+
+message SSPGetFileCountResponse {
+    optional SSPRequestType type = 1 [default = GET_FILE_COUNT_REQUEST];
+    optional SSPFile dir = 2;
+    optional uint32 maxdepth = 3;
+    repeated string exclusion_pattern = 4;
+    optional uint64 count = 5;
+}
+
+//检测文件存在请求
+message SSPFileExistRequest {
+    optional SSPRequestType type = 1 [default = GET_FILE_EXIST_REQUEST];
+    optional SSPFile file = 2;
+}
+message SSPFileExistResponse {
+    optional SSPRequestType type = 1 [default = GET_FILE_EXIST_REQUEST];
+    optional SSPFile file = 2;
+    optional bool exist = 3;
+}
+
+//建立目录请求
+message SSPCreateFolderRequest {
+    optional SSPRequestType type = 1 [default = GET_CREATE_FOLDER_REQUEST];
+    optional SSPFile file = 2;
+}
+message SSPCreateFolderResponse {
+    optional SSPRequestType type = 1 [default = GET_CREATE_FOLDER_REQUEST];
+    optional SSPFile file = 2;
+    optional bool succeed = 3;
+    optional SSPFileIOError error_code = 4;
+    optional string error_message = 5;
+}
+
+//重命名目录请求
+message SSPRenameFileRequest {
+    optional SSPRequestType type = 1 [default = GET_RENAME_FILE_REQUEST];
+    optional SSPFile source_file = 2;
+    optional SSPFile target_file = 3;
+}
+message SSPRenameFileResponse {
+    optional SSPRequestType type = 1 [default = GET_RENAME_FILE_REQUEST];
+    optional SSPFile source_file = 2;
+    optional SSPFile target_file = 3;
+    optional bool succeed = 4;
+    optional SSPFileIOError error_code = 5;
+    optional string error_message = 6;
+}
+
+//删除文件请求
+message SSPDeleteFileRequest {
+    optional SSPRequestType type = 1 [default = GET_DELETE_FILE_REQUEST];
+    repeated SSPFile file = 2;     //要删除的文件列表，可能是目录（需要连目录内容全部删除）
+    optional bool is_sync = 3;     //是否需要维护同步状态
+    optional bool is_trash = 4;    //是否移动到回收站
+}
+message SSPDeleteFileResponse {
+    optional SSPRequestType type = 1 [default = GET_DELETE_FILE_REQUEST];
+    repeated SSPFile file = 2;
+    optional bool succeed = 4;
+    optional SSPFileIOError error_code = 5;
+    optional string error_message = 6;
+}
+
+//目录变更监控请求
+message SSPMonitorFolderRequest {
+    optional SSPRequestType type = 1 [default = MONITOR_FOLDER_REQUEST];
+    optional SSPFile file = 2;  //要监控的目录
+    optional bool register = 3;  //yes: 表示要监控 file， no: 表示取消对 file 的监控
+}
+message SSPMonitorFolderResponseHeader {
+    optional SSPRequestType type = 1 [default = MONITOR_FOLDER_RESPONSE_HEADER];
+    optional bool succeed = 2;  //是否监控成功
+    optional string error_message = 3; //如果监控不成功，错误原因是？
+}
+message SSPMonitorFolderResponse {
+    optional SSPRequestType type = 1 [default = MONITOR_FOLDER_RESPONSE];
+    repeated SSPFileEvent event = 2;
+}
+
+//文件上传下载请求
+//下载文件请求，手机端 -》 电脑端
+message SSPDownloadFileRequest {
+    optional SSPRequestType type = 1 [default = GET_DOWNLOAD_FILE_REQUEST];
+    optional SSPFile file = 2;           //被下载的文件，不含目录
+    optional SSPDataRange range = 3;     //需要下载的起始字节位置和长度，如果 length=0 表示全部要下载，如果 length > 剩余数据长度，那么就返回剩余字节长度
+    optional bool need_md5 = 4;          //需要计算 md5
+    optional bool gzip = 5;              //标记是否经过 gzip 压缩，某些文件类型是值得 gzip 压缩的，所以我们用这个标志来标明传递的文件数据是否压缩过。
+    optional bool is_sync = 6;           //是否需要维护同步状态
+}
+
+message SSPDownloadFileResponseHeader {
+    optional SSPRequestType type = 1 [default = GET_DOWNLOAD_FILE_RESPONSE_HEADER];
+    optional SSPFile file = 2;           //被下载文件，包含一些基本属性，包括文件大小等
+    optional SSPDataRange range = 3;     //请求时候的 offset， 返回有效的剩余长度
+    optional bool need_md5 = 4;          //需要计算 md5
+    optional string data_md5 = 5;        //下载数据区域的 MD5 值，如果 need_md5 == 0 不需要计算这个值
+    optional bool ready = 6;             //是否可以继续下载数据
+    optional SSPFileIOError error_code = 7; //如果不能继续，则error_code代表原因
+}
+
+// SSPDownloadFileResponseBody 不适合大文件传输，所以文件传输主要数据通过 session_id + binary 方式传输
+/*
+message SSPDownloadFileResponseBody {
+    optional SSPRequestType type = 1 [default = GET_DOWNLOAD_FILE_RESPONSE_BODY];
+    optional SSPFile file = 2;           //被下载文件，包含一些基本属性
+    optional SSPDataRange range = 3;     //file_bytes 的起始字节位置, file_bytes 的字节长度
+    optional bytes data_bytes = 4;       //文件数据 范围是从 offset <-> offset+length
+}
+*/
+
+//上传文件请求 电脑端 -》 手机端
+//上传文件请求 Header
+message SSPUploadFileRequest {
+    optional SSPRequestType type = 1 [default = GET_UPLOAD_FILE_REQUEST_HEADER];
+    optional SSPFile file = 2;           //上传的文件位置，如果文件已经存在，就删掉旧文件。所以相当于上传文件请求总是覆盖操作。这里会包含文件大小。
+    optional string data_md5 = 3;        //上传数据的整体 md5 值，如果这个值为空那么就不需要计算了。
+    optional bool gzip = 4;              //标记是否经过 gzip 压缩，某些文件类型是值得 gzip 压缩的，所以我们用这个标志来标明传递的文件数据是否压缩过。
+    optional bool is_sync = 5;           //是否需要维护同步状态
+}
+
+//当一个收到 SSPUploadFileRequestHeader 后返回这个响应包
+message SSPUploadFileResponseHeader {
+    optional SSPRequestType type = 1 [default = GET_UPLOAD_FILE_RESPONSE];
+    optional SSPFile file = 2;                  //被上传的文件
+    optional bool ready = 3;                    //空间已经准备好，可以开始接受上传
+    optional SSPFileIOError error_code = 4;     //如果没有 ready, 哪么出现错误代码是什么？
+}
+// SSPUploadFileRequestBody 不适合大文件传输，所以文件传输主要数据通过 session_id + binary 方式传输
+//上传文件请求 Body
+/*
+message SSPUploadFileRequestBody {
+    optional SSPRequestType type = 1 [default = GET_UPLOAD_FILE_REQUEST_BODY];
+    optional SSPFile file = 2;                  //被上传的文件
+    optional SSPDataRange upload_range = 3;     //被上传的数据范围
+    optional SSPDataRange transfered_range = 4; //已经上传的数据范围
+    optional uint64 data_length = 5;            //当前 data_bytes 的字节长度
+    optional bytes data_bytes = 6;              //被上传的文件大小
+}
+*/
+//当一个文件全部发送完毕，返回 SSPUploadFileResponse
+message SSPUploadFileResponse {
+    optional SSPRequestType type = 1 [default = GET_UPLOAD_FILE_RESPONSE];
+    optional SSPFile file = 2;                  //被上传的文件。这里包含上传的文件大小。
+    optional bool canceled = 3;                 //这个上传是否被取消了
+    optional bool succeed = 4;                  //上传是否成功
+    optional SSPFileIOError error_code = 5;     //如果不成功失败原因是什么？
+}
+
+
+/*
+媒体库和缩略图请求
+*/
+
+//获取缩略图请求
+message SSPGetThumbnailRequest {
+    optional SSPRequestType type = 1 [default = GET_THUMBNAIL_REQUEST];
+    repeated SSPImageFile image = 2;//先根据 media Id 来获取缩略图，如果请求里没有 media Id，那么根据 file path 来获取缩略图
+    repeated SSPVideoFile video = 3;//先根据 media Id 来获取缩略图，如果请求里没有 media Id，那么根据 file path 来获取缩略图
+    repeated SSPAudioAlbum audio_album = 4;
+}
+message SSPGetThumbnailResponse {
+    optional SSPRequestType type = 1 [default = GET_THUMBNAIL_REQUEST];
+    repeated SSPImageFile image = 2;
+    repeated SSPVideoFile video = 3;
+    repeated SSPAudioAlbum audio_album = 4;
+}
+
+//获取 Photo Media Library 请求
+message SSPGetPhotoLibraryRequest {
+    optional SSPRequestType type = 1 [default = GET_PHOTO_LIB_REQUEST];
+}
+message SSPGetPhotoLibraryResponse {
+    optional SSPRequestType type = 1 [default = GET_PHOTO_LIB_REQUEST];
+    repeated SSPImageFile image = 2;
+    repeated SSPImageAlbum album = 3;
+    optional uint64 camera_album_id = 4;        //相机相册 id
+}
+
+//获取 Video Media Library 请求
+message SSPGetVideoLibraryRequest {
+    optional SSPRequestType type = 1 [default = GET_VIDEO_LIB_REQUEST];
+}
+message SSPGetVideoLibraryResponse {
+    optional SSPRequestType type = 1 [default = GET_VIDEO_LIB_REQUEST];
+    repeated SSPVideoFile video = 2;
+    repeated SSPVideoAlbum album = 3;
+}
+
+//获取 Audio Media Library 请求
+message SSPGetAudioLibraryRequest {
+    optional SSPRequestType type = 1 [default = GET_AUDIO_LIB_REQUEST];
+}
+message SSPGetAudioLibraryResponse {
+    optional SSPRequestType type = 1 [default = GET_AUDIO_LIB_REQUEST];
+    repeated SSPAudioFile audio = 2;
+    repeated SSPAudioAlbum album = 3;
+}
+
+//媒体库变更回调
+message SSPPhotoLibraryChange {
+    optional SSPRequestType type = 1 [default = PHOTO_LIB_CHANGE];
+    repeated SSPImageFile added_image = 2;
+    repeated SSPImageFile deleted_image = 3;
+}
+message SSPVideoLibraryChange {
+    optional SSPRequestType type = 1 [default = VIDEO_LIB_CHANGE];
+    repeated SSPVideoFile added_video = 2;
+    repeated SSPVideoFile deleted_video = 3;
+    repeated SSPVideoFile updated_video = 4;//解决有些手机视频先创建，有些后创建
+}
+message SSPAudioLibraryChange {
+    optional SSPRequestType type = 1 [default = AUDIO_LIB_CHANGE];
+    repeated SSPAudioFile added_audio = 2;
+    repeated SSPAudioFile deleted_audio = 3;
+    repeated SSPAudioAlbum added_album = 4;
+}
+
+//剪切板配置start=========================================================================
+message SSPClipboard {
+    optional bytes content = 1; // gzip 压缩过的剪切板内容
+    optional int64 mstimestamp = 2;
+}
+
+//获取剪切板内容请求   电脑端=>手机端
+message SSPGetClipboardRequest {
+	optional SSPRequestType type = 1 [default = GET_CLIPBOARD_REQUEST];
+}
+
+message SSPGetClipboardResponse {
+	optional SSPRequestType type = 1 [default = GET_CLIPBOARD_REQUEST];
+	repeated SSPClipboard clipboard=2;          //剪切板对象
+}
+
+
+//发送剪切板内容   电脑端=>手机端
+message SSPPostClipboardRequest {
+	optional SSPRequestType type = 1 [default = POST_CLIPBOARD_REQUEST];
+	required SSPClipboard clipboard=2;          //剪切板对象
+}
+
+message SSPPostClipboardResponse {
+	optional SSPRequestType type = 1 [default = POST_CLIPBOARD_REQUEST];
+	optional bool succeed = 2;
+}
+
+
+//清空剪切板内容   电脑端=>手机端
+message SSPClearClipboardRequest {
+	optional SSPRequestType type = 1 [default = CLEAR_CLIPBOARD_REQUEST];
+}
+
+message SSPClearClipboardResponse {
+	optional SSPRequestType type = 1 [default = CLEAR_CLIPBOARD_REQUEST];
+	optional bool succeed = 2;
+}
+
+//删除剪切板内容请求   电脑端=>手机端
+message SSPDeleteClipboardRequest {
+	optional SSPRequestType type = 1 [default = DELETE_CLIPBOARD_REQUEST];
+	required SSPClipboard clipboard=2;          //剪切板对象
+}
+
+message SSPDeleteClipboardResponse {
+	optional SSPRequestType type = 1 [default = DELETE_CLIPBOARD_REQUEST];
+	optional bool succeed = 2;
+}
+
+//剪切板变更回调
+message SSPClipboardChange {
+    optional SSPRequestType type = 1 [default = CLIPBOARD_CHANGE];
+    repeated SSPClipboard clipboard=2;          //剪切板对象
+}
+
+//剪切板配置end=========================================================================
+
+message SSPCancelRequest {
+    optional SSPRequestType type = 1 [default = CANCEL_REQUEST];
+    optional uint64 session_id = 2;
+    optional SSPCancelErrorCode error_code = 3;
+}
+
+enum SSPCancelErrorCode {
+    ERROR_CODE_UNKNOWN = 1;         // 未知异常
+    ERROR_CODE_SDCARD_REMOVED = 2;  // sd卡被拔出
+}
+
+//同步相关
+
+//启动一次性同步请求
+message SSPPhotoSyncRequest {
+    optional SSPRequestType type = 1 [default = PHOTO_SYNC_REQUEST];
+    optional string pc_id = 2;          //pc端的唯一标志
+    repeated SSPFile files = 3;         //上一次同步的快照列表
+}
+
+//一次性同步请求的回调
+message SSPPhotoSyncResponse {
+    optional SSPRequestType type = 1 [default = PHOTO_SYNC_REQUEST];
+    optional bool is_first = 2;         //是否是首次同步
+    repeated SSPFile files = 3;         //当前手机端文件状态列表
+    optional bool is_success = 4;      //请求是否成功
+}
+
+//文件类型
+enum SSPFileType {
+    NORMAL = 0;         //普通文件
+    DATA = 1;           //数据文件
+}
+
+//文件变更回调
+message SSPFileChange {
+    optional SSPRequestType type = 1 [default = FILE_CHANGE];
+    repeated SSPFileChangeItem file_change_items = 2;       //文件变更项列表
+}
+
+//文件变更项
+message SSPFileChangeItem {
+    optional SSPFile file = 1;                  //变更文件信息
+    optional SSPFileChangeStatus status = 2;    //文件变更类型
+}
+
+//文件变更类型
+enum SSPFileChangeStatus {
+    None = 0;               //无变化
+    Added = 1;              //新增文件
+    Deleted = 2;            //删除文件
+    Modified = 3;           //修改文件
+    InfoModified = 4;       //修改文件附属信息
+    FileAndInfoModified = 5;//修改文件及附属信息
+}
+
+//请求实时同步接口
+message SSPSyncMonitorRequest {
+    optional SSPRequestType type = 1 [default = SYNC_MONITOR_REQUEST];
+    optional bool is_sync_monitor = 2;      //是否开启实时同步
+}
+
+//请求实时同步回调
+message SSPSyncMonitorResponse {
+    optional SSPRequestType type = 1 [default = SYNC_MONITOR_REQUEST];
+    optional bool is_success = 2;      //请求是否成功
+}
+
+//请求实时同步接口
+message SSPUpdateFileRequest {
+    optional SSPRequestType type = 1 [default = UPDATE_FILE_INFO];
+    repeated SSPFile files = 2;
+    optional bool is_sync = 3;  //是否需要维护同步状态
+}
+
+//请求实时同步接口
+message SSPUpdateFileResponse {
+    optional SSPRequestType type = 1 [default = UPDATE_FILE_INFO_RESPONSE];
+    optional bool is_success = 2;
+}

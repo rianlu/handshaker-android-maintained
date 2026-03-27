@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<smartisanos.widget.RoundedRectLinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content" smartisanos:cornerRadius="10.0dp" style="@style/PopupMenuStyle"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:smartisanos="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:id="@id/menu_title_container" android:layout_width="match_parent" android:layout_height="wrap_content">
+        <TextView android:textSize="12.0sp" android:textStyle="bold" android:textColor="#4c000000" android:gravity="center_vertical" android:id="@id/menu_title" android:layout_width="match_parent" android:layout_height="@dimen/popup_list_menu_title_height" android:layout_marginLeft="@dimen/popup_list_title_left_margin" />
+        <View android:background="@drawable/list_divider_drawable" android:layout_width="match_parent" android:layout_height="@dimen/list_divider_height" />
+    </LinearLayout>
+    <ListView android:id="@id/menu_list" android:layout_width="match_parent" android:layout_height="wrap_content" android:listSelector="@android:color/transparent" android:divider="@null" android:overScrollMode="always" />
+    <View android:id="@id/menu_list_bottom_divider" android:background="@drawable/list_divider_drawable" android:layout_width="match_parent" android:layout_height="@dimen/list_divider_height" />
+    <RelativeLayout android:layout_gravity="center" android:id="@id/bottom_action_bar" android:background="#f5f5f5" android:layout_width="match_parent" android:layout_height="@dimen/popup_list_menu_item_height" android:layout_below="@id/menu_title">
+        <Button android:textSize="10.0sp" android:textStyle="bold" android:textColor="@color/title_or_btn_text_color" android:id="@id/left_btn" android:background="@drawable/pop_menu_btn_selector" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentLeft="true" />
+        <Button android:textSize="10.0sp" android:textStyle="bold" android:textColor="@color/title_or_btn_text_color" android:id="@id/right_btn" android:background="@drawable/pop_menu_btn_selector" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentRight="true" />
+        <TextView android:textSize="10.0sp" android:textColor="#4c000000" android:gravity="center" android:id="@id/action_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_toLeftOf="@id/right_btn" android:layout_toRightOf="@id/left_btn" android:layout_centerInParent="true" />
+    </RelativeLayout>
+</smartisanos.widget.RoundedRectLinearLayout>

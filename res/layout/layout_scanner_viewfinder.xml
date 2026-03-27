@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical" android:background="@drawable/barcode_viewfinder" android:layout_width="match_parent" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="11.0sp" android:textColor="#e6ffffff" android:gravity="center_horizontal" android:id="@id/scan_tips" android:background="@color/zxing_transparent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/scan_tips_txt" android:layout_centerHorizontal="true" android:lineSpacingExtra="10.0sp" />
+    <FrameLayout android:id="@id/scan_frame" android:layout_width="@dimen/scanner_view_finder_width" android:layout_height="@dimen/scanner_view_finder_height" android:layout_below="@id/scan_tips" android:layout_centerHorizontal="true">
+        <ImageView android:id="@id/scan_indicator" android:background="@drawable/barcode_scanning" android:visibility="gone" android:layout_width="match_parent" android:layout_height="wrap_content" />
+    </FrameLayout>
+    <TextView android:textSize="10.0sp" android:textColor="#e6ffffff" android:gravity="center_horizontal" android:layout_gravity="center|bottom" android:id="@id/wifi_name" android:background="@color/zxing_transparent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8.0dp" android:layout_below="@id/scan_frame" android:layout_centerHorizontal="true" />
+    <Button android:id="@id/scan_quit" android:background="@drawable/barcode_btn_cancel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="52.0dp" android:layout_below="@id/wifi_name" android:layout_centerHorizontal="true" />
+</RelativeLayout>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:background="@color/connectting_fragment_background" android:layout_width="match_parent" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:background="@drawable/icon_no_wifi" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/no_wifi_image_margin_top" />
+    <TextView android:textSize="@dimen/no_wifi_tip_text_size" android:textColor="@color/no_wifi_tip_text_color" android:gravity="center_horizontal" android:paddingLeft="@dimen/no_wifi_tip_padding_left_right" android:paddingRight="@dimen/no_wifi_tip_padding_left_right" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/no_wifi_tip_margin_top" android:text="@string/no_wifi_tip" />
+    <TextView android:textSize="@dimen/no_wifi_tip_text_size" android:textColor="@color/normal_text" android:id="@id/no_wifi_btn_settings" android:background="@drawable/btn_common" android:paddingLeft="@dimen/no_wifi_btn_padding_left_right" android:paddingTop="@dimen/no_wifi_btn_padding_top_bottom" android:paddingRight="@dimen/no_wifi_btn_padding_left_right" android:paddingBottom="@dimen/no_wifi_btn_padding_top_bottom" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/no_wifi_btn_margin_top" android:text="@string/no_wifi_btn_connect_wifi" />
+</LinearLayout>

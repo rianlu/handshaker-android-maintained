@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:paddingLeft="30.0dp" android:paddingTop="30.0dp" android:paddingRight="30.0dp" android:paddingBottom="30.0dp" android:layout_width="match_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:id="@id/tip_dialog_message" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/tip_dialog_message" android:lineSpacingMultiplier="1.5" />
+    <TextView android:id="@id/tip_dialog_more" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="20.0dp" android:text="@string/tip_dialog_more" />
+</LinearLayout>

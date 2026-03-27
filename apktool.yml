@@ -1,0 +1,20 @@
+version: 3.0.1
+apkFileName: handshaker_130128.apk
+usesFramework:
+  ids:
+  - 1
+sdkInfo:
+  minSdkVersion: 17
+  targetSdkVersion: 22
+versionInfo:
+  versionCode: 201
+  versionName: 1.2.0
+resourcesInfo:
+  packageId: 127
+  keepRawValues: true
+doNotCompress:
+- arsc
+- jpg
+- ogg
+- png
+- assets/version.properties

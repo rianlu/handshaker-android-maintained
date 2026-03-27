@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <drawable name="menu_list_item_normal">#ffffff</drawable>
+    <drawable name="menu_list_item_pressed">#f5f5f5</drawable>
+    <drawable name="transparent_drawable">@android:color/transparent</drawable>
+</resources>

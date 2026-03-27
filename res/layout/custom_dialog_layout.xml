@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="@null" android:paddingLeft="10.0dp" android:paddingRight="10.0dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:minWidth="240.0dp"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/feedback_dialog_content" android:background="@drawable/feedback_dialog_message_background" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="80.0dp">
+        <TextView android:textSize="18.0sp" android:textColor="@android:color/black" android:id="@id/feedback_dialog_message" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dp" />
+    </LinearLayout>
+    <View android:background="#bfc0c5" android:layout_width="match_parent" android:layout_height="1.0px" />
+    <LinearLayout android:orientation="horizontal" android:background="@drawable/feedback_dialog_bottom_background" android:paddingLeft="5.0dp" android:paddingTop="5.0dp" android:paddingRight="5.0dp" android:paddingBottom="5.0dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="40.0dp">
+        <Button android:textColor="@android:color/black" android:id="@id/feedback_dialog_positiveButton" android:background="@android:color/white" android:layout_width="0.0dp" android:layout_height="wrap_content" android:singleLine="true" android:layout_weight="1.0" />
+        <View android:background="#bfc0c5" android:layout_width="1.0px" android:layout_height="match_parent" />
+        <Button android:textColor="@android:color/black" android:id="@id/feedback_dialog_negativeButton" android:background="@android:color/white" android:layout_width="0.0dp" android:layout_height="wrap_content" android:singleLine="true" android:layout_weight="1.0" />
+    </LinearLayout>
+</LinearLayout>

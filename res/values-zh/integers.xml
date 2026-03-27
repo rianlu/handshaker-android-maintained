@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="connect_tip_click_gap">1</integer>
+</resources>

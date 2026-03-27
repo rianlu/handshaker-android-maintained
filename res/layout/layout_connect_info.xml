@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:background="@drawable/wifi_image_background" android:paddingBottom="@dimen/wifi_tip_margin_bottom" android:layout_width="match_parent" android:layout_height="wrap_content">
+        <LinearLayout android:orientation="horizontal" android:id="@id/wifi_image_layout" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/wifi_image_margin" android:layout_marginTop="@dimen/wifi_image_margin_top_bottom" android:layout_marginRight="@dimen/wifi_image_margin" android:layout_marginBottom="@dimen/wifi_image_margin_top_bottom">
+            <ImageView android:id="@id/connect_info_image_phone" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+            <RelativeLayout android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0">
+                <ImageView android:id="@id/connect_info_image_connect_icon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true" />
+            </RelativeLayout>
+            <ImageView android:id="@id/connect_info_image_mac" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        </LinearLayout>
+        <TextView android:textSize="@dimen/title_btn_back" android:textColor="@color/normal_text" android:id="@id/connect_info_tip_for_image" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/wifi_image_margin" android:layout_marginRight="@dimen/wifi_image_margin" android:layout_below="@id/wifi_image_layout" android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:background="@drawable/selector_setting_sub_item_bg_top" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/setting_item_top">
+        <TextView android:textSize="@dimen/setting_item_text_size" android:textColor="@color/settings_item_color_bg" android:paddingLeft="@dimen/setting_item_text_left" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/wifi_phone_name" android:singleLine="true" />
+        <TextView android:textSize="@dimen/setting_item_current_language_size" android:textColor="@color/settings_item_right_text_color" android:ellipsize="end" android:gravity="right" android:id="@id/wifi_phone_name" android:paddingRight="@dimen/setting_item_text_padding_right" android:layout_width="0.0dp" android:layout_height="wrap_content" android:singleLine="true" android:layout_weight="1.0" />
+    </LinearLayout>
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:background="@drawable/selector_setting_sub_item_bg_bottom" android:layout_width="match_parent" android:layout_height="wrap_content">
+        <TextView android:textSize="@dimen/setting_item_text_size" android:textColor="@color/settings_item_color_bg" android:paddingLeft="@dimen/setting_item_text_left" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/wifi_ssid" android:singleLine="true" />
+        <TextView android:textSize="@dimen/setting_item_current_language_size" android:textColor="@color/settings_item_right_text_color" android:ellipsize="end" android:gravity="right" android:id="@id/wifi_ssid" android:paddingRight="@dimen/setting_item_text_padding_right" android:layout_width="0.0dp" android:layout_height="wrap_content" android:singleLine="true" android:layout_weight="1.0" />
+    </LinearLayout>
+    <TextView android:id="@id/connect_info_tip" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/wifi_middle_tip" style="@style/SettingItemTipsStyle" />
+</LinearLayout>

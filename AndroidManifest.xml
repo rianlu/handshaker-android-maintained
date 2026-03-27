@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.smartisanos.smartfolder.aoa" platformBuildVersionCode="25" platformBuildVersionName="7.1.1">
+    <uses-feature android:name="android.hardware.usb.accessory" android:required="true"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_ALL_DOWNLOADS"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE"/>
+    <uses-permission android:name="android.permission.GET_PACKAGE_SIZE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera" android:required="false"/>
+    <uses-feature android:name="android.hardware.camera.front" android:required="false"/>
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false"/>
+    <uses-feature android:name="android.hardware.camera.flash" android:required="false"/>
+    <uses-feature android:name="android.hardware.screen.landscape" android:required="false"/>
+    <uses-feature android:name="android.hardware.wifi" android:required="false"/>
+    <meta-data android:name="android.support.VERSION" android:value="25.3.0"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <application android:directBootAware="true" android:icon="@drawable/ic_launcher" android:label="@string/app_name" android:name="com.smartisanos.smartfolder.aoa.FolderApp" android:sharedUserId="android.uid.system" android:supportsRtl="true" android:theme="@style/MainActivityTheme">
+        <activity android:label="HandShaker" android:launchMode="singleTask" android:name="com.smartisanos.smartfolder.aoa.MainActivity" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED"/>
+            </intent-filter>
+            <meta-data android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED" android:resource="@xml/accessory_filter"/>
+        </activity>
+        <activity android:launchMode="singleTop" android:name="com.smartisanos.smartfolder.aoa.activity.SettingsActivity" android:screenOrientation="portrait"/>
+        <activity android:launchMode="singleTop" android:name="com.smartisanos.smartfolder.aoa.activity.SwitchLanguageActivity" android:screenOrientation="portrait"/>
+        <activity android:launchMode="singleTop" android:name="com.smartisanos.smartfolder.aoa.activity.UserExperienceActivity" android:screenOrientation="portrait"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:launchMode="singleTop" android:name="com.smartisan.feedbackhelper.FeedbackActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:launchMode="singleTop" android:name="com.smartisanos.smartfolder.aoa.qrcode.ScanActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <service android:exported="false" android:name="com.smartisanos.smartfolder.aoa.service.UiDialogService"/>
+        <service android:exported="false" android:name="com.smartisanos.smartfolder.aoa.service.MediaScannerService"/>
+        <service android:exported="true" android:name="com.smartisanos.smartfolder.aoa.service.ConnectionManagerService"/>
+        <meta-data android:name="AppChannel" android:value="203"/>
+        <meta-data android:name="AppId" android:value="30"/>
+        <activity android:clearTaskOnLaunch="true" android:name="com.journeyapps.barcodescanner.CaptureActivity" android:screenOrientation="sensorLandscape" android:stateNotNeeded="true" android:theme="@style/zxing_CaptureTheme" android:windowSoftInputMode="stateAlwaysHidden"/>
+        <service android:name="com.smartisan.feedbackhelper.upload.ReliableUploader"/>
+        <service android:exported="false" android:name="com.smartisan.feedbackhelper.utils.ReportGenerate">
+            <intent-filter>
+                <action android:name="smartisan.intent.action.REPORT.DATA"/>
+            </intent-filter>
+        </service>
+    </application>
+</manifest>

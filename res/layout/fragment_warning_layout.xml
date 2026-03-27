@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="#ffffff" android:layout_width="match_parent" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.smartisanos.smartfolder.aoa.view.TitleBar android:id="@id/titlebar" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_alignParentTop="true" />
+    <Button android:textColor="@android:color/white" android:id="@id/back_button" android:background="@drawable/selector_blue_button" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="9.0dp" android:text="@string/back_main_settings" android:layout_alignParentBottom="true" />
+    <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="147.0dp" android:layout_below="@id/titlebar">
+        <ImageView android:layout_gravity="center_horizontal" android:background="@drawable/warning_icon" android:layout_width="89.29999dp" android:layout_height="89.29999dp" />
+        <TextView android:textSize="20.0dp" android:textColor="@color/normal_text" android:layout_gravity="center_horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="26.0dp" android:text="@string/host_version_low_title" />
+        <TextView android:textSize="13.5dp" android:textColor="@color/no_wifi_tip_text_color" android:gravity="center" android:layout_gravity="center_horizontal" android:paddingLeft="25.0dp" android:paddingRight="25.0dp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="12.0dp" android:text="@string/host_version_low_summary" />
+    </LinearLayout>
+</RelativeLayout>

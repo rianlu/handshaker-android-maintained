@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="item_icon_size">144</integer>
+    <integer name="connect_tip_click_gap">4</integer>
+    <integer name="eyeAnimDuration">16</integer>
+</resources>

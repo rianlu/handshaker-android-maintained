@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="constraintSet" format="reference" />
+    <attr name="layout_constraintBaseline_creator" format="integer" />
+    <attr name="layout_constraintBaseline_toBaselineOf" format="reference">
+        <enum name="parent" value="0" />
+    </attr>
+    <attr name="layout_constraintBottom_creator" format="integer" />
+    <attr name="layout_constraintBottom_toBottomOf" format="reference">
+        <enum name="parent" value="0" />
+    </attr>
+    <attr name="layout_constraintBottom_toTopOf" format="reference">
+        <enum name="parent" value="0" />
+    </attr>
+    <attr name="layout_constraintDimensionRatio" format="string" />
+    <attr name="layout_constraintEnd_toEndOf" format="reference">
+        <enum name="parent" value="0" />
+    </attr>
+    <attr name="layout_constraintEnd_toStartOf" format="reference">
+        <enum name="parent" value="0" />
+    </attr>
+    <attr name="layout_constraintGuide_begin" format="dimension" />
+    <attr name="layout_constraintGuide_end" format="dimension" />
+    <attr name="layout_constraintGuide_percent" format="float" />
+    <attr name="layout_constraintHeight_default">
+        <enum name="spread" value="0" />
+        <enum name="wrap" value="1" />
+    </attr>
+    <attr name="layout_constraintHeight_max" format="dimension" />
+    <attr name="layout_constraintHeight_min" format="dimension" />
+    <attr name="layout_constraintHorizontal_bias" format="float" />
+    <attr name="layout_constraintHorizontal_chainStyle">
+        <enum name="spread" value="0" />
+        <enum name="packed" value="2" />
+        <enum name="spread_inside" value="1" />
+    </attr>
+    <attr name="layout_constraintHorizontal_weight" format="float" />
+    <attr name="layout_constraintLeft_creator" format="integer" />
+    <attr name="layout_constraintLeft_toLeftOf" format="reference">
+        <enum name="parent" value="0" />
+    </attr>
+    <attr name="layout_constraintLeft_toRightOf" format="reference">
+        <enum name="parent" value="0" />
+    </attr>
+    <attr name="layout_constraintRight_creator" format="integer" />
+    <attr name="layout_constraintRight_toLeftOf" format="reference">
+        <enum name="parent" value="0" />
+    </attr>
+    <attr name="layout_constraintRight_toRightOf" format="reference">
+        <enum name="parent" value="0" />
+    </attr>
+    <attr name="layout_constraintStart_toEndOf" format="reference">
+        <enum name="parent" value="0" />
+    </attr>
+    <attr name="layout_constraintStart_toStartOf" format="reference">
+        <enum name="parent" value="0" />
+    </attr>
+    <attr name="layout_constraintTop_creator" format="integer" />
+    <attr name="layout_constraintTop_toBottomOf" format="reference">
+        <enum name="parent" value="0" />
+    </attr>
+    <attr name="layout_constraintTop_toTopOf" format="reference">
+        <enum name="parent" value="0" />
+    </attr>
+    <attr name="layout_constraintVertical_bias" format="float" />
+    <attr name="layout_constraintVertical_chainStyle">
+        <enum name="spread" value="0" />
+        <enum name="packed" value="2" />
+        <enum name="spread_inside" value="1" />
+    </attr>
+    <attr name="layout_constraintVertical_weight" format="float" />
+    <attr name="layout_constraintWidth_default">
+        <enum name="spread" value="0" />
+        <enum name="wrap" value="1" />
+    </attr>
+    <attr name="layout_constraintWidth_max" format="dimension" />
+    <attr name="layout_constraintWidth_min" format="dimension" />
+    <attr name="layout_editor_absoluteX" format="dimension" />
+    <attr name="layout_editor_absoluteY" format="dimension" />
+    <attr name="layout_goneMarginBottom" format="dimension" />
+    <attr name="layout_goneMarginEnd" format="dimension" />
+    <attr name="layout_goneMarginLeft" format="dimension" />
+    <attr name="layout_goneMarginRight" format="dimension" />
+    <attr name="layout_goneMarginStart" format="dimension" />
+    <attr name="layout_goneMarginTop" format="dimension" />
+    <attr name="layout_optimizationLevel">
+        <flag name="all" value="2" />
+        <flag name="basic" value="4" />
+        <flag name="chains" value="8" />
+        <flag name="none" value="1" />
+    </attr>
+    <attr name="button_count" format="integer" />
+    <attr name="has_button_gap" format="boolean" />
+    <attr name="type">
+        <flag name="error" value="0x4" />
+        <flag name="floated" value="0x8" />
+        <flag name="history" value="0x90" />
+        <flag name="hot" value="0x91" />
+        <flag name="light" value="0x93" />
+        <flag name="normal" value="0x0" />
+        <flag name="recommended" value="0x92" />
+        <flag name="remove" value="0x2" />
+        <flag name="vip" value="0x1" />
+    </attr>
+    <attr name="appInfoIcon" format="reference" />
+    <attr name="appInfoTitle" format="string" />
+    <attr name="appInfoSummary" format="string" />
+    <attr name="section_primary_title" format="string" />
+    <attr name="section_subtitle" format="string" />
+    <attr name="section_message" format="string" />
+    <attr name="inner_circle_radius" format="dimension" />
+    <attr name="fore_ring_width" format="dimension" />
+    <attr name="back_ring_width" format="dimension" />
+    <attr name="progress" format="integer" />
+    <attr name="back_progress_start_color" format="color" />
+    <attr name="back_progress_end_color" format="color" />
+    <attr name="fore_progress_start_color" format="color" />
+    <attr name="fore_progress_end_color" format="color" />
+    <attr name="failed_progress_color" format="color" />
+    <attr name="feedback_itemtitle" format="string" />
+    <attr name="feedback_titleColor" format="color" />
+    <attr name="feedback_titleSize" format="dimension" />
+    <attr name="feedback_backText" format="string" />
+    <attr name="feedback_backTextColor" format="color" />
+    <attr name="feedback_backTextSize" format="dimension" />
+    <attr name="feedback_okText" format="string" />
+    <attr name="feedback_okTextColor" format="color" />
+    <attr name="feedback_okTextSize" format="dimension" />
+    <attr name="itemCheckGravity">
+        <enum name="bottom" value="2" />
+        <enum name="middle" value="1" />
+        <enum name="single" value="3" />
+        <enum name="top" value="0" />
+    </attr>
+    <attr name="itemCheckIcon" format="color|reference" />
+    <attr name="itemCheckTitle" format="string" />
+    <attr name="itemCheckSummary" format="string" />
+    <attr name="itemCheckTitleSize" format="dimension" />
+    <attr name="itemCheckSummarySize" format="dimension" />
+    <attr name="itemSwitchIcon" format="color|reference" />
+    <attr name="itemSwitchTitle" format="string" />
+    <attr name="itemSwitchSummary" format="string" />
+    <attr name="itemSwitchIsEnable" format="boolean" />
+    <attr name="itemSwitchTitleSize" format="dimension" />
+    <attr name="itemSwitchSummarySize" format="dimension" />
+    <attr name="itemSwitchTitleColor" format="color" />
+    <attr name="feedback_itemSwitchIcon" format="color|reference" />
+    <attr name="feedback_itemSwitchTitle" format="string" />
+    <attr name="feedback_itemSwitchSummary" format="string" />
+    <attr name="feedback_itemSwitchIsEnable" format="boolean" />
+    <attr name="feedback_itemSwitchTitleSize" format="dimension" />
+    <attr name="feedback_itemSwitchSummarySize" format="dimension" />
+    <attr name="feedback_itemSwitchTitleColor" format="color" />
+    <attr name="itemTextGravity">
+        <enum name="bottom" value="2" />
+        <enum name="middle" value="1" />
+        <enum name="single" value="3" />
+        <enum name="top" value="0" />
+    </attr>
+    <attr name="itemTextIcon" format="color|reference" />
+    <attr name="itemTextTitle" format="string" />
+    <attr name="itemTextSummary" format="string" />
+    <attr name="itemTextShowArrow" format="boolean" />
+    <attr name="itemTextSubTitle" format="string" />
+    <attr name="itemTextSubTitleFontSize" format="dimension" />
+    <attr name="itemTextArrow" format="reference" />
+    <attr name="itemTextTitleMaxWidth" format="dimension" />
+    <attr name="itemTextClickable" format="boolean" />
+    <attr name="cornerRadius" format="dimension" />
+    <attr name="searchBarBackground" format="color|reference" />
+    <attr name="editBackground" format="color|reference" />
+    <attr name="cancelBackground" format="color|reference" />
+    <attr name="cancelText" format="string|reference" />
+    <attr name="leftIcon" format="reference" />
+    <attr name="rightIcon" format="reference" />
+    <attr name="hasLeftIcon" format="boolean" />
+    <attr name="hasRightIcon" format="boolean" />
+    <attr name="hasCancelButton" format="boolean" />
+    <attr name="hintText" format="string|reference" />
+    <attr name="focusableInit" format="boolean" />
+    <attr name="autoFocus" format="boolean" />
+    <attr name="withAnimation" format="boolean" />
+    <attr name="hasShadow" format="boolean" />
+    <attr name="shadowColors" format="color|reference" />
+    <attr name="blankStyle">
+        <enum name="normal" value="0" />
+        <enum name="small" value="1" />
+        <enum name="withAction" value="2" />
+    </attr>
+    <attr name="primaryHint" format="string" />
+    <attr name="secondaryHint" format="string" />
+    <attr name="emptyDrawable" format="reference" />
+    <attr name="emptyActionBackground" format="reference" />
+    <attr name="titleText" format="string" />
+    <attr name="titleColor" format="color" />
+    <attr name="titleSize" format="dimension" />
+    <attr name="backText" format="string" />
+    <attr name="backTextColor" format="color" />
+    <attr name="backTextSize" format="dimension" />
+    <attr name="backTextVisible" format="boolean" />
+    <attr name="okText" format="string" />
+    <attr name="okTextColor" format="color" />
+    <attr name="okTextSize" format="dimension" />
+    <attr name="shadowDrawable" format="reference" />
+    <attr name="shadowVisible" format="boolean" />
+    <attr name="vertical" format="boolean" />
+    <declare-styleable name="zxing_camera_preview">
+        <attr name="zxing_framing_rect_width" format="dimension" />
+        <attr name="zxing_framing_rect_height" format="dimension" />
+        <attr name="zxing_use_texture_view" format="boolean" />
+        <attr name="zxing_preview_scaling_strategy" format="enum">
+            <enum name="centerCrop" value="1" />
+            <enum name="fitCenter" value="2" />
+            <enum name="fitXY" value="3" />
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="zxing_finder_view">
+        <attr name="zxing_possible_result_points" format="color" />
+        <attr name="zxing_result_view" format="color" />
+        <attr name="zxing_viewfinder_laser" format="color" />
+        <attr name="zxing_viewfinder_mask" format="color" />
+    </declare-styleable>
+    <declare-styleable name="zxing_view">
+        <attr name="zxing_scanner_layout" format="reference" />
+    </declare-styleable>
+</resources>

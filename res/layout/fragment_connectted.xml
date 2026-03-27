@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_width="wrap_content" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent">
+        <com.smartisanos.smartfolder.aoa.view.ConnectInfoView android:id="@id/connectted_connect_info" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/connection_main_view_top" />
+        <TextView android:textSize="@dimen/conntectted_btn_disconnectted_text_size" android:textColor="@android:color/white" android:gravity="center" android:layout_gravity="center_horizontal" android:id="@id/connectted_btn_disconnect" android:background="@drawable/long_red_button_solo" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/conntectted_btn_disconnectted_margin_bottom" android:text="@string/connectted_btn_disconnectted" android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+    <com.smartisanos.smartfolder.aoa.view.TitleBar android:id="@id/titlebar" android:layout_width="match_parent" android:layout_height="wrap_content" />
+</FrameLayout>

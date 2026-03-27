@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical" android:background="@drawable/background" android:layout_width="match_parent" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:background="@drawable/setting_item_single_background" android:paddingTop="7.0dp" android:paddingBottom="7.0dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/top_view_margin_top" android:layout_marginBottom="3.0dp">
+        <ScrollView android:paddingLeft="12.0dp" android:paddingRight="12.0dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:overScrollMode="always">
+            <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
+                <WebView android:id="@id/experience_plan_info" android:scrollbars="none" android:layout_width="match_parent" android:layout_height="wrap_content" />
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+    <com.smartisanos.smartfolder.aoa.view.TitleBar android:id="@id/titlebar" android:layout_width="match_parent" android:layout_height="wrap_content" />
+</RelativeLayout>

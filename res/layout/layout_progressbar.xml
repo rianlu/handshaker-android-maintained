@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/loading_root_view" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="281.0dp"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/loading_img" android:background="@drawable/connecting_loading" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    <TextView android:textSize="10.0sp" android:textColor="#e6ffffff" android:id="@id/loading_tip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="12.0dp" android:text="@string/scan_autolink_progress_txt" />
+</LinearLayout>

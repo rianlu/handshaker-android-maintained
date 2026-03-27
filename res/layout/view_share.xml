@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="@drawable/share_bg" android:layout_width="match_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:orientation="horizontal" android:background="@drawable/share_title_bar" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <TextView android:textSize="@dimen/more_text_size_15" android:textColor="@color/setting_item_text_color" android:gravity="center" android:id="@id/share_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/setting_share_title_txt" android:layout_centerInParent="true" />
+        <TextView android:textSize="@dimen/more_text_size_135" android:textColor="#313131" android:gravity="center" android:id="@id/share_cancel" android:background="@drawable/setting_share_cancel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minWidth="@dimen/button_min_width" android:text="@android:string/cancel" android:layout_alignParentRight="true" />
+    </RelativeLayout>
+    <TableLayout android:id="@id/layout_share" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/share_comp_top" android:layout_marginBottom="@dimen/share_comp_bottom">
+        <TableRow android:layout_weight="1.0">
+            <TextView android:textSize="@dimen/setting_share_comp_text_size" android:textColor="@color/setting_item_text_color" android:gravity="center" android:layout_gravity="center" android:id="@id/share_weibo" android:background="@null" android:layout_width="0.0dp" android:layout_height="wrap_content" android:text="@string/weibo" android:drawableTop="@drawable/weibo" android:layout_weight="1.0" />
+            <TextView android:textSize="@dimen/setting_share_comp_text_size" android:textColor="@color/setting_item_text_color" android:gravity="center" android:layout_gravity="center" android:id="@id/share_weixin" android:background="@null" android:layout_width="0.0dp" android:layout_height="wrap_content" android:text="@string/we_chat" android:drawableTop="@drawable/wx" android:layout_weight="1.0" />
+            <TextView android:textSize="@dimen/setting_share_comp_text_size" android:textColor="@color/setting_item_text_color" android:gravity="center" android:layout_gravity="center" android:id="@id/share_twitter" android:background="@null" android:layout_width="0.0dp" android:layout_height="wrap_content" android:text="@string/twitter" android:drawableTop="@drawable/twitter" android:layout_weight="1.0" />
+        </TableRow>
+        <TableRow android:layout_marginTop="28.0dp" android:layout_weight="1.0">
+            <TextView android:textSize="@dimen/setting_share_comp_text_size" android:textColor="@color/setting_item_text_color" android:gravity="center" android:layout_gravity="center" android:id="@id/share_qzone" android:background="@null" android:layout_width="0.0dp" android:layout_height="wrap_content" android:text="@string/qzone" android:drawableTop="@drawable/qzone" android:layout_weight="1.0" />
+            <TextView android:textSize="@dimen/setting_share_comp_text_size" android:textColor="@color/setting_item_text_color" android:gravity="center" android:layout_gravity="center" android:id="@id/share_weixin_timeline" android:background="@null" android:layout_width="0.0dp" android:layout_height="wrap_content" android:text="@string/we_chat_timeline" android:drawableTop="@drawable/pyq" android:layout_weight="1.0" />
+            <TextView android:textSize="@dimen/setting_share_comp_text_size" android:textColor="@color/setting_item_text_color" android:gravity="center" android:layout_gravity="center" android:id="@id/share_facebook" android:background="@null" android:layout_width="0.0dp" android:layout_height="wrap_content" android:text="@string/facebook" android:drawableTop="@drawable/fb" android:layout_weight="1.0" />
+        </TableRow>
+    </TableLayout>
+</LinearLayout>
