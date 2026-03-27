@@ -70,13 +70,13 @@
 
     const/4 v1, 0x3
 
-    const-string v2, "(select bucket_id from files where audio._id = files._id ) AS bucket_id"
+    const-string v2, "bucket_id"
 
     aput-object v2, v0, v1
 
     const/4 v1, 0x4
 
-    const-string v2, "(select bucket_display_name from files where audio._id = files._id ) AS bucket_name"
+    const-string v2, "bucket_display_name"
 
     aput-object v2, v0, v1
 
@@ -130,13 +130,13 @@
 
     const/16 v1, 0xd
 
-    const-string v2, "(select audio_genres_map.genre_id from audio_genres_map where audio._id = audio_genres_map.audio_id) AS genre_id"
+    const-string v2, "album_id"
 
     aput-object v2, v0, v1
 
     const/16 v1, 0xe
 
-    const-string v2, "(select audio_genres.name from audio_genres,audio_genres_map where audio_genres._id = audio_genres_map.genre_id AND audio._id = audio_genres_map.audio_id) AS genre_name"
+    const-string v2, "album"
 
     aput-object v2, v0, v1
 

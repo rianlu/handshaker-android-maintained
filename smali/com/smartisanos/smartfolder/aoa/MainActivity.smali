@@ -11,7 +11,8 @@
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
         Lcom/smartisanos/smartfolder/aoa/MainActivity$a;,
-        Lcom/smartisanos/smartfolder/aoa/MainActivity$b;
+        Lcom/smartisanos/smartfolder/aoa/MainActivity$b;,
+        Lcom/smartisanos/smartfolder/aoa/MainActivity$c;
     }
 .end annotation
 
@@ -54,6 +55,10 @@
 .field private r:Landroid/content/ServiceConnection;
 
 .field private s:Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService$c;
+
+.field private t:Landroid/content/BroadcastReceiver;
+
+.field private u:Z
 
 
 # direct methods
@@ -100,6 +105,13 @@
     invoke-direct {v0, p0}, Lcom/smartisanos/smartfolder/aoa/b;-><init>(Lcom/smartisanos/smartfolder/aoa/MainActivity;)V
 
     iput-object v0, p0, Lcom/smartisanos/smartfolder/aoa/MainActivity;->s:Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService$c;
+
+    .line 145
+    new-instance v0, Lcom/smartisanos/smartfolder/aoa/MainActivity$c;
+
+    invoke-direct {v0, p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity$c;-><init>(Lcom/smartisanos/smartfolder/aoa/MainActivity;)V
+
+    iput-object v0, p0, Lcom/smartisanos/smartfolder/aoa/MainActivity;->t:Landroid/content/BroadcastReceiver;
 
     return-void
 .end method
@@ -502,6 +514,28 @@
     return-void
 .end method
 
+.method static synthetic k(Lcom/smartisanos/smartfolder/aoa/MainActivity;)Z
+    .locals 1
+
+    .prologue
+    .line 66
+    invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->l()Z
+
+    move-result v0
+
+    return v0
+.end method
+
+.method static synthetic l(Lcom/smartisanos/smartfolder/aoa/MainActivity;)V
+    .locals 0
+
+    .prologue
+    .line 66
+    invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->g()V
+
+    return-void
+.end method
+
 .method private k()V
     .locals 1
 
@@ -526,7 +560,7 @@
     return-void
 .end method
 
-.method private l()V
+.method private l()Z
     .locals 5
 
     .prologue
@@ -535,59 +569,338 @@
 
     const/16 v1, 0x17
 
+    if-lt v0, v1, :cond_4
+
+    const/16 v1, 0x1e
+
+    if-lt v0, v1, :cond_0
+
+    invoke-static {}, Landroid/os/Environment;->isExternalStorageManager()Z
+
+    move-result v1
+
+    if-nez v1, :cond_0
+
+    new-instance v1, Landroid/content/Intent;
+
+    const-string v2, "android.settings.MANAGE_APP_ALL_FILES_ACCESS_PERMISSION"
+
+    invoke-direct {v1, v2}, Landroid/content/Intent;-><init>(Ljava/lang/String;)V
+
+    new-instance v2, Ljava/lang/StringBuilder;
+
+    const-string v3, "package:"
+
+    invoke-direct {v2, v3}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+
+    invoke-virtual {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->getPackageName()Ljava/lang/String;
+
+    move-result-object v3
+
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v2
+
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v2
+
+    invoke-static {v2}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
+
+    move-result-object v2
+
+    invoke-virtual {v1, v2}, Landroid/content/Intent;->setData(Landroid/net/Uri;)Landroid/content/Intent;
+
+    const/16 v2, 0x3eb
+
+    invoke-virtual {p0, v1, v2}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->startActivityForResult(Landroid/content/Intent;I)V
+
+    const/4 v0, 0x0
+
+    return v0
+
+    :cond_0
+    .line 572
+    const/16 v1, 0x21
+
     if-lt v0, v1, :cond_2
 
-    .line 572
+    .line 573
+    const-string v0, "android.permission.READ_MEDIA_AUDIO"
+
+    invoke-static {p0, v0}, Landroid/support/v4/content/a;->a(Landroid/content/Context;Ljava/lang/String;)I
+
+    move-result v0
+
+    if-nez v0, :cond_1
+
+    const-string v0, "android.permission.READ_MEDIA_IMAGES"
+
+    invoke-static {p0, v0}, Landroid/support/v4/content/a;->a(Landroid/content/Context;Ljava/lang/String;)I
+
+    move-result v0
+
+    if-nez v0, :cond_1
+
+    const-string v0, "android.permission.READ_MEDIA_VIDEO"
+
+    invoke-static {p0, v0}, Landroid/support/v4/content/a;->a(Landroid/content/Context;Ljava/lang/String;)I
+
+    move-result v0
+
+    if-nez v0, :cond_1
+
     const-string v0, "android.permission.ACCESS_FINE_LOCATION"
 
     invoke-static {p0, v0}, Landroid/support/v4/content/a;->a(Landroid/content/Context;Ljava/lang/String;)I
 
     move-result v0
 
-    if-eqz v0, :cond_2
+    if-nez v0, :cond_1
 
-    .line 573
     const-string v0, "android.permission.ACCESS_COARSE_LOCATION"
 
     invoke-static {p0, v0}, Landroid/support/v4/content/a;->a(Landroid/content/Context;Ljava/lang/String;)I
 
     move-result v0
 
-    if-nez v0, :cond_0
+    if-eqz v0, :cond_4
 
-    goto :goto_0
-
-    .line 577
-    :cond_0
-    const/4 v0, 0x2
+    .line 579
+    :cond_1
+    const/4 v0, 0x5
 
     new-array v0, v0, [Ljava/lang/String;
 
     const/4 v1, 0x0
 
-    const-string v2, "android.permission.ACCESS_FINE_LOCATION"
+    const-string v2, "android.permission.READ_MEDIA_AUDIO"
 
     aput-object v2, v0, v1
 
     const/4 v1, 0x1
 
+    const-string v2, "android.permission.READ_MEDIA_IMAGES"
+
+    aput-object v2, v0, v1
+
+    const/4 v1, 0x2
+
+    const-string v2, "android.permission.READ_MEDIA_VIDEO"
+
+    aput-object v2, v0, v1
+
+    const/4 v1, 0x3
+
+    const-string v2, "android.permission.ACCESS_FINE_LOCATION"
+
+    aput-object v2, v0, v1
+
+    const/4 v1, 0x4
+
     const-string v2, "android.permission.ACCESS_COARSE_LOCATION"
 
     aput-object v2, v0, v1
 
-    .line 578
+    .line 580
     const/16 v1, 0x3ea
 
     invoke-static {p0, v0, v1}, Landroid/support/v4/app/a;->a(Landroid/app/Activity;[Ljava/lang/String;I)V
 
-    .line 580
-    :cond_1
-    return-void
+    .line 581
+    const/4 v0, 0x0
 
-    .line 574
+    return v0
+
+    .line 584
     :cond_2
+    const-string v0, "android.permission.READ_EXTERNAL_STORAGE"
+
+    invoke-static {p0, v0}, Landroid/support/v4/content/a;->a(Landroid/content/Context;Ljava/lang/String;)I
+
+    move-result v0
+
+    if-nez v0, :cond_3
+
+    const-string v0, "android.permission.WRITE_EXTERNAL_STORAGE"
+
+    invoke-static {p0, v0}, Landroid/support/v4/content/a;->a(Landroid/content/Context;Ljava/lang/String;)I
+
+    move-result v0
+
+    if-nez v0, :cond_3
+
+    const-string v0, "android.permission.ACCESS_FINE_LOCATION"
+
+    invoke-static {p0, v0}, Landroid/support/v4/content/a;->a(Landroid/content/Context;Ljava/lang/String;)I
+
+    move-result v0
+
+    if-nez v0, :cond_3
+
+    const-string v0, "android.permission.ACCESS_COARSE_LOCATION"
+
+    invoke-static {p0, v0}, Landroid/support/v4/content/a;->a(Landroid/content/Context;Ljava/lang/String;)I
+
+    move-result v0
+
+    if-eqz v0, :cond_4
+
+    .line 590
+    :cond_3
+    const/4 v0, 0x4
+
+    new-array v0, v0, [Ljava/lang/String;
+
+    const/4 v1, 0x0
+
+    const-string v2, "android.permission.READ_EXTERNAL_STORAGE"
+
+    aput-object v2, v0, v1
+
+    const/4 v1, 0x1
+
+    const-string v2, "android.permission.WRITE_EXTERNAL_STORAGE"
+
+    aput-object v2, v0, v1
+
+    const/4 v1, 0x2
+
+    const-string v2, "android.permission.ACCESS_FINE_LOCATION"
+
+    aput-object v2, v0, v1
+
+    const/4 v1, 0x3
+
+    const-string v2, "android.permission.ACCESS_COARSE_LOCATION"
+
+    aput-object v2, v0, v1
+
+    .line 591
+    const/16 v1, 0x3ea
+
+    invoke-static {p0, v0, v1}, Landroid/support/v4/app/a;->a(Landroid/app/Activity;[Ljava/lang/String;I)V
+
+    .line 593
+    const/4 v0, 0x0
+
+    return v0
+
+    :cond_4
+    const/4 v0, 0x1
+
+    return v0
+.end method
+
+.method private m()Z
+    .locals 6
+
+    .prologue
+    .line 596
+    invoke-virtual {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->getIntent()Landroid/content/Intent;
+
+    move-result-object v0
+
+    .line 597
+    invoke-virtual {v0}, Landroid/content/Intent;->getAction()Ljava/lang/String;
+
+    move-result-object v1
+
+    const-string v2, "android.hardware.usb.action.USB_ACCESSORY_ATTACHED"
+
+    invoke-static {v1, v2}, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Z
+
+    move-result v1
+
+    if-eqz v1, :cond_1
+
+    .line 598
+    const-string v1, "accessory"
+
+    invoke-virtual {v0, v1}, Landroid/content/Intent;->getParcelableExtra(Ljava/lang/String;)Landroid/os/Parcelable;
+
+    move-result-object v0
+
+    check-cast v0, Landroid/hardware/usb/UsbAccessory;
+
+    .line 599
+    if-eqz v0, :cond_1
+
+    .line 600
+    const-string v1, "usb"
+
+    invoke-virtual {p0, v1}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+
+    move-result-object v1
+
+    check-cast v1, Landroid/hardware/usb/UsbManager;
+
+    .line 601
+    invoke-virtual {v1, v0}, Landroid/hardware/usb/UsbManager;->hasPermission(Landroid/hardware/usb/UsbAccessory;)Z
+
+    move-result v2
+
+    if-nez v2, :cond_1
+
+    .line 602
+    const-string v2, "MainActivity"
+
+    const-string v3, "request usb accessory permission"
+
+    invoke-static {v2, v3}, Lcom/smartisanos/smartfolder/aoa/h/t;->a(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 603
+    new-instance v2, Landroid/content/Intent;
+
+    const-string v3, "com.smartisanos.smartfolder.aoa.action.USB_PERMISSION"
+
+    invoke-direct {v2, v3}, Landroid/content/Intent;-><init>(Ljava/lang/String;)V
+
+    .line 604
+    invoke-virtual {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->getPackageName()Ljava/lang/String;
+
+    move-result-object v3
+
+    invoke-virtual {v2, v3}, Landroid/content/Intent;->setPackage(Ljava/lang/String;)Landroid/content/Intent;
+
+    .line 605
+    sget v3, Landroid/os/Build$VERSION;->SDK_INT:I
+
+    const/16 v4, 0x17
+
+    if-lt v3, v4, :cond_0
+
+    const/high16 v3, 0x4000000
+
+    .line 606
     :goto_0
-    return-void
+    const/4 v4, 0x0
+
+    invoke-static {p0, v4, v2, v3}, Landroid/app/PendingIntent;->getBroadcast(Landroid/content/Context;ILandroid/content/Intent;I)Landroid/app/PendingIntent;
+
+    move-result-object v2
+
+    .line 607
+    invoke-virtual {v1, v0, v2}, Landroid/hardware/usb/UsbManager;->requestPermission(Landroid/hardware/usb/UsbAccessory;Landroid/app/PendingIntent;)V
+
+    .line 608
+    const/4 v0, 0x0
+
+    .line 611
+    :goto_1
+    return v0
+
+    .line 605
+    :cond_0
+    const/4 v3, 0x0
+
+    goto :goto_0
+
+    .line 611
+    :cond_1
+    const/4 v0, 0x1
+
+    goto :goto_1
 .end method
 
 
@@ -1088,6 +1401,29 @@
 
     .prologue
     .line 434
+    const/16 v0, 0x3eb
+
+    if-ne p1, v0, :cond_0
+
+    invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->l()Z
+
+    move-result v0
+
+    if-eqz v0, :cond_5
+
+    invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->m()Z
+
+    move-result v0
+
+    if-eqz v0, :cond_5
+
+    invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->g()V
+
+    invoke-virtual {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->b()V
+
+    goto/16 :goto_0
+
+    :cond_0
     const/16 v0, 0x21
 
     if-ne p1, v0, :cond_4
@@ -1095,26 +1431,19 @@
     .line 435
     const/4 v0, -0x1
 
-    if-ne p2, v0, :cond_0
+    if-ne p2, v0, :cond_5
 
     sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
 
     const/16 v1, 0x15
 
-    if-lt v0, v1, :cond_0
+    if-lt v0, v1, :cond_5
 
     .line 436
     iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/MainActivity;->o:Lcom/smartisanos/smartfolder/aoa/MainActivity$a;
 
-    if-nez v0, :cond_1
+    if-eqz v0, :cond_5
 
-    .line 9596
-    :cond_0
-    :goto_0
-    return-void
-
-    .line 439
-    :cond_1
     iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/MainActivity;->o:Lcom/smartisanos/smartfolder/aoa/MainActivity$a;
 
     invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/MainActivity$a;->a(Lcom/smartisanos/smartfolder/aoa/MainActivity$a;)Ljava/lang/String;
@@ -1126,7 +1455,7 @@
 
     move-result v1
 
-    if-nez v1, :cond_0
+    if-nez v1, :cond_5
 
     .line 443
     invoke-virtual {p3}, Landroid/content/Intent;->getData()Landroid/net/Uri;
@@ -1143,7 +1472,7 @@
 
     move-result v0
 
-    if-eqz v0, :cond_3
+    if-eqz v0, :cond_1
 
     .line 446
     invoke-virtual {p3}, Landroid/content/Intent;->getFlags()I
@@ -1186,7 +1515,7 @@
     goto :goto_0
 
     .line 454
-    :cond_3
+    :cond_1
     invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->i()V
 
     goto :goto_0
@@ -1195,7 +1524,7 @@
     :cond_4
     sget v0, Lcom/a/b/e/a/a;->a:I
 
-    if-ne p1, v0, :cond_0
+    if-ne p1, v0, :cond_5
 
     .line 9570
     invoke-static {p1, p2, p3}, Lcom/a/b/e/a/a;->a(IILandroid/content/Intent;)Lcom/a/b/e/a/b;
@@ -1203,7 +1532,7 @@
     move-result-object v0
 
     .line 9571
-    if-eqz v0, :cond_0
+    if-eqz v0, :cond_5
 
     .line 9572
     invoke-virtual {v0}, Lcom/a/b/e/a/b;->a()Ljava/lang/String;
@@ -1234,11 +1563,11 @@
 
     move-result v1
 
-    if-eqz v1, :cond_5
+    if-eqz v1, :cond_6
 
     iget-object v1, p0, Lcom/smartisanos/smartfolder/aoa/MainActivity;->h:Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService;
 
-    if-eqz v1, :cond_5
+    if-eqz v1, :cond_6
 
     .line 9577
     new-instance v1, Lcom/smartisanos/smartfolder/aoa/f;
@@ -1253,7 +1582,7 @@
     goto :goto_0
 
     .line 9598
-    :cond_5
+    :cond_6
     new-instance v1, Ljava/lang/StringBuilder;
 
     const-string v2, "QRCode, activity, Invalid data:"
@@ -1270,7 +1599,11 @@
 
     invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/h/t;->d(Ljava/lang/String;)V
 
-    goto/16 :goto_0
+    goto :goto_0
+
+    :cond_5
+    :goto_0
+    return-void
 .end method
 
 .method public onBackPressed()V
@@ -1425,7 +1758,21 @@
     iput-object v0, p0, Lcom/smartisanos/smartfolder/aoa/MainActivity;->i:Landroid/content/Intent;
 
     .line 189
-    invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->g()V
+    new-instance v0, Landroid/content/IntentFilter;
+
+    const-string v2, "com.smartisanos.smartfolder.aoa.action.USB_PERMISSION"
+
+    invoke-direct {v0, v2}, Landroid/content/IntentFilter;-><init>(Ljava/lang/String;)V
+
+    .line 190
+    iget-object v2, p0, Lcom/smartisanos/smartfolder/aoa/MainActivity;->t:Landroid/content/BroadcastReceiver;
+
+    invoke-virtual {p0, v2, v0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->registerReceiver(Landroid/content/BroadcastReceiver;Landroid/content/IntentFilter;)Landroid/content/Intent;
+
+    .line 191
+    const/4 v0, 0x1
+
+    iput-boolean v0, p0, Lcom/smartisanos/smartfolder/aoa/MainActivity;->u:Z
 
     .line 4221
     invoke-static {}, Lcom/smartisanos/smartfolder/aoa/h/f;->a()Lcom/smartisanos/smartfolder/aoa/h/f;
@@ -1460,26 +1807,40 @@
     invoke-virtual {p0, v0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->setContentView(I)V
 
     .line 193
-    invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->l()V
+    invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->l()Z
+
+    move-result v0
 
     .line 194
-    invoke-virtual {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->b()V
+    if-eqz v0, :cond_3
+
+    invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->m()Z
+
+    move-result v0
+
+    if-eqz v0, :cond_3
+
+    invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->g()V
 
     .line 195
+    :cond_3
+    invoke-virtual {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->b()V
+
+    .line 196
     invoke-static {}, Lcom/smartisanos/smartfolder/aoa/g/e;->a()Lcom/smartisanos/smartfolder/aoa/g/e;
 
     move-result-object v0
 
     invoke-virtual {v0, p0}, Lcom/smartisanos/smartfolder/aoa/g/e;->a(Lcom/smartisanos/smartfolder/aoa/g/g;)V
 
-    .line 195
+    .line 197
     invoke-static {}, Lorg/greenrobot/eventbus/c;->a()Lorg/greenrobot/eventbus/c;
 
     move-result-object v0
 
     invoke-virtual {v0, p0}, Lorg/greenrobot/eventbus/c;->a(Ljava/lang/Object;)V
 
-    .line 200
+    .line 202
     const/4 v0, 0x0
 
     invoke-static {p0, v1, v0}, Lcom/smartisanos/smartfolder/aoa/h;->a(Landroid/content/Context;ZLcom/smartisan/updater/o;)V
@@ -1596,10 +1957,26 @@
     :cond_1
     invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->k()V
 
-    .line 7611
-    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/MainActivity;->m:Landroid/app/AlertDialog;
+    .line 351
+    iget-boolean v0, p0, Lcom/smartisanos/smartfolder/aoa/MainActivity;->u:Z
 
     if-eqz v0, :cond_2
+
+    .line 352
+    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/MainActivity;->t:Landroid/content/BroadcastReceiver;
+
+    invoke-virtual {p0, v0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->unregisterReceiver(Landroid/content/BroadcastReceiver;)V
+
+    .line 353
+    const/4 v0, 0x0
+
+    iput-boolean v0, p0, Lcom/smartisanos/smartfolder/aoa/MainActivity;->u:Z
+
+    .line 7611
+    :cond_2
+    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/MainActivity;->m:Landroid/app/AlertDialog;
+
+    if-eqz v0, :cond_3
 
     iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/MainActivity;->m:Landroid/app/AlertDialog;
 
@@ -1607,7 +1984,7 @@
 
     move-result v0
 
-    if-eqz v0, :cond_2
+    if-eqz v0, :cond_3
 
     .line 7612
     iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/MainActivity;->m:Landroid/app/AlertDialog;
@@ -1615,7 +1992,7 @@
     invoke-virtual {v0}, Landroid/app/AlertDialog;->dismiss()V
 
     .line 354
-    :cond_2
+    :cond_3
     invoke-static {}, Lcom/smartisanos/smartfolder/aoa/g/e;->a()Lcom/smartisanos/smartfolder/aoa/g/e;
 
     move-result-object v0
@@ -1860,9 +2237,76 @@
     invoke-virtual {p0, p1}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->setIntent(Landroid/content/Intent;)V
 
     .line 307
+    invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->l()Z
+
+    move-result v0
+
+    if-eqz v0, :cond_0
+
+    invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->m()Z
+
+    move-result v0
+
+    if-eqz v0, :cond_0
+
     invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->g()V
 
     .line 308
+    :cond_0
+    return-void
+.end method
+
+.method public onRequestPermissionsResult(I[Ljava/lang/String;[I)V
+    .locals 3
+
+    .prologue
+    .line 311
+    invoke-super {p0, p1, p2, p3}, Landroid/app/Activity;->onRequestPermissionsResult(I[Ljava/lang/String;[I)V
+
+    .line 312
+    const/16 v0, 0x3ea
+
+    if-ne p1, v0, :cond_2
+
+    if-eqz p3, :cond_2
+
+    .line 313
+    const/4 v0, 0x0
+
+    :goto_0
+    array-length v1, p3
+
+    if-ge v0, v1, :cond_1
+
+    aget v1, p3, v0
+
+    if-nez v1, :cond_2
+
+    add-int/lit8 v0, v0, 0x1
+
+    goto :goto_0
+
+    .line 317
+    :cond_1
+    invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->l()Z
+
+    move-result v0
+
+    if-eqz v0, :cond_2
+
+    invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->m()Z
+
+    move-result v0
+
+    if-eqz v0, :cond_2
+
+    invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->g()V
+
+    .line 318
+    invoke-virtual {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->b()V
+
+    .line 320
+    :cond_2
     return-void
 .end method
 

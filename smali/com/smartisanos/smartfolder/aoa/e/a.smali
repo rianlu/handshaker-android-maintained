@@ -53,7 +53,7 @@
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     .line 36
-    const-wide/16 v0, 0x3a98
+    const-wide/32 v0, 0x7530
 
     iput-wide v0, p0, Lcom/smartisanos/smartfolder/aoa/e/a;->g:J
 
@@ -169,7 +169,7 @@
     .locals 5
 
     .prologue
-    const-wide/16 v0, 0x1388
+    const-wide/32 v0, 0x7530
 
     .line 114
     const-wide/16 v2, 0x0
