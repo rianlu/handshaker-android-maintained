@@ -1,6 +1,6 @@
-# handshaker_decompiled
+# handshaker-android-maintained
 
-HandShaker Android 客户端反编译修复项目，当前重点是恢复新版 Android 上的可用性，并为后续二次修改提供一个可继续维护的基础版本。
+HandShaker Android 非官方维护项目，当前重点是恢复新版 Android 上的可用性，并为后续二次修改提供一个可继续维护的基础版本。
 
 ## 版权与免责声明
 
