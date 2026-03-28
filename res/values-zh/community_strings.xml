@@ -2,5 +2,4 @@
 <resources>
     <string name="community_edition_badge_title">非官方维护版</string>
     <string name="community_edition_badge_subtitle">兼容 Android 16</string>
-    <string name="community_edition_badge_version">v0.1.0 · 2026-03-28</string>
 </resources>

@@ -1,2 +1,3 @@
 build/
+.local/
 .DS_Store
