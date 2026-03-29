@@ -58,6 +58,14 @@
 - Mac 端也已经独立完成维护修复，可前往 [handshaker-mac-maintained](https://github.com/rianlu/handshaker-mac-maintained) 获取可用版本
 - APK 已加入“非官方维护版”视觉标识，便于与原版区分
 
+## 已实测环境
+
+- Redmi Note 12 Turbo / Evolution X / Android 16
+- Xiaomi Pad 5 Pro / HyperOS 1.0.2.0 / Android 13
+
+> [!NOTE]
+> 当前仓库明确实测的是以上设备与系统组合。其他品牌、ROM、Android 版本以及不同桌面端环境下的表现可能存在差异，请不要默认视为所有设备都完全一致。
+
 ## 下载与使用
 
 ### 获取 APK
