@@ -12,12 +12,18 @@
     </a>
     <img alt="Android 16" src="https://img.shields.io/badge/Android-16%20Compatible-4CAF50?style=for-the-badge" />
     <img alt="Windows" src="https://img.shields.io/badge/Windows-Tested-1E88E5?style=for-the-badge" />
-    <img alt="macOS" src="https://img.shields.io/badge/macOS-Limited%20Support-9E9E9E?style=for-the-badge" />
+    <img alt="macOS" src="https://img.shields.io/badge/macOS-Maintained%20Client-43A047?style=for-the-badge" />
   </p>
 </div>
 
 > [!IMPORTANT]
 > 本仓库是 HandShaker Android 的非官方维护项目，与原厂无官方关联。仓库内容主要用于个人学习、兼容性分析和非商业研究。详细说明见 [NOTICE.md](NOTICE.md)。
+
+## 相关项目
+
+- Android 端维护版仓库：当前仓库
+- Mac 端维护版仓库：[handshaker-mac-maintained](https://github.com/rianlu/handshaker-mac-maintained)
+- Mac 端最新发布页：[Latest Release](https://github.com/rianlu/handshaker-mac-maintained/releases/latest)
 
 ## 截图预览
 
@@ -49,7 +55,7 @@
 
 - Android 端已经可以在新版系统上正常启动，并补齐了一批权限与连接兼容修复
 - Windows 客户端已经实测可正常连接和使用
-- macOS 客户端当前仍存在明显兼容性问题，不建议作为正式可用方案
+- Mac 端也已经独立完成维护修复，可前往 [handshaker-mac-maintained](https://github.com/rianlu/handshaker-mac-maintained) 获取可用版本
 - APK 已加入“非官方维护版”视觉标识，便于与原版区分
 
 ## 下载与使用
@@ -58,11 +64,12 @@
 
 - 推荐直接前往 [Releases](https://github.com/rianlu/handshaker-android-maintained/releases) 页面下载已签名 APK
 - 当前最新版本可在 [Latest Release](https://github.com/rianlu/handshaker-android-maintained/releases/latest) 获取
+- 如果你需要 Mac 桌面端，请前往 [HandShaker Mac Maintained](https://github.com/rianlu/handshaker-mac-maintained) 下载对应 DMG
 
 ### 适用场景
 
 - 如果你主要在 Windows 上使用 HandShaker，可以直接测试当前 APK
-- 如果你主要在 macOS 上使用 HandShaker，不建议把当前桌面端当作稳定方案
+- 如果你主要在 macOS 上使用 HandShaker，建议搭配 [Mac 端维护版](https://github.com/rianlu/handshaker-mac-maintained) 一起使用
 
 ### Windows 使用建议
 
