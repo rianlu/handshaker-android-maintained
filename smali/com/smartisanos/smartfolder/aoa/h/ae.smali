@@ -149,9 +149,19 @@
     if-eqz v4, :cond_6
 
     .line 47
-    check-cast v0, Ljava/lang/String;
+    if-eqz v0, :cond_5a
 
-    iput-object v0, p0, Lcom/smartisanos/smartfolder/aoa/h/ae;->d:Ljava/lang/String;
+    invoke-virtual {v0}, Ljava/lang/Object;->toString()Ljava/lang/String;
+
+    move-result-object v6
+
+    goto :goto_1a
+
+    :cond_5a
+    const/4 v6, 0x0
+
+    :goto_1a
+    iput-object v6, p0, Lcom/smartisanos/smartfolder/aoa/h/ae;->d:Ljava/lang/String;
     :try_end_1
     .catch Ljava/lang/ClassNotFoundException; {:try_start_1 .. :try_end_1} :catch_0
     .catch Ljava/lang/IllegalAccessException; {:try_start_1 .. :try_end_1} :catch_1
@@ -178,9 +188,19 @@
     if-eqz v4, :cond_7
 
     .line 49
-    check-cast v0, Ljava/lang/String;
+    if-eqz v0, :cond_6a
 
-    iput-object v0, p0, Lcom/smartisanos/smartfolder/aoa/h/ae;->e:Ljava/lang/String;
+    invoke-virtual {v0}, Ljava/lang/Object;->toString()Ljava/lang/String;
+
+    move-result-object v6
+
+    goto :goto_1b
+
+    :cond_6a
+    const/4 v6, 0x0
+
+    :goto_1b
+    iput-object v6, p0, Lcom/smartisanos/smartfolder/aoa/h/ae;->e:Ljava/lang/String;
 
     goto :goto_1
 
@@ -195,9 +215,19 @@
     if-eqz v4, :cond_8
 
     .line 51
-    check-cast v0, Ljava/lang/String;
+    if-eqz v0, :cond_7a
 
-    iput-object v0, p0, Lcom/smartisanos/smartfolder/aoa/h/ae;->f:Ljava/lang/String;
+    invoke-virtual {v0}, Ljava/lang/Object;->toString()Ljava/lang/String;
+
+    move-result-object v6
+
+    goto :goto_1c
+
+    :cond_7a
+    const/4 v6, 0x0
+
+    :goto_1c
+    iput-object v6, p0, Lcom/smartisanos/smartfolder/aoa/h/ae;->f:Ljava/lang/String;
 
     goto :goto_1
 
