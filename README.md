@@ -49,6 +49,7 @@
 - 修复新版 Android 上的媒体查询兼容问题
 - 修复 USB 有线连接授权链路问题
 - 修复连接页 Wi-Fi 名称显示异常问题
+- **解锁剪切板功能**：通过硬编码 Smartisan 设备标识，使 Mac/Windows 客户端的剪切板 Tab 在任意 Android 设备上正常显示
 - 保留原始结构，适合继续做后续兼容性维护
 
 ## 当前状态
@@ -95,6 +96,7 @@
 - 部分定位、媒体读取、文件访问、USB Accessory 权限流程缺失
 - 部分新版 Android 上的媒体查询兼容问题
 - USB 有线连接授权链路问题
+- **剪切板功能在非锤子设备上不显示**（Mac/Windows 桌面端通过 SSP 握手中的 `productBrand`、`productManufacturer`、`smartisanVersion` 字段判断是否为锤子设备，非锤子设备不展示剪切板 Tab；当前版本已在握手信息中硬编码为 Smartisan 标识，使剪切板 Tab 在任意 Android 设备上正常展示，PC→手机方向粘贴已可用）
 
 ## 仓库结构
 

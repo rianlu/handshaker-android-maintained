@@ -144,29 +144,17 @@
     iput-object v0, p0, Lcom/smartisanos/smartfolder/aoa/h/f$c;->q:Ljava/lang/String;
 
     .line 233
-    const-string v0, "ro.product.brand"
-
-    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/h/d;->a(Ljava/lang/String;)Ljava/lang/String;
-
-    move-result-object v0
+    const-string v0, "Smartisan"
 
     iput-object v0, p0, Lcom/smartisanos/smartfolder/aoa/h/f$c;->r:Ljava/lang/String;
 
     .line 235
-    const-string v0, "ro.product.manufacturer"
-
-    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/h/d;->a(Ljava/lang/String;)Ljava/lang/String;
-
-    move-result-object v0
+    const-string v0, "Smartisan"
 
     iput-object v0, p0, Lcom/smartisanos/smartfolder/aoa/h/f$c;->s:Ljava/lang/String;
 
     .line 237
-    const-string v0, "ro.smartisan.version"
-
-    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/h/d;->a(Ljava/lang/String;)Ljava/lang/String;
-
-    move-result-object v0
+    const-string v0, "7.1.6"
 
     iput-object v0, p0, Lcom/smartisanos/smartfolder/aoa/h/f$c;->t:Ljava/lang/String;
 
