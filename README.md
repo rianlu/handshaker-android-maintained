@@ -156,6 +156,11 @@ sh ./tools/build_release.sh
 - 维护版图标资源位于 `res/drawable-*/ic_launcher_custom.png`
 - 仓库根目录的 `ic_launcher.png` 用于 README 与维护版视觉展示
 
+## 友情链接
+
+- [LINUX DO](https://linux.do/)
+  社区文化：真诚、友善、团结、专业，共建你我引以为荣之社区。
+
 ## 版权与免责声明
 
 - 原始应用及相关商标、名称、资源和版权归原权利人所有
