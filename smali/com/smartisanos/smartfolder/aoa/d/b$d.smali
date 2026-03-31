@@ -251,12 +251,101 @@
     :catch_0
     move-exception v0
 
-    :try_start_2
     invoke-virtual {v0}, Ljava/lang/Exception;->printStackTrace()V
+
+    # fallback: use standard ClipboardManager.getPrimaryClip()
+    :try_start_2
+    invoke-static {}, Lcom/smartisanos/smartfolder/aoa/d/b;->e()Ljava/lang/Object;
+
+    move-result-object v0
+
+    invoke-static {}, Lcom/smartisanos/smartfolder/aoa/d/b;->d()Ljava/lang/Class;
+
+    move-result-object v1
+
+    const-string v2, "getPrimaryClip"
+
+    const/4 v4, 0x0
+
+    new-array v4, v4, [Ljava/lang/Class;
+
+    invoke-virtual {v1, v2, v4}, Ljava/lang/Class;->getMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+
+    move-result-object v1
+
+    const/4 v4, 0x0
+
+    new-array v4, v4, [Ljava/lang/Object;
+
+    invoke-virtual {v1, v0, v4}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
+
+    move-result-object v0
+
+    if-eqz v0, :fallback_done
+
+    check-cast v0, Landroid/content/ClipData;
+
+    invoke-virtual {v0}, Landroid/content/ClipData;->getItemCount()I
+
+    move-result v1
+
+    if-lez v1, :fallback_done
+
+    const/4 v1, 0x0
+
+    invoke-virtual {v0, v1}, Landroid/content/ClipData;->getItemAt(I)Landroid/content/ClipData$Item;
+
+    move-result-object v0
+
+    invoke-static {}, Lcom/smartisanos/smartfolder/aoa/FolderApp;->a()Lcom/smartisanos/smartfolder/aoa/FolderApp;
+
+    move-result-object v1
+
+    invoke-virtual {v0, v1}, Landroid/content/ClipData$Item;->coerceToText(Landroid/content/Context;)Ljava/lang/CharSequence;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Ljava/lang/Object;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/h/d;->b(Ljava/lang/String;)Lcom/a/a/e;
+
+    move-result-object v1
+
+    invoke-static {}, Lcom/smartisanos/smartfolder/a/a$n;->n()Lcom/smartisanos/smartfolder/a/a$n$a;
+
+    move-result-object v2
+
+    invoke-virtual {v2, v1}, Lcom/smartisanos/smartfolder/a/a$n$a;->a(Lcom/a/a/e;)Lcom/smartisanos/smartfolder/a/a$n$a;
+
+    invoke-static {}, Ljava/lang/System;->currentTimeMillis()J
+
+    move-result-wide v4
+
+    invoke-virtual {v2, v4, v5}, Lcom/smartisanos/smartfolder/a/a$n$a;->a(J)Lcom/smartisanos/smartfolder/a/a$n$a;
+
+    invoke-virtual {v2}, Lcom/smartisanos/smartfolder/a/a$n$a;->d()Lcom/a/a/m;
+
+    move-result-object v0
+
+    invoke-virtual {v3, v0}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
     :try_end_2
+    .catch Ljava/lang/Exception; {:try_start_2 .. :try_end_2} :catch_1
     .catchall {:try_start_2 .. :try_end_2} :catchall_0
 
-    .line 1195
+    :fallback_done
+    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/d/b$d;->c:Ljava/util/concurrent/CountDownLatch;
+
+    invoke-virtual {v0}, Ljava/util/concurrent/CountDownLatch;->countDown()V
+
+    goto :goto_0
+
+    :catch_1
+    move-exception v0
+
+    invoke-virtual {v0}, Ljava/lang/Exception;->printStackTrace()V
+
     iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/d/b$d;->c:Ljava/util/concurrent/CountDownLatch;
 
     invoke-virtual {v0}, Ljava/util/concurrent/CountDownLatch;->countDown()V
