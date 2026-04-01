@@ -206,6 +206,17 @@
 
     goto :goto_0
 
+    :pswitch_3
+    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/h/f$d;->a:Lcom/smartisanos/smartfolder/aoa/h/f;
+
+    iget-object v1, p1, Landroid/os/Message;->obj:Ljava/lang/Object;
+
+    check-cast v1, Landroid/app/Activity;
+
+    invoke-static {v0, v1}, Lcom/smartisanos/smartfolder/aoa/h/f;->h(Lcom/smartisanos/smartfolder/aoa/h/f;Landroid/app/Activity;)V
+
+    goto :goto_0
+
     .line 670
     nop
 
@@ -214,5 +225,6 @@
         :pswitch_0
         :pswitch_2
         :pswitch_1
+        :pswitch_3
     .end packed-switch
 .end method

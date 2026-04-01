@@ -52,6 +52,8 @@
 
 .field private p:Lcom/smartisanos/smartfolder/aoa/h/ac$a;
 
+.field private q:Ljava/lang/String;
+
 
 # direct methods
 .method static constructor <clinit>()V
@@ -118,6 +120,49 @@
     sget-object v0, Lcom/smartisanos/smartfolder/aoa/h/f;->e:Lcom/smartisanos/smartfolder/aoa/h/f;
 
     return-object v0
+.end method
+
+.method public final a(Landroid/app/Activity;)V
+    .locals 4
+
+    .prologue
+    if-eqz p1, :cond_0
+
+    invoke-static {}, Lcom/smartisanos/smartfolder/aoa/h/d;->m()Z
+
+    move-result v0
+
+    if-nez v0, :cond_0
+
+    iget-boolean v0, p0, Lcom/smartisanos/smartfolder/aoa/h/f;->o:Z
+
+    if-eqz v0, :cond_0
+
+    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/h/f;->h:Lcom/smartisanos/smartfolder/aoa/h/f$d;
+
+    if-eqz v0, :cond_0
+
+    const/4 v1, 0x4
+
+    invoke-virtual {v0, v1}, Lcom/smartisanos/smartfolder/aoa/h/f$d;->hasMessages(I)Z
+
+    move-result v2
+
+    if-eqz v2, :cond_1
+
+    invoke-virtual {v0, v1}, Lcom/smartisanos/smartfolder/aoa/h/f$d;->removeMessages(I)V
+
+    :cond_1
+    invoke-virtual {v0, v1, p1}, Lcom/smartisanos/smartfolder/aoa/h/f$d;->obtainMessage(ILjava/lang/Object;)Landroid/os/Message;
+
+    move-result-object v1
+
+    const-wide/16 v2, 0x64
+
+    invoke-virtual {v0, v1, v2, v3}, Lcom/smartisanos/smartfolder/aoa/h/f$d;->sendMessageDelayed(Landroid/os/Message;J)Z
+
+    :cond_0
+    return-void
 .end method
 
 .method static synthetic a(Landroid/content/Context;J)Ljava/lang/String;
@@ -599,6 +644,16 @@
     return-void
 .end method
 
+.method static synthetic h(Lcom/smartisanos/smartfolder/aoa/h/f;Landroid/app/Activity;)V
+    .locals 0
+
+    .prologue
+    .line 41
+    invoke-direct {p0, p1}, Lcom/smartisanos/smartfolder/aoa/h/f;->i(Landroid/app/Activity;)V
+
+    return-void
+.end method
+
 .method private h()V
     .locals 3
 
@@ -634,6 +689,167 @@
     invoke-virtual {v0, v1}, Lcom/smartisanos/smartfolder/aoa/h/f$d;->post(Ljava/lang/Runnable;)Z
 
     .line 636
+    return-void
+.end method
+
+.method private i(Landroid/app/Activity;)V
+    .locals 10
+
+    .prologue
+    if-eqz p1, :cond_2
+
+    invoke-static {}, Lcom/smartisanos/smartfolder/aoa/h/d;->m()Z
+
+    move-result v0
+
+    if-nez v0, :cond_2
+
+    invoke-static {}, Lcom/smartisanos/smartfolder/aoa/a/a;->c()Z
+
+    move-result v0
+
+    if-nez v0, :cond_0
+
+    goto :goto_0
+
+    :cond_0
+    const-string v0, "clipboard"
+
+    invoke-virtual {p1, v0}, Landroid/app/Activity;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Landroid/content/ClipboardManager;
+
+    if-eqz v0, :cond_1
+
+    :try_start_0
+    invoke-virtual {v0}, Landroid/content/ClipboardManager;->getPrimaryClip()Landroid/content/ClipData;
+
+    move-result-object v1
+
+    if-eqz v1, :cond_1
+
+    invoke-virtual {v1}, Landroid/content/ClipData;->getItemCount()I
+
+    move-result v2
+
+    if-lez v2, :cond_1
+
+    const/4 v2, 0x0
+
+    invoke-virtual {v1, v2}, Landroid/content/ClipData;->getItemAt(I)Landroid/content/ClipData$Item;
+
+    move-result-object v1
+
+    invoke-virtual {v1, p1}, Landroid/content/ClipData$Item;->coerceToText(Landroid/content/Context;)Ljava/lang/CharSequence;
+
+    move-result-object v1
+
+    invoke-static {v1}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+
+    move-result v2
+
+    if-nez v2, :cond_1
+
+    invoke-virtual {v1}, Ljava/lang/Object;->toString()Ljava/lang/String;
+
+    move-result-object v2
+
+    iget-object v3, p0, Lcom/smartisanos/smartfolder/aoa/h/f;->q:Ljava/lang/String;
+
+    invoke-static {v3, v2}, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Z
+
+    move-result v3
+
+    if-nez v3, :cond_2
+
+    invoke-static {}, Lcom/smartisanos/smartfolder/a/a$n;->n()Lcom/smartisanos/smartfolder/a/a$n$a;
+
+    move-result-object v3
+
+    invoke-static {v2}, Lcom/smartisanos/smartfolder/aoa/h/d;->b(Ljava/lang/String;)Lcom/a/a/e;
+
+    move-result-object v4
+
+    invoke-virtual {v3, v4}, Lcom/smartisanos/smartfolder/a/a$n$a;->a(Lcom/a/a/e;)Lcom/smartisanos/smartfolder/a/a$n$a;
+
+    invoke-static {}, Ljava/lang/System;->currentTimeMillis()J
+
+    move-result-wide v4
+
+    invoke-virtual {v3, v4, v5}, Lcom/smartisanos/smartfolder/a/a$n$a;->a(J)Lcom/smartisanos/smartfolder/a/a$n$a;
+
+    invoke-virtual {v3}, Lcom/smartisanos/smartfolder/a/a$n$a;->d()Lcom/a/a/m;
+
+    move-result-object v3
+
+    new-instance v4, Ljava/util/ArrayList;
+
+    invoke-direct {v4}, Ljava/util/ArrayList;-><init>()V
+
+    invoke-virtual {v4, v3}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
+
+    invoke-static {}, Lcom/smartisanos/smartfolder/a/a$o;->l()Lcom/smartisanos/smartfolder/a/a$o$a;
+
+    move-result-object v3
+
+    sget-object v5, Lcom/smartisanos/smartfolder/a/a$dp;->D:Lcom/smartisanos/smartfolder/a/a$dp;
+
+    invoke-virtual {v3, v5}, Lcom/smartisanos/smartfolder/a/a$o$a;->a(Lcom/smartisanos/smartfolder/a/a$dp;)Lcom/smartisanos/smartfolder/a/a$o$a;
+
+    move-result-object v3
+
+    invoke-virtual {v3, v4}, Lcom/smartisanos/smartfolder/a/a$o$a;->a(Ljava/lang/Iterable;)Lcom/smartisanos/smartfolder/a/a$o$a;
+
+    move-result-object v3
+
+    invoke-virtual {v3}, Lcom/smartisanos/smartfolder/a/a$o$a;->d()Lcom/a/a/m;
+
+    move-result-object v3
+
+    check-cast v3, Lcom/smartisanos/smartfolder/a/a$o;
+
+    invoke-static {}, Lcom/smartisanos/smartfolder/aoa/a/a;->a()Lcom/smartisanos/smartfolder/aoa/a/a;
+
+    move-result-object v4
+
+    sget-object v5, Lcom/smartisanos/smartfolder/aoa/a/a$a;->g:Lcom/smartisanos/smartfolder/aoa/a/a$a;
+
+    invoke-virtual {v4, v5}, Lcom/smartisanos/smartfolder/aoa/a/a;->a(Lcom/smartisanos/smartfolder/aoa/a/a$a;)V
+
+    invoke-static {}, Lcom/smartisanos/smartfolder/aoa/a/a;->a()Lcom/smartisanos/smartfolder/aoa/a/a;
+
+    move-result-object v4
+
+    sget-object v5, Lcom/smartisanos/smartfolder/aoa/a/a$a;->g:Lcom/smartisanos/smartfolder/aoa/a/a$a;
+
+    invoke-virtual {v3}, Lcom/smartisanos/smartfolder/a/a$o;->b()[B
+
+    move-result-object v3
+
+    invoke-virtual {v4, v5, v3}, Lcom/smartisanos/smartfolder/aoa/a/a;->a(Lcom/smartisanos/smartfolder/aoa/a/a$a;[B)V
+
+    iput-object v2, p0, Lcom/smartisanos/smartfolder/aoa/h/f;->q:Ljava/lang/String;
+    :try_end_0
+    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
+
+    goto :goto_0
+
+    :catch_0
+    move-exception v0
+
+    invoke-virtual {v0}, Ljava/lang/Exception;->printStackTrace()V
+
+    goto :goto_0
+
+    :cond_1
+    const/4 v0, 0x0
+
+    iput-object v0, p0, Lcom/smartisanos/smartfolder/aoa/h/f;->q:Ljava/lang/String;
+
+    :cond_2
+    :goto_0
     return-void
 .end method
 
@@ -1075,6 +1291,8 @@
 
     :try_start_1
     iput-boolean v0, p0, Lcom/smartisanos/smartfolder/aoa/h/f;->o:Z
+
+    iput-object v0, p0, Lcom/smartisanos/smartfolder/aoa/h/f;->q:Ljava/lang/String;
 
     .line 152
     iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/h/f;->j:Landroid/content/Context;

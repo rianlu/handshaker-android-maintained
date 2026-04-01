@@ -2346,6 +2346,12 @@
 
     invoke-virtual {v0, v1}, Lorg/greenrobot/eventbus/c;->d(Ljava/lang/Object;)V
 
+    invoke-static {}, Lcom/smartisanos/smartfolder/aoa/h/f;->a()Lcom/smartisanos/smartfolder/aoa/h/f;
+
+    move-result-object v0
+
+    invoke-virtual {v0, p0}, Lcom/smartisanos/smartfolder/aoa/h/f;->a(Landroid/app/Activity;)V
+
     .line 300
     return-void
 .end method
