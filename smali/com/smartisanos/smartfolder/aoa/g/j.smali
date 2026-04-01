@@ -2237,9 +2237,8 @@
     move-result-object v2
 
     .line 120
-    invoke-static {}, Lcom/smartisanos/smartfolder/aoa/h/d;->m()Z
-
-    move-result v3
+    # Windows Wi-Fi handshake gates clipboard support on this Smartisan flag.
+    const/4 v3, 0x1
 
     invoke-virtual {v2, v3}, Lcom/smartisanos/smartfolder/a/a$ce$a;->a(Z)Lcom/smartisanos/smartfolder/a/a$ce$a;
 
