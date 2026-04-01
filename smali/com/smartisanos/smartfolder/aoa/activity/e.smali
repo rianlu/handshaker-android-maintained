@@ -45,6 +45,21 @@
     .line 183
     if-eqz v0, :cond_4
 
+    .line 184
+    sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
+
+    const/16 v2, 0x17
+
+    if-lt v0, v2, :cond_6
+
+    .line 185
+    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/activity/e;->a:Lcom/smartisanos/smartfolder/aoa/activity/c;
+
+    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/activity/c;->b(Lcom/smartisanos/smartfolder/aoa/activity/c;)V
+
+    goto/16 :goto_1
+
+    :cond_6
     .line 186
     invoke-static {}, Lcom/smartisanos/smartfolder/aoa/h/d;->n()Z
 

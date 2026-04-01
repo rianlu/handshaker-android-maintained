@@ -26,56 +26,57 @@
 
 # virtual methods
 .method public final onClick(Landroid/view/View;)V
-    .locals 2
+    .locals 4
 
     .prologue
     .line 211
-    invoke-static {}, Lcom/smartisanos/smartfolder/aoa/h/d;->n()Z
+    new-instance v0, Landroid/content/Intent;
 
-    move-result v0
+    const-string v1, "android.settings.APPLICATION_DETAILS_SETTINGS"
 
-    if-eqz v0, :cond_1
+    invoke-direct {v0, v1}, Landroid/content/Intent;-><init>(Ljava/lang/String;)V
 
     .line 212
-    new-instance v0, Landroid/content/Intent;
+    new-instance v1, Ljava/lang/StringBuilder;
 
-    const-string v1, "android.settings.APPLICATION_SETTINGS"
+    const-string v2, "package:"
 
-    invoke-direct {v0, v1}, Landroid/content/Intent;-><init>(Ljava/lang/String;)V
+    invoke-direct {v1, v2}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
 
     .line 213
-    iget-object v1, p0, Lcom/smartisanos/smartfolder/aoa/activity/f;->a:Lcom/smartisanos/smartfolder/aoa/activity/e;
+    iget-object v2, p0, Lcom/smartisanos/smartfolder/aoa/activity/f;->a:Lcom/smartisanos/smartfolder/aoa/activity/e;
 
-    iget-object v1, v1, Lcom/smartisanos/smartfolder/aoa/activity/e;->a:Lcom/smartisanos/smartfolder/aoa/activity/c;
+    iget-object v2, v2, Lcom/smartisanos/smartfolder/aoa/activity/e;->a:Lcom/smartisanos/smartfolder/aoa/activity/c;
 
-    invoke-virtual {v1, v0}, Lcom/smartisanos/smartfolder/aoa/activity/c;->startActivity(Landroid/content/Intent;)V
+    invoke-virtual {v2}, Lcom/smartisanos/smartfolder/aoa/activity/c;->getActivity()Landroid/app/Activity;
 
-    .line 218
-    :cond_0
-    :goto_0
-    return-void
+    move-result-object v2
+
+    invoke-virtual {v2}, Landroid/app/Activity;->getPackageName()Ljava/lang/String;
+
+    move-result-object v2
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {v1}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
+
+    move-result-object v1
+
+    invoke-virtual {v0, v1}, Landroid/content/Intent;->setData(Landroid/net/Uri;)Landroid/content/Intent;
 
     .line 214
-    :cond_1
-    invoke-static {}, Lcom/smartisanos/smartfolder/aoa/h/d;->v()Z
-
-    move-result v0
-
-    if-nez v0, :cond_0
-
-    .line 215
-    new-instance v0, Landroid/content/Intent;
-
-    const-string v1, "android.settings.APPLICATION_SETTINGS"
-
-    invoke-direct {v0, v1}, Landroid/content/Intent;-><init>(Ljava/lang/String;)V
-
-    .line 216
     iget-object v1, p0, Lcom/smartisanos/smartfolder/aoa/activity/f;->a:Lcom/smartisanos/smartfolder/aoa/activity/e;
 
     iget-object v1, v1, Lcom/smartisanos/smartfolder/aoa/activity/e;->a:Lcom/smartisanos/smartfolder/aoa/activity/c;
 
     invoke-virtual {v1, v0}, Lcom/smartisanos/smartfolder/aoa/activity/c;->startActivity(Landroid/content/Intent;)V
 
-    goto :goto_0
+    .line 215
+    return-void
 .end method
