@@ -2363,6 +2363,12 @@
     .line 328
     invoke-super {p0}, Landroid/app/Activity;->onStop()V
 
+    invoke-static {}, Lcom/smartisanos/smartfolder/aoa/h/f;->a()Lcom/smartisanos/smartfolder/aoa/h/f;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Lcom/smartisanos/smartfolder/aoa/h/f;->d()V
+
     .line 7030
     invoke-static {}, Lcom/smartisan/trackerlib/a;->a()Lcom/smartisan/trackerlib/a;
 
@@ -2386,6 +2392,24 @@
     invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->h()V
 
     .line 333
+    :cond_0
+    return-void
+.end method
+
+.method public onWindowFocusChanged(Z)V
+    .locals 1
+
+    .prologue
+    invoke-super {p0, p1}, Landroid/app/Activity;->onWindowFocusChanged(Z)V
+
+    if-eqz p1, :cond_0
+
+    invoke-static {}, Lcom/smartisanos/smartfolder/aoa/h/f;->a()Lcom/smartisanos/smartfolder/aoa/h/f;
+
+    move-result-object v0
+
+    invoke-virtual {v0, p0}, Lcom/smartisanos/smartfolder/aoa/h/f;->a(Landroid/app/Activity;)V
+
     :cond_0
     return-void
 .end method

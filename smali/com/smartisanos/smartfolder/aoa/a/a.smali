@@ -200,6 +200,25 @@
     return v0
 .end method
 
+.method public final e()Z
+    .locals 1
+
+    .prologue
+    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/a/a;->e:Lcom/smartisanos/smartfolder/aoa/g/a;
+
+    if-eqz v0, :cond_0
+
+    const/4 v0, 0x1
+
+    :goto_0
+    return v0
+
+    :cond_0
+    const/4 v0, 0x0
+
+    goto :goto_0
+.end method
+
 
 # virtual methods
 .method public final a(Lcom/smartisanos/smartfolder/aoa/a/a$a;)V
