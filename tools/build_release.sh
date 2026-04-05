@@ -81,6 +81,8 @@ sync_versions() {
 
 build_apk() {
   mkdir -p "$build_dir"
+  # Apktool reuses build intermediates and can keep stale version metadata.
+  rm -rf "$repo_root/build/apk" "$repo_root/build/resources.zip"
   rm -f "$unsigned_apk" "$aligned_apk" "$signed_apk"
   apktool b "$repo_root" -o "$unsigned_apk"
 }
