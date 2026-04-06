@@ -148,6 +148,7 @@
     <string name="scan_link_error_dialog_content">Please check your network status and try again. You can also try connect via USB if encountering multiple failures</string>
     <string name="scan_link_error_dialog_title">Connection Failed</string>
     <string name="scan_qrcode_error_toast">Unusable QRCode, please try again</string>
+    <string name="usb_replug_required_tip">If disconnected, replug the USB cable.</string>
     <string name="scan_qrcode_link_tip">You can try setting up connection manually if your desired device is not discovered</string>
     <string name="scan_qrcode_txt">Manual</string>
     <string name="scan_tips_txt">"Please launch the desktop client of HandShaker

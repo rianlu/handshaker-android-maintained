@@ -1137,6 +1137,7 @@
     <public type="string" name="os_update_dlg_ok_btn" id="0x7f0900be" />
     <public type="string" name="os_update_dlg_title" id="0x7f0900bf" />
     <public type="string" name="twitter" id="0x7f0900c0" />
+    <public type="string" name="usb_replug_required_tip" id="0x7f0900c1" />
     <public type="integer" name="quickbar_ex_num_columns" id="0x7f0a0000" />
     <public type="integer" name="item_icon_size" id="0x7f0a0001" />
     <public type="integer" name="connect_tip_click_gap" id="0x7f0a0002" />

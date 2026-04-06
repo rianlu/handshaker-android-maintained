@@ -4,11 +4,12 @@
     <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent">
         <com.smartisanos.smartfolder.aoa.view.ConnectInfoView android:id="@id/connectting_wifi_layout" android:visibility="gone" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/connection_main_view_top" />
         <include android:id="@id/connectting_no_wifi_layout" android:visibility="gone" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_marginTop="@dimen/connecting_main_view_no_wifi_top" layout="@layout/layout_no_wifi" />
-        <LinearLayout android:id="@id/connecting_usb_tip" android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/connectting_usb_tip_margin_bottom" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true">
+        <LinearLayout android:id="@id/connecting_usb_tip" android:gravity="center_horizontal" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/connectting_usb_tip_margin_bottom" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true">
             <RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
                 <ImageView android:id="@id/connectting_image_usb" android:background="@drawable/icon_usb" android:layout_width="wrap_content" android:layout_height="wrap_content" />
                 <TextView android:textSize="@dimen/connectting_usb_tip_text_size" android:textStyle="bold" android:textColor="@color/normal_text" android:id="@id/connectting_bottom_tip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/connectting_usb_tip_margin_left" android:text="@string/connectting_usb_tip" android:layout_toRightOf="@id/connectting_image_usb" android:layout_centerVertical="true" />
             </RelativeLayout>
+            <TextView android:textSize="@dimen/settings_item_tips_text_size" android:textColor="@color/setting_item_tips_color" android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6.0dp" android:text="@string/usb_replug_required_tip" />
         </LinearLayout>
     </RelativeLayout>
     <com.smartisanos.smartfolder.aoa.view.TitleBar android:id="@id/titlebar" android:layout_width="match_parent" android:layout_height="wrap_content" />

@@ -145,6 +145,7 @@
     <string name="scan_link_error_dialog_content">請檢查您的網絡狀況，並確保手機與電腦處在同一無線網絡環境。如多次失敗可嘗試 USB 連接。</string>
     <string name="scan_link_error_dialog_title">連接失敗</string>
     <string name="scan_qrcode_error_toast">無效的二維碼，請掃描 HandShake r電腦客戶端中無線連接的二維碼。</string>
+    <string name="usb_replug_required_tip">如已斷開，請重新插拔資料線。</string>
     <string name="scan_qrcode_link_tip">電腦無法搜索到此設備時，您可以嘗試手動建立連接</string>
     <string name="scan_qrcode_txt">手動建立連接</string>
     <string name="scan_tips_txt">"打开 HandShaker 電腦客户端
