@@ -1846,9 +1846,6 @@
 
     if-nez v1, :cond_3
 
-    .line 4238
-    iget-object v2, p0, Lcom/smartisan/updater/a;->a:Landroid/content/Context;
-
     .line 5458
     invoke-virtual {p1}, Lcom/smartisan/updater/Version;->b()I
 
@@ -1913,17 +1910,6 @@
 
     .line 5467
     :cond_d
-    iget-boolean v1, p0, Lcom/smartisan/updater/a;->e:Z
-
-    if-nez v1, :cond_11
-
-    .line 5468
-    new-instance v1, Landroid/app/AlertDialog$Builder;
-
-    invoke-direct {v1, v2, v11}, Landroid/app/AlertDialog$Builder;-><init>(Landroid/content/Context;I)V
-
-    .line 5474
-    :goto_4
     iget-object v2, p0, Lcom/smartisan/updater/a;->c:Ljava/lang/String;
 
     new-array v3, v5, [Ljava/lang/Object;
@@ -1938,102 +1924,55 @@
 
     move-result-object v2
 
-    .line 5475
-    invoke-virtual {v1, v2}, Landroid/app/AlertDialog$Builder;->setMessage(Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;
-
-    .line 5476
-    sget v2, Lcom/smartisan/updater/l$a;->a:I
-
-    invoke-virtual {v1, v2}, Landroid/app/AlertDialog$Builder;->setTitle(I)Landroid/app/AlertDialog$Builder;
-
     .line 5478
-    sget v2, Lcom/smartisan/updater/l$a;->n:I
+    sget v3, Lcom/smartisan/updater/l$a;->n:I
 
     .line 5479
     invoke-virtual {p1}, Lcom/smartisan/updater/Version;->c()Ljava/lang/String;
 
-    move-result-object v3
+    move-result-object v4
 
     invoke-virtual {p1}, Lcom/smartisan/updater/Version;->d()Ljava/lang/String;
 
-    move-result-object v4
+    move-result-object v6
 
-    invoke-virtual {p0, v3, v4}, Lcom/smartisan/updater/a;->a(Ljava/lang/String;Ljava/lang/String;)Z
+    invoke-virtual {p0, v4, v6}, Lcom/smartisan/updater/a;->a(Ljava/lang/String;Ljava/lang/String;)Z
 
-    move-result v3
+    move-result v4
 
-    if-eqz v3, :cond_e
+    if-eqz v4, :cond_e
 
     .line 5480
-    sget v2, Lcom/smartisan/updater/l$a;->o:I
+    sget v3, Lcom/smartisan/updater/l$a;->o:I
 
     .line 5482
     :cond_e
-    new-instance v3, Lcom/smartisan/updater/d;
+    new-instance v4, Lcom/smartisan/updater/d;
 
-    invoke-direct {v3, p0, p1}, Lcom/smartisan/updater/d;-><init>(Lcom/smartisan/updater/a;Lcom/smartisan/updater/Version;)V
-
-    invoke-virtual {v1, v2, v3}, Landroid/app/AlertDialog$Builder;->setPositiveButton(ILandroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;
+    invoke-direct {v4, p0, p1}, Lcom/smartisan/updater/d;-><init>(Lcom/smartisan/updater/a;Lcom/smartisan/updater/Version;)V
 
     .line 5512
-    sget v2, Lcom/smartisan/updater/l$a;->m:I
+    sget v5, Lcom/smartisan/updater/l$a;->m:I
 
-    new-instance v3, Lcom/smartisan/updater/e;
+    new-instance v11, Lcom/smartisan/updater/e;
 
-    invoke-direct {v3, p0}, Lcom/smartisan/updater/e;-><init>(Lcom/smartisan/updater/a;)V
+    invoke-direct {v11, p0}, Lcom/smartisan/updater/e;-><init>(Lcom/smartisan/updater/a;)V
 
-    invoke-virtual {v1, v2, v3}, Landroid/app/AlertDialog$Builder;->setNegativeButton(ILandroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;
+    const/4 v12, 0x1
 
-    .line 5521
-    invoke-virtual {v1, v5}, Landroid/app/AlertDialog$Builder;->setCancelable(Z)Landroid/app/AlertDialog$Builder;
+    move-object v6, p0
 
-    .line 5523
-    invoke-virtual {v1}, Landroid/app/AlertDialog$Builder;->create()Landroid/app/AlertDialog;
+    move-object v7, v2
 
-    move-result-object v1
+    move v8, v3
 
-    .line 5524
-    invoke-virtual {v1, v10}, Landroid/app/AlertDialog;->setCanceledOnTouchOutside(Z)V
+    move-object v9, v4
 
-    .line 5525
-    invoke-virtual {v1, p0}, Landroid/app/AlertDialog;->setOnDismissListener(Landroid/content/DialogInterface$OnDismissListener;)V
+    move v10, v5
 
-    .line 5526
-    iget-object v2, p0, Lcom/smartisan/updater/a;->a:Landroid/content/Context;
-
-    instance-of v2, v2, Landroid/app/Activity;
-
-    if-nez v2, :cond_10
-
-    .line 5528
-    sget v2, Landroid/os/Build$VERSION;->SDK_INT:I
-
-    if-lt v2, v12, :cond_f
-
-    .line 5529
-    const/16 v0, 0x7d5
-
-    .line 5533
-    :cond_f
-    invoke-virtual {v1}, Landroid/app/AlertDialog;->getWindow()Landroid/view/Window;
-
-    move-result-object v2
-
-    invoke-virtual {v2, v0}, Landroid/view/Window;->setType(I)V
-
-    .line 5535
-    :cond_10
-    invoke-virtual {v1}, Landroid/app/AlertDialog;->show()V
+    invoke-direct/range {v6 .. v12}, Lcom/smartisan/updater/a;->l(Ljava/lang/CharSequence;ILandroid/view/View$OnClickListener;ILandroid/view/View$OnClickListener;Z)V
 
     goto/16 :goto_0
-
-    .line 5470
-    :cond_11
-    new-instance v1, Landroid/app/AlertDialog$Builder;
-
-    invoke-direct {v1, v2}, Landroid/app/AlertDialog$Builder;-><init>(Landroid/content/Context;)V
-
-    goto :goto_4
 
     .line 4242
     :cond_12
