@@ -11,7 +11,7 @@
     .line 18
     new-instance v0, Lcom/smartisan/updater/a;
 
-    const-string v1, "http://update.smartisanos.com/handshaker/update_info"
+    const-string v1, "https://api.github.com/repos/rianlu/handshaker-android-maintained/releases/latest"
 
     const v2, 0x7f090080
 

@@ -252,6 +252,22 @@
 
     if-nez v3, :cond_2
 
+    const-string v3, "github.com"
+
+    invoke-virtual {v2, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v3
+
+    if-nez v3, :cond_0
+
+    const-string v3, "gh-proxy.org"
+
+    invoke-virtual {v2, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v3
+
+    if-nez v3, :cond_0
+
     const-string v3, "dl.smartisan.cn"
 
     .line 348
@@ -961,6 +977,84 @@
     goto :goto_0
 .end method
 
+.method private j()Z
+    .locals 13
+
+    .prologue
+    const/4 v11, 0x0
+
+    invoke-static {}, Ljava/util/Calendar;->getInstance()Ljava/util/Calendar;
+
+    move-result-object v0
+
+    const/4 v12, 0x1
+
+    invoke-virtual {v0, v12}, Ljava/util/Calendar;->get(I)I
+
+    move-result v10
+
+    const/4 v12, 0x2
+
+    invoke-virtual {v0, v12}, Ljava/util/Calendar;->get(I)I
+
+    move-result v7
+
+    const/4 v12, 0x5
+
+    invoke-virtual {v0, v12}, Ljava/util/Calendar;->get(I)I
+
+    move-result v6
+
+    invoke-static {}, Ljava/lang/System;->currentTimeMillis()J
+
+    move-result-wide v8
+
+    iget-object v12, p0, Lcom/smartisan/updater/a;->a:Landroid/content/Context;
+
+    invoke-static {v12}, Lcom/smartisan/updater/m;->a(Landroid/content/Context;)Lcom/smartisan/updater/m;
+
+    move-result-object v12
+
+    invoke-virtual {v12}, Lcom/smartisan/updater/m;->d()J
+
+    move-result-wide v2
+
+    invoke-virtual {v0, v2, v3}, Ljava/util/Calendar;->setTimeInMillis(J)V
+
+    const/4 v12, 0x1
+
+    invoke-virtual {v0, v12}, Ljava/util/Calendar;->get(I)I
+
+    move-result v5
+
+    const/4 v12, 0x2
+
+    invoke-virtual {v0, v12}, Ljava/util/Calendar;->get(I)I
+
+    move-result v4
+
+    const/4 v12, 0x5
+
+    invoke-virtual {v0, v12}, Ljava/util/Calendar;->get(I)I
+
+    move-result v1
+
+    if-ne v10, v5, :cond_0
+
+    if-ne v7, v4, :cond_0
+
+    if-ne v6, v1, :cond_0
+
+    cmp-long v12, v8, v2
+
+    if-lez v12, :cond_0
+
+    const/4 v11, 0x1
+
+    :cond_0
+    return v11
+.end method
+
 
 # virtual methods
 .method public final a(Landroid/content/Context;Ljava/lang/String;)V
@@ -1070,12 +1164,10 @@
     .prologue
     const/4 v0, 0x0
 
-    .line 264
     iget-boolean v1, p0, Lcom/smartisan/updater/a;->e:Z
 
-    if-eqz v1, :cond_0
+    if-eqz v1, :cond_auto_check
 
-    .line 265
     invoke-static {}, Lcom/smartisan/trackerlib/a;->a()Lcom/smartisan/trackerlib/a;
 
     move-result-object v1
@@ -1102,35 +1194,42 @@
 
     invoke-virtual {v1, v2}, Lcom/smartisan/trackerlib/a;->a(Ljava/lang/String;)V
 
-    .line 278
-    :cond_0
+    :cond_auto_check
+    iget-boolean v1, p0, Lcom/smartisan/updater/a;->e:Z
+
+    if-nez v1, :cond_network_check
+
+    invoke-direct {p0}, Lcom/smartisan/updater/a;->j()Z
+
+    move-result v1
+
+    if-eqz v1, :cond_network_check
+
+    goto :goto_0
+
+    :cond_network_check
     iget-object v1, p0, Lcom/smartisan/updater/a;->a:Landroid/content/Context;
 
     invoke-static {v1}, Lcom/smartisan/updater/p;->a(Landroid/content/Context;)Z
 
     move-result v1
 
-    if-eqz v1, :cond_1
+    if-eqz v1, :cond_no_network
 
-    .line 279
     new-array v0, v0, [Ljava/lang/Void;
 
     invoke-virtual {p0, v0}, Lcom/smartisan/updater/a;->execute([Ljava/lang/Object;)Landroid/os/AsyncTask;
 
-    .line 280
     const/4 v0, 0x1
 
-    .line 287
     :goto_0
     return v0
 
-    .line 281
-    :cond_1
+    :cond_no_network
     iget-boolean v1, p0, Lcom/smartisan/updater/a;->e:Z
 
-    if-eqz v1, :cond_2
+    if-eqz v1, :cond_finish
 
-    .line 283
     iget-object v1, p0, Lcom/smartisan/updater/a;->a:Landroid/content/Context;
 
     sget v2, Lcom/smartisan/updater/l$a;->e:I
@@ -1148,8 +1247,7 @@
 
     invoke-virtual {v1}, Landroid/widget/Toast;->show()V
 
-    .line 286
-    :cond_2
+    :cond_finish
     invoke-direct {p0}, Lcom/smartisan/updater/a;->d()V
 
     goto :goto_0
