@@ -3,7 +3,7 @@
 .source "ApkUpdater.java"
 
 # interfaces
-.implements Landroid/content/DialogInterface$OnClickListener;
+.implements Landroid/view/View$OnClickListener;
 
 
 # instance fields
@@ -25,7 +25,7 @@
 
 
 # virtual methods
-.method public final onClick(Landroid/content/DialogInterface;I)V
+.method public final onClick(Landroid/view/View;)V
     .locals 1
 
     .prologue
