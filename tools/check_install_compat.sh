@@ -23,9 +23,23 @@ if [ "$target_sdk" -lt 24 ]; then
 fi
 
 if grep -q 'android:sharedUserId=' "$manifest"; then
-  if ! grep -q 'android:sharedUserMaxSdkVersion="32"' "$manifest"; then
-    fail "sharedUserId is present without android:sharedUserMaxSdkVersion=\"32\""
-  fi
+  fail "sharedUserId must be removed for modern sideload installs"
+fi
+
+if grep -q 'android.permission.READ_MEDIA_' "$manifest"; then
+  fail "READ_MEDIA_* must not be requested when MANAGE_EXTERNAL_STORAGE is required"
+fi
+
+if grep -q 'android.permission.READ_EXTERNAL_STORAGE"/>' "$manifest"; then
+  fail "READ_EXTERNAL_STORAGE must be capped with android:maxSdkVersion=\"29\""
+fi
+
+if grep -q 'android.permission.WRITE_EXTERNAL_STORAGE"/>' "$manifest"; then
+  fail "WRITE_EXTERNAL_STORAGE must be capped with android:maxSdkVersion=\"29\""
+fi
+
+if grep -q 'android.permission.GET_PACKAGE_SIZE' "$manifest"; then
+  fail "GET_PACKAGE_SIZE must not be requested because installed-app scanning is disabled"
 fi
 
 printf '%s\n' "PASS: install compatibility checks passed"

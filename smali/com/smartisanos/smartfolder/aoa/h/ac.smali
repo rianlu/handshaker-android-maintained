@@ -330,53 +330,13 @@
 .end method
 
 .method public static a(Landroid/content/Context;Lcom/smartisanos/smartfolder/aoa/h/ac$a;)V
-    .locals 10
+    .locals 2
 
     .prologue
-    const-wide/16 v8, 0x0
-
     .line 56
-    invoke-virtual {p0}, Landroid/content/Context;->getPackageManager()Landroid/content/pm/PackageManager;
+    const-wide/16 v0, 0x0
 
-    move-result-object v0
-
-    const/16 v1, 0x2200
-
-    invoke-virtual {v0, v1}, Landroid/content/pm/PackageManager;->getInstalledApplications(I)Ljava/util/List;
-
-    move-result-object v6
-
-    .line 59
-    invoke-interface {v6}, Ljava/util/List;->size()I
-
-    move-result v4
-
-    .line 60
-    new-instance v3, Ljava/util/concurrent/atomic/AtomicInteger;
-
-    const/4 v0, 0x0
-
-    invoke-direct {v3, v0}, Ljava/util/concurrent/atomic/AtomicInteger;-><init>(I)V
-
-    .line 61
-    new-instance v1, Ljava/util/concurrent/atomic/AtomicLong;
-
-    invoke-direct {v1, v8, v9}, Ljava/util/concurrent/atomic/AtomicLong;-><init>(J)V
-
-    .line 62
-    new-instance v2, Ljava/util/concurrent/atomic/AtomicLong;
-
-    invoke-direct {v2, v8, v9}, Ljava/util/concurrent/atomic/AtomicLong;-><init>(J)V
-
-    .line 63
-    new-instance v0, Lcom/smartisanos/smartfolder/aoa/h/ad;
-
-    move-object v5, p1
-
-    invoke-direct/range {v0 .. v5}, Lcom/smartisanos/smartfolder/aoa/h/ad;-><init>(Ljava/util/concurrent/atomic/AtomicLong;Ljava/util/concurrent/atomic/AtomicLong;Ljava/util/concurrent/atomic/AtomicInteger;ILcom/smartisanos/smartfolder/aoa/h/ac$a;)V
-
-    .line 75
-    invoke-static {p0, v6, v0}, Lcom/smartisanos/smartfolder/aoa/h/ac;->a(Landroid/content/Context;Ljava/util/List;Landroid/content/pm/a;)V
+    invoke-interface {p1, v0, v1, v0, v1}, Lcom/smartisanos/smartfolder/aoa/h/ac$a;->a(JJ)V
 
     .line 76
     return-void

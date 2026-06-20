@@ -54,7 +54,7 @@ select_device() {
     return 0
   fi
 
-  devices=$(adb devices | awk 'NR>1 && $2=="device" {print $1}')
+  devices=$(adb devices | sed -n 's/[	]device$//p')
   count=$(printf '%s\n' "$devices" | sed '/^$/d' | wc -l | tr -d ' ')
 
   if [ "$count" -eq 0 ]; then
@@ -81,12 +81,12 @@ install_apk() {
   fi
 
   if [ -n "${ANDROID_SERIAL:-}" ]; then
-    adb -s "$device_serial" install -r "$signed_apk"
+    adb -s "$device_serial" install --user 0 -r "$signed_apk"
   else
-    adb install -r "$signed_apk"
+    adb install --user 0 -r "$signed_apk"
   fi
 
-  echo "adb install -r succeeded"
+  echo "adb install --user 0 -r succeeded"
 }
 
 need_cmd apktool

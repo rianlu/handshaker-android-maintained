@@ -621,35 +621,11 @@
 
     :cond_0
     .line 572
-    const/16 v1, 0x21
+    const/16 v1, 0x1e
 
     if-lt v0, v1, :cond_2
 
     .line 573
-    const-string v0, "android.permission.READ_MEDIA_AUDIO"
-
-    invoke-static {p0, v0}, Landroid/support/v4/content/a;->a(Landroid/content/Context;Ljava/lang/String;)I
-
-    move-result v0
-
-    if-nez v0, :cond_1
-
-    const-string v0, "android.permission.READ_MEDIA_IMAGES"
-
-    invoke-static {p0, v0}, Landroid/support/v4/content/a;->a(Landroid/content/Context;Ljava/lang/String;)I
-
-    move-result v0
-
-    if-nez v0, :cond_1
-
-    const-string v0, "android.permission.READ_MEDIA_VIDEO"
-
-    invoke-static {p0, v0}, Landroid/support/v4/content/a;->a(Landroid/content/Context;Ljava/lang/String;)I
-
-    move-result v0
-
-    if-nez v0, :cond_1
-
     const-string v0, "android.permission.ACCESS_FINE_LOCATION"
 
     invoke-static {p0, v0}, Landroid/support/v4/content/a;->a(Landroid/content/Context;Ljava/lang/String;)I
@@ -668,35 +644,17 @@
 
     .line 579
     :cond_1
-    const/4 v0, 0x5
+    const/4 v0, 0x2
 
     new-array v0, v0, [Ljava/lang/String;
 
     const/4 v1, 0x0
 
-    const-string v2, "android.permission.READ_MEDIA_AUDIO"
-
-    aput-object v2, v0, v1
-
-    const/4 v1, 0x1
-
-    const-string v2, "android.permission.READ_MEDIA_IMAGES"
-
-    aput-object v2, v0, v1
-
-    const/4 v1, 0x2
-
-    const-string v2, "android.permission.READ_MEDIA_VIDEO"
-
-    aput-object v2, v0, v1
-
-    const/4 v1, 0x3
-
     const-string v2, "android.permission.ACCESS_FINE_LOCATION"
 
     aput-object v2, v0, v1
 
-    const/4 v1, 0x4
+    const/4 v1, 0x1
 
     const-string v2, "android.permission.ACCESS_COARSE_LOCATION"
 
