@@ -29,6 +29,8 @@
 
 .field private h:Landroid/view/View$OnClickListener;
 
+.field private i:Landroid/widget/TextView;
+
 
 # direct methods
 .method public constructor <init>(Landroid/content/Context;)V
@@ -125,6 +127,17 @@
     iput-object v0, p0, Lcom/smartisanos/smartfolder/aoa/view/ConnectInfoView;->b:Landroid/widget/TextView;
 
     .line 67
+    const v0, 0x7f0e00e2
+
+    invoke-virtual {p0, v0}, Lcom/smartisanos/smartfolder/aoa/view/ConnectInfoView;->findViewById(I)Landroid/view/View;
+
+    move-result-object v0
+
+    check-cast v0, Landroid/widget/TextView;
+
+    iput-object v0, p0, Lcom/smartisanos/smartfolder/aoa/view/ConnectInfoView;->i:Landroid/widget/TextView;
+
+    .line 68
     const v0, 0x7f0e0086
 
     invoke-virtual {p0, v0}, Lcom/smartisanos/smartfolder/aoa/view/ConnectInfoView;->findViewById(I)Landroid/view/View;
@@ -323,7 +336,7 @@
 .end method
 
 .method private c()V
-    .locals 5
+    .locals 6
 
     .prologue
     .line 131
@@ -347,6 +360,14 @@
     invoke-static {v1}, Lcom/smartisanos/smartfolder/aoa/h/y;->b(Landroid/content/Context;)Ljava/lang/String;
 
     move-result-object v1
+
+    invoke-static {}, Lcom/smartisanos/smartfolder/aoa/FolderApp;->a()Lcom/smartisanos/smartfolder/aoa/FolderApp;
+
+    move-result-object v5
+
+    invoke-static {v5}, Lcom/smartisanos/smartfolder/aoa/h/y;->c(Landroid/content/Context;)Ljava/lang/String;
+
+    move-result-object v5
 
     .line 133
     const-string v2, "ConnectInfoView"
@@ -386,6 +407,10 @@
     iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/view/ConnectInfoView;->b:Landroid/widget/TextView;
 
     invoke-virtual {v0, v1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+
+    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/view/ConnectInfoView;->i:Landroid/widget/TextView;
+
+    invoke-virtual {v0, v5}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
     .line 136
     return-void

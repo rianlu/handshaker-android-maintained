@@ -185,6 +185,7 @@ Click the link down below to find the barcode and scan"</string>
     <string name="wifi_middle_tip">"Please launch HandShaker from your computer in the same WLAN network to establish connection. Unable to create connection? "</string>
     <string name="wifi_phone_name">Phone Name</string>
     <string name="wifi_scan_connect">please scan again</string>
+    <string name="wifi_ip">IP Address</string>
     <string name="wifi_ssid">Current WLAN</string>
     <string name="wifi_top_tip">Please launch HandShaker to establish connection</string>
     <string name="yes">YES</string>

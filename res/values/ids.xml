@@ -134,6 +134,7 @@
     <id name="connect_info_tip_for_image" />
     <id name="wifi_phone_name" />
     <id name="wifi_ssid" />
+    <id name="wifi_ip" />
     <id name="connect_info_tip" />
     <id name="setting_follow_weixin" />
     <id name="wechat_account_title" />

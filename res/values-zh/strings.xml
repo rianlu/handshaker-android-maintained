@@ -95,6 +95,7 @@
     <string name="wifi_middle_tip">请在同一无线网络下启动 HandShaker 电脑客户端选择本手机以建立连接。无法连接？</string>
     <string name="wifi_phone_name">本机名称</string>
     <string name="wifi_scan_connect">请尝试扫码连接</string>
+    <string name="wifi_ip">IP 地址</string>
     <string name="wifi_ssid">当前无线网络</string>
     <string name="wifi_top_tip">打开 HandShaker 客户端以建立连接</string>
     <string name="yes">YES</string>

@@ -67,6 +67,37 @@
     return-void
 .end method
 
+.method private static a(Ljava/net/Socket;)V
+    .locals 1
+
+    .prologue
+    .line 44
+    :try_start_0
+    const/4 v0, 0x1
+
+    invoke-virtual {p0, v0}, Ljava/net/Socket;->setTcpNoDelay(Z)V
+
+    invoke-virtual {p0, v0}, Ljava/net/Socket;->setKeepAlive(Z)V
+
+    const/high16 v0, 0x40000
+
+    invoke-virtual {p0, v0}, Ljava/net/Socket;->setSendBufferSize(I)V
+
+    invoke-virtual {p0, v0}, Ljava/net/Socket;->setReceiveBufferSize(I)V
+    :try_end_0
+    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
+
+    .line 45
+    :goto_0
+    return-void
+
+    .line 44
+    :catch_0
+    move-exception v0
+
+    goto :goto_0
+.end method
+
 
 # virtual methods
 .method public final a(Z)V
@@ -114,6 +145,9 @@
     move-result-object v1
 
     .line 57
+    invoke-static {v1}, Lcom/smartisanos/smartfolder/aoa/service/i$a;->a(Ljava/net/Socket;)V
+
+    .line 58
     iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/service/i$a;->b:Ljava/lang/String;
 
     new-instance v2, Ljava/lang/StringBuilder;
@@ -132,17 +166,17 @@
 
     invoke-static {v0, v2}, Lcom/smartisanos/smartfolder/aoa/h/t;->a(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 58
+    .line 59
     if-eqz v1, :cond_3
 
-    .line 59
+    .line 60
     iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/service/i$a;->a:Lcom/smartisanos/smartfolder/aoa/service/i;
 
     invoke-virtual {v0}, Lcom/smartisanos/smartfolder/aoa/service/i;->a()Z
 
     move-result v0
 
-    .line 60
+    .line 61
     iget-object v2, p0, Lcom/smartisanos/smartfolder/aoa/service/i$a;->b:Ljava/lang/String;
 
     new-instance v3, Ljava/lang/StringBuilder;
@@ -161,41 +195,49 @@
 
     invoke-static {v2, v3}, Lcom/smartisanos/smartfolder/aoa/h/t;->a(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 61
+    .line 62
     if-eqz v0, :cond_0
 
-    .line 63
+    .line 64
     :try_start_1
     iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/service/i$a;->a:Lcom/smartisanos/smartfolder/aoa/service/i;
 
     invoke-static {v0, v1}, Lcom/smartisanos/smartfolder/aoa/service/i;->a(Lcom/smartisanos/smartfolder/aoa/service/i;Ljava/net/Socket;)V
 
-    .line 64
+    .line 65
     iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/service/i$a;->a:Lcom/smartisanos/smartfolder/aoa/service/i;
 
     invoke-virtual {v0}, Lcom/smartisanos/smartfolder/aoa/service/i;->c()V
 
-    .line 65
+    .line 66
     iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/service/i$a;->a:Lcom/smartisanos/smartfolder/aoa/service/i;
 
     new-instance v2, Lcom/smartisanos/smartfolder/aoa/service/i$b;
+
+    new-instance v4, Ljava/io/BufferedInputStream;
 
     invoke-virtual {v1}, Ljava/net/Socket;->getInputStream()Ljava/io/InputStream;
 
     move-result-object v3
 
-    invoke-direct {v2, v3}, Lcom/smartisanos/smartfolder/aoa/service/i$b;-><init>(Ljava/io/InputStream;)V
+    const/high16 v0, 0x10000
+
+    invoke-direct {v4, v3, v0}, Ljava/io/BufferedInputStream;-><init>(Ljava/io/InputStream;I)V
+
+    invoke-direct {v2, v4}, Lcom/smartisanos/smartfolder/aoa/service/i$b;-><init>(Ljava/io/InputStream;)V
+
+    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/service/i$a;->a:Lcom/smartisanos/smartfolder/aoa/service/i;
 
     new-instance v3, Lcom/smartisanos/smartfolder/aoa/g/a$c;
 
-    .line 66
+    .line 67
     invoke-virtual {v1}, Ljava/net/Socket;->getOutputStream()Ljava/io/OutputStream;
 
     move-result-object v4
 
     invoke-direct {v3, v4}, Lcom/smartisanos/smartfolder/aoa/g/a$c;-><init>(Ljava/io/OutputStream;)V
 
-    .line 65
+    .line 66
     invoke-virtual {v0, v2, v3}, Lcom/smartisanos/smartfolder/aoa/service/i;->a(Lcom/smartisanos/smartfolder/aoa/service/i$b;Lcom/smartisanos/smartfolder/aoa/g/a$c;)Lcom/smartisanos/smartfolder/aoa/g/a;
 
     move-result-object v0
