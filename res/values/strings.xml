@@ -145,7 +145,7 @@
     <string name="scan_autolink_progress_txt">Connecting...</string>
     <string name="scan_camera_occupy_txt">Unable to launch camera as it is occupied by another app</string>
     <string name="scan_camera_permission_txt">Please authorize HandShaker to use your camera</string>
-    <string name="scan_link_error_dialog_content">Please check your network status and try again. You can also try connect via USB if encountering multiple failures</string>
+    <string name="scan_link_error_dialog_content">Please check your network status and try again. You can also try connect via USB if encountering multiple failures.\n\nDevice address: %s\nMake sure Windows Firewall allows HandShaker on private networks and that the computer and phone are on the same subnet.</string>
     <string name="scan_link_error_dialog_title">Connection Failed</string>
     <string name="scan_qrcode_error_toast">Unusable QRCode, please try again</string>
     <string name="usb_replug_required_tip">If disconnected, replug the USB cable.</string>

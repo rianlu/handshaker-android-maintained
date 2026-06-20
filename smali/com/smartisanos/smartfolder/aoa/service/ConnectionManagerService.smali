@@ -199,43 +199,15 @@
 .end method
 
 .method private f()Z
-    .locals 2
+    .locals 1
 
     .prologue
-    const/4 v1, 0x1
-
     .line 307
-    const-string v0, "connectivity"
-
-    invoke-virtual {p0, v0}, Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
-
-    move-result-object v0
-
-    check-cast v0, Landroid/net/ConnectivityManager;
-
-    .line 308
-    invoke-virtual {v0}, Landroid/net/ConnectivityManager;->getActiveNetworkInfo()Landroid/net/NetworkInfo;
-
-    move-result-object v0
-
-    .line 309
-    if-eqz v0, :cond_0
-
-    invoke-virtual {v0}, Landroid/net/NetworkInfo;->getType()I
+    invoke-static {p0}, Lcom/smartisanos/smartfolder/aoa/h/y;->a(Landroid/content/Context;)Z
 
     move-result v0
 
-    if-ne v0, v1, :cond_0
-
-    move v0, v1
-
-    :goto_0
     return v0
-
-    :cond_0
-    const/4 v0, 0x0
-
-    goto :goto_0
 .end method
 
 .method static synthetic f(Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService;)Z

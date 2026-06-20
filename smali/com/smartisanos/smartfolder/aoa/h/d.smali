@@ -919,7 +919,7 @@
     invoke-direct {v7, v1, v3}, Ljava/net/InetSocketAddress;-><init>(Ljava/lang/String;I)V
 
     .line 688
-    const/16 v1, 0xbb8
+    const/16 v1, 0x2710
 
     invoke-virtual {v4, v7, v1}, Ljava/net/Socket;->connect(Ljava/net/SocketAddress;I)V
 

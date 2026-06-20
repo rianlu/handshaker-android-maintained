@@ -5,7 +5,7 @@
 
 # direct methods
 .method public static a(Landroid/content/Context;)Landroid/app/AlertDialog;
-    .locals 3
+    .locals 6
 
     .prologue
     .line 111
@@ -20,7 +20,22 @@
 
     const v2, 0x7f090090
 
-    invoke-virtual {v1, v2}, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+    const/4 v3, 0x1
+
+    new-array v4, v3, [Ljava/lang/Object;
+
+    invoke-static {p0}, Lcom/smartisanos/smartfolder/aoa/h/y;->c(Landroid/content/Context;)Ljava/lang/String;
+
+    move-result-object v5
+
+    if-eqz v5, :cond_0
+
+    :goto_0
+    const/4 v3, 0x0
+
+    aput-object v5, v4, v3
+
+    invoke-virtual {v1, v2, v4}, Landroid/content/res/Resources;->getString(I[Ljava/lang/Object;)Ljava/lang/String;
 
     move-result-object v1
 
@@ -53,6 +68,11 @@
 
     .line 125
     return-object v0
+
+    :cond_0
+    const-string v5, ""
+
+    goto :goto_0
 .end method
 
 .method public static a(Landroid/content/Context;Lcom/smartisanos/smartfolder/aoa/b/g;)Landroid/app/AlertDialog;

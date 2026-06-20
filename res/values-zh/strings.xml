@@ -55,7 +55,7 @@
     <string name="scan_autolink_progress_txt">正在连接...</string>
     <string name="scan_camera_occupy_txt">无法开启摄像头，可能是因为摄像头正被其他应用占用。</string>
     <string name="scan_camera_permission_txt">“HandShaker”没有摄像头的权限，请点击“设置”前往开启。</string>
-    <string name="scan_link_error_dialog_content">请检查您的网络状况，并确保手机与电脑处在同一无线网络环境。如多次失败可尝试USB连接。</string>
+    <string name="scan_link_error_dialog_content">请检查您的网络状况，并确保手机与电脑处在同一无线网络环境。如多次失败可尝试USB连接。\n\n本机地址: %s\n请确认 Windows 防火墙允许 HandShaker 访问专用网络，且电脑与手机在同一网段。</string>
     <string name="scan_link_error_dialog_title">连接失败</string>
     <string name="scan_qrcode_error_toast">无效的二维码，请扫描 HandShaker 电脑客户端中无线连接的二维码。</string>
     <string name="usb_replug_required_tip">如已断开，请重新插拔数据线。</string>

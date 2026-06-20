@@ -12,34 +12,37 @@
     if-eqz p0, :cond_0
 
     .line 46
-    const-string v0, "connectivity"
+    const-string v0, "wifi"
 
     invoke-virtual {p0, v0}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
 
     move-result-object v0
 
-    check-cast v0, Landroid/net/ConnectivityManager;
+    check-cast v0, Landroid/net/wifi/WifiManager;
 
     .line 47
-    invoke-virtual {v0}, Landroid/net/ConnectivityManager;->getActiveNetworkInfo()Landroid/net/NetworkInfo;
+    if-eqz v0, :cond_0
+
+    invoke-virtual {v0}, Landroid/net/wifi/WifiManager;->isWifiEnabled()Z
+
+    move-result v1
+
+    if-eqz v1, :cond_0
+
+    invoke-virtual {v0}, Landroid/net/wifi/WifiManager;->getConnectionInfo()Landroid/net/wifi/WifiInfo;
 
     move-result-object v0
 
     .line 49
     if-eqz v0, :cond_0
 
-    invoke-virtual {v0}, Landroid/net/NetworkInfo;->getType()I
-
-    move-result v1
-
-    const/4 v2, 0x1
-
-    if-ne v1, v2, :cond_0
-
-    .line 50
-    invoke-virtual {v0}, Landroid/net/NetworkInfo;->isAvailable()Z
+    invoke-virtual {v0}, Landroid/net/wifi/WifiInfo;->getIpAddress()I
 
     move-result v0
+
+    if-eqz v0, :cond_0
+
+    const/4 v0, 0x1
 
     .line 53
     :goto_0
@@ -61,27 +64,11 @@
     if-eqz p0, :cond_2
 
     .line 59
-    const-string v0, "connectivity"
-
-    invoke-virtual {p0, v0}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
-
-    move-result-object v0
-
-    check-cast v0, Landroid/net/ConnectivityManager;
-
-    .line 60
-    invoke-virtual {v0}, Landroid/net/ConnectivityManager;->getActiveNetworkInfo()Landroid/net/NetworkInfo;
-
-    move-result-object v0
-
-    .line 62
-    if-eqz v0, :cond_2
-
-    invoke-virtual {v0}, Landroid/net/NetworkInfo;->getType()I
+    invoke-static {p0}, Lcom/smartisanos/smartfolder/aoa/h/y;->a(Landroid/content/Context;)Z
 
     move-result v0
 
-    if-ne v0, v4, :cond_2
+    if-eqz v0, :cond_2
 
     .line 63
     const-string v0, "wifi"
