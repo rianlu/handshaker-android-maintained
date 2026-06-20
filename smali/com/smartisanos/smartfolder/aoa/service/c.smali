@@ -32,6 +32,11 @@
     invoke-super {p0}, Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService$a;->b()V
 
     .line 93
+    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/service/c;->a:Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService;
+
+    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService;->j(Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService;)V
+
+    .line 94
     invoke-static {}, Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService;->d()Ljava/lang/String;
 
     move-result-object v0
@@ -148,9 +153,14 @@
 
     .prologue
     .line 102
-    invoke-super {p0}, Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService$a;->c()V
+    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/service/c;->a:Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService;
+
+    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService;->k(Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService;)V
 
     .line 103
+    invoke-super {p0}, Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService$a;->c()V
+
+    .line 104
     invoke-static {}, Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService;->d()Ljava/lang/String;
 
     move-result-object v0

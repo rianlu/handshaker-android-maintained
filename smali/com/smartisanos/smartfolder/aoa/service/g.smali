@@ -56,9 +56,16 @@
 
     move-result-object v0
 
+    invoke-virtual {v0}, Landroid/os/PowerManager$WakeLock;->isHeld()Z
+
+    move-result v1
+
+    if-eqz v1, :cond_0
+
     invoke-virtual {v0}, Landroid/os/PowerManager$WakeLock;->release()V
 
     .line 379
+    :cond_0
     invoke-static {}, Lcom/smartisanos/smartfolder/aoa/f/e;->a()Lcom/smartisanos/smartfolder/aoa/f/e;
 
     move-result-object v0

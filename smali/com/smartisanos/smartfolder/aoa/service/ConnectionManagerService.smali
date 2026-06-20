@@ -40,6 +40,8 @@
 
 .field private l:Landroid/content/BroadcastReceiver;
 
+.field private m:Landroid/net/wifi/WifiManager$WifiLock;
+
 
 # direct methods
 .method static constructor <clinit>()V
@@ -347,6 +349,52 @@
     return-object v0
 .end method
 
+.method static synthetic j(Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService;)V
+    .locals 1
+
+    .prologue
+    .line 47
+    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService;->m:Landroid/net/wifi/WifiManager$WifiLock;
+
+    if-eqz v0, :cond_0
+
+    invoke-virtual {v0}, Landroid/net/wifi/WifiManager$WifiLock;->isHeld()Z
+
+    move-result v0
+
+    if-nez v0, :cond_0
+
+    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService;->m:Landroid/net/wifi/WifiManager$WifiLock;
+
+    invoke-virtual {v0}, Landroid/net/wifi/WifiManager$WifiLock;->acquire()V
+
+    :cond_0
+    return-void
+.end method
+
+.method static synthetic k(Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService;)V
+    .locals 1
+
+    .prologue
+    .line 47
+    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService;->m:Landroid/net/wifi/WifiManager$WifiLock;
+
+    if-eqz v0, :cond_0
+
+    invoke-virtual {v0}, Landroid/net/wifi/WifiManager$WifiLock;->isHeld()Z
+
+    move-result v0
+
+    if-eqz v0, :cond_0
+
+    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService;->m:Landroid/net/wifi/WifiManager$WifiLock;
+
+    invoke-virtual {v0}, Landroid/net/wifi/WifiManager$WifiLock;->release()V
+
+    :cond_0
+    return-void
+.end method
+
 
 # virtual methods
 .method public final a()V
@@ -604,24 +652,82 @@
     iput-object v0, p0, Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService;->h:Landroid/os/PowerManager$WakeLock;
 
     .line 170
+    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService;->h:Landroid/os/PowerManager$WakeLock;
+
+    const/4 v1, 0x0
+
+    invoke-virtual {v0, v1}, Landroid/os/PowerManager$WakeLock;->setReferenceCounted(Z)V
+
+    .line 171
+    invoke-static {}, Lcom/smartisanos/smartfolder/aoa/FolderApp;->a()Lcom/smartisanos/smartfolder/aoa/FolderApp;
+
+    move-result-object v0
+
+    const-string v1, "wifi"
+
+    invoke-virtual {v0, v1}, Lcom/smartisanos/smartfolder/aoa/FolderApp;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Landroid/net/wifi/WifiManager;
+
+    if-eqz v0, :cond_0
+
+    .line 172
+    const/4 v1, 0x3
+
+    const-string v2, "HandShakerWifi"
+
+    invoke-virtual {v0, v1, v2}, Landroid/net/wifi/WifiManager;->createWifiLock(ILjava/lang/String;)Landroid/net/wifi/WifiManager$WifiLock;
+
+    move-result-object v0
+
+    iput-object v0, p0, Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService;->m:Landroid/net/wifi/WifiManager$WifiLock;
+
+    .line 173
+    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService;->m:Landroid/net/wifi/WifiManager$WifiLock;
+
+    const/4 v1, 0x0
+
+    invoke-virtual {v0, v1}, Landroid/net/wifi/WifiManager$WifiLock;->setReferenceCounted(Z)V
+
+    .line 174
+    :cond_0
     return-void
 .end method
 
 .method public onDestroy()V
-    .locals 1
+    .locals 2
 
     .prologue
     .line 229
     invoke-super {p0}, Landroid/app/Service;->onDestroy()V
 
     .line 230
+    invoke-static {p0}, Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService;->k(Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService;)V
+
+    .line 231
+    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService;->h:Landroid/os/PowerManager$WakeLock;
+
+    if-eqz v0, :cond_0
+
+    invoke-virtual {v0}, Landroid/os/PowerManager$WakeLock;->isHeld()Z
+
+    move-result v1
+
+    if-eqz v1, :cond_0
+
+    invoke-virtual {v0}, Landroid/os/PowerManager$WakeLock;->release()V
+
+    .line 232
+    :cond_0
     invoke-static {}, Lorg/greenrobot/eventbus/c;->a()Lorg/greenrobot/eventbus/c;
 
     move-result-object v0
 
     invoke-virtual {v0, p0}, Lorg/greenrobot/eventbus/c;->c(Ljava/lang/Object;)V
 
-    .line 231
+    .line 233
     return-void
 .end method
 

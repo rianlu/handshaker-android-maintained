@@ -42,6 +42,11 @@
     invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->f(Lcom/smartisanos/smartfolder/aoa/MainActivity;)V
 
     .line 147
+    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/b;->a:Lcom/smartisanos/smartfolder/aoa/MainActivity;
+
+    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->m(Lcom/smartisanos/smartfolder/aoa/MainActivity;)V
+
+    .line 148
     return-void
 .end method
 
@@ -77,6 +82,11 @@
     invoke-static {v0, v1}, Lcom/smartisanos/smartfolder/aoa/h/t;->a(Ljava/lang/String;Ljava/lang/String;)V
 
     .line 158
+    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/b;->a:Lcom/smartisanos/smartfolder/aoa/MainActivity;
+
+    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->m(Lcom/smartisanos/smartfolder/aoa/MainActivity;)V
+
+    .line 159
     return-void
 .end method
 

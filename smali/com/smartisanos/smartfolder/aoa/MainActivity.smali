@@ -536,6 +536,16 @@
     return-void
 .end method
 
+.method static synthetic m(Lcom/smartisanos/smartfolder/aoa/MainActivity;)V
+    .locals 0
+
+    .prologue
+    .line 66
+    invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->n()V
+
+    return-void
+.end method
+
 .method private k()V
     .locals 1
 
@@ -748,6 +758,76 @@
     const/4 v0, 0x1
 
     return v0
+.end method
+
+.method private n()V
+    .locals 6
+
+    .prologue
+    const/4 v5, 0x0
+
+    .line 620
+    invoke-virtual {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->isFinishing()Z
+
+    move-result v0
+
+    if-nez v0, :cond_0
+
+    invoke-virtual {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->isDestroyed()Z
+
+    move-result v0
+
+    if-eqz v0, :cond_1
+
+    .line 650
+    :cond_0
+    :goto_0
+    return-void
+
+    .line 624
+    :cond_1
+    sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
+
+    const/16 v1, 0x17
+
+    if-lt v0, v1, :cond_0
+
+    .line 628
+    :cond_2
+    const-string v0, "power"
+
+    invoke-virtual {p0, v0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Landroid/os/PowerManager;
+
+    if-eqz v0, :cond_3
+
+    invoke-virtual {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->getPackageName()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-virtual {v0, v1}, Landroid/os/PowerManager;->isIgnoringBatteryOptimizations(Ljava/lang/String;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_3
+
+    goto :goto_0
+
+    .line 637
+    :cond_3
+    new-instance v0, Lcom/smartisanos/smartfolder/aoa/i;
+
+    invoke-direct {v0, p0}, Lcom/smartisanos/smartfolder/aoa/i;-><init>(Lcom/smartisanos/smartfolder/aoa/MainActivity;)V
+
+    .line 638
+    const/4 v1, 0x0
+
+    invoke-virtual {v0, v1, v5}, Lcom/smartisanos/smartfolder/aoa/i;->onClick(Landroid/content/DialogInterface;I)V
+
+    goto :goto_0
 .end method
 
 .method private m()Z

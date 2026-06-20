@@ -56,9 +56,16 @@
 
     move-result-object v0
 
+    invoke-virtual {v0}, Landroid/os/PowerManager$WakeLock;->isHeld()Z
+
+    move-result v1
+
+    if-nez v1, :cond_0
+
     invoke-virtual {v0}, Landroid/os/PowerManager$WakeLock;->acquire()V
 
     .line 369
+    :cond_0
     iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/service/f;->a:Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService$a;
 
     invoke-virtual {v0}, Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService$a;->b()V
