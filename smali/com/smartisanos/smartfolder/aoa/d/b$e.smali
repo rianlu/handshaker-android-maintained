@@ -115,6 +115,8 @@
     .line 1312
     const-string v3, "text"
 
+    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/h/f;->b(Ljava/lang/String;)V
+
     invoke-static {v3, v0}, Landroid/content/ClipData;->newPlainText(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Landroid/content/ClipData;
 
     move-result-object v0

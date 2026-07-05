@@ -60,6 +60,10 @@
 
 .field private t:Landroid/content/ClipboardManager$OnPrimaryClipChangedListener;
 
+.field private u:Z
+
+.field private v:Z
+
 
 # direct methods
 .method static constructor <clinit>()V
@@ -135,13 +139,32 @@
     return-object v0
 .end method
 
+.method public static b(Ljava/lang/String;)V
+    .locals 2
+
+    .prologue
+    sget-object v0, Lcom/smartisanos/smartfolder/aoa/h/f;->e:Lcom/smartisanos/smartfolder/aoa/h/f;
+
+    iput-object p0, v0, Lcom/smartisanos/smartfolder/aoa/h/f;->q:Ljava/lang/String;
+
+    const/4 v1, 0x1
+
+    iput-boolean v1, v0, Lcom/smartisanos/smartfolder/aoa/h/f;->u:Z
+
+    return-void
+.end method
+
 .method public final a(Landroid/app/Activity;)V
-    .locals 0
+    .locals 1
 
     .prologue
     if-eqz p1, :cond_0
 
     iput-object p1, p0, Lcom/smartisanos/smartfolder/aoa/h/f;->r:Landroid/app/Activity;
+
+    const/4 v0, 0x1
+
+    iput-boolean v0, p0, Lcom/smartisanos/smartfolder/aoa/h/f;->v:Z
 
     invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/h/f;->j()V
 
@@ -661,9 +684,51 @@
 .end method
 
 .method static synthetic i(Lcom/smartisanos/smartfolder/aoa/h/f;)V
-    .locals 0
+    .locals 3
 
     .prologue
+    iget-boolean v0, p0, Lcom/smartisanos/smartfolder/aoa/h/f;->u:Z
+
+    if-eqz v0, :cond_0
+
+    const/4 v0, 0x0
+
+    iput-boolean v0, p0, Lcom/smartisanos/smartfolder/aoa/h/f;->u:Z
+
+    return-void
+
+    :cond_0
+    :try_start_0
+    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/h/f;->s:Landroid/content/ClipboardManager;
+
+    if-eqz v0, :cond_1
+
+    invoke-virtual {v0}, Landroid/content/ClipboardManager;->getPrimaryClipDescription()Landroid/content/ClipDescription;
+
+    move-result-object v0
+
+    if-eqz v0, :cond_1
+
+    invoke-virtual {v0}, Landroid/content/ClipDescription;->getLabel()Ljava/lang/CharSequence;
+
+    move-result-object v0
+
+    const-string v1, "universalClipData"
+
+    invoke-static {v0, v1}, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Z
+
+    move-result v2
+
+    if-eqz v2, :cond_1
+
+    return-void
+    :try_end_0
+    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
+
+    :catch_0
+    move-exception v0
+
+    :cond_1
     invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/h/f;->j()V
 
     return-void
@@ -936,6 +1001,17 @@
     invoke-virtual {v1, v2}, Landroid/content/ClipboardManager;->addPrimaryClipChangedListener(Landroid/content/ClipboardManager$OnPrimaryClipChangedListener;)V
 
     :cond_1
+    iget-boolean v1, p0, Lcom/smartisanos/smartfolder/aoa/h/f;->v:Z
+
+    if-eqz v1, :cond_4
+
+    const/4 v1, 0x0
+
+    iput-boolean v1, p0, Lcom/smartisanos/smartfolder/aoa/h/f;->v:Z
+
+    return-void
+
+    :cond_4
     invoke-virtual {v0}, Landroid/app/Activity;->hasWindowFocus()Z
 
     move-result v1

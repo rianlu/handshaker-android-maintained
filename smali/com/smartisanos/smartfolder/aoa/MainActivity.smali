@@ -642,7 +642,11 @@
 
     move-result v0
 
-    if-nez v0, :cond_1
+    if-eqz v0, :cond_1
+
+    goto :goto_0
+
+    :cond_1
 
     const-string v0, "android.permission.ACCESS_COARSE_LOCATION"
 
@@ -650,10 +654,12 @@
 
     move-result v0
 
-    if-eqz v0, :cond_4
+    if-eqz v0, :cond_5
+
+    goto :goto_0
 
     .line 579
-    :cond_1
+    :cond_5
     const/4 v0, 0x2
 
     new-array v0, v0, [Ljava/lang/String;
@@ -677,6 +683,11 @@
 
     .line 581
     const/4 v0, 0x0
+
+    return v0
+
+    :goto_0
+    const/4 v0, 0x1
 
     return v0
 
@@ -2307,6 +2318,10 @@
     if-ne p1, v0, :cond_2
 
     if-eqz p3, :cond_2
+
+    array-length v0, p3
+
+    if-lez v0, :cond_2
 
     .line 313
     const/4 v0, 0x0
