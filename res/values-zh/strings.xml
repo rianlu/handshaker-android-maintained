@@ -14,7 +14,7 @@
     <string name="connect_info_usb_tip">已通过 USB 数据线与电脑建立连接</string>
     <string name="connect_info_wifi_tip">已与 %s 建立连接</string>
     <string name="connectted_btn_disconnectted">断开连接</string>
-    <string name="connectting_usb_tip">也可以通过 USB 数据线连接到电脑</string>
+    <string name="connectting_usb_tip">USB 状态: 等待连接电脑</string>
     <string name="disconnect_dialog_cancel">否</string>
     <string name="disconnect_dialog_message">手机已与电脑建立连接，是否断开连接？</string>
     <string name="disconnect_dialog_title">是否断开连接</string>
@@ -58,7 +58,9 @@
     <string name="scan_link_error_dialog_content">请检查您的网络状况，并确保手机与电脑处在同一无线网络环境。如多次失败可尝试USB连接。\n\n本机地址: %s\n请确认 Windows 防火墙允许 HandShaker 访问专用网络，且电脑与手机在同一网段。</string>
     <string name="scan_link_error_dialog_title">连接失败</string>
     <string name="scan_qrcode_error_toast">无效的二维码，请扫描 HandShaker 电脑客户端中无线连接的二维码。</string>
-    <string name="usb_replug_required_tip">如已断开，请重新插拔数据线。</string>
+    <string name="usb_replug_required_tip">Windows 请将 USB 用途设为"文件传输"; Mac 无需切换。</string>
+    <string name="usb_connection_dialog_title">USB 连接提示</string>
+    <string name="usb_connection_dialog_message">连接 Windows:\n请将手机 USB 用途设置为"文件传输", 再打开或重试电脑端 HandShaker.\n\n连接 Mac:\n无需修改 USB 用途. 如无响应, 请重新插拔数据线.</string>
     <string name="scan_qrcode_link_tip">电脑无法搜索到此设备时，您可以尝试手动建立连接</string>
     <string name="scan_qrcode_txt">手动建立连接</string>
     <string name="scan_tips_txt">"打开 HandShaker 电脑客户端

@@ -495,7 +495,7 @@
 .end method
 
 .method public final b()V
-    .locals 5
+    .locals 6
 
     .prologue
     .line 109
@@ -562,6 +562,36 @@
     const v2, 0x7f0200ce
 
     invoke-virtual {v1, v2}, Landroid/view/View;->setBackgroundResource(I)V
+
+    iget-object v1, p0, Lcom/smartisanos/smartfolder/aoa/view/ConnectInfoView;->d:Landroid/widget/TextView;
+
+    const/4 v2, 0x0
+
+    invoke-virtual {v1, v2}, Landroid/widget/TextView;->setVisibility(I)V
+
+    invoke-virtual {p0}, Lcom/smartisanos/smartfolder/aoa/view/ConnectInfoView;->getContext()Landroid/content/Context;
+
+    move-result-object v1
+
+    const-string v2, "usb_status"
+
+    const/4 v3, 0x0
+
+    invoke-virtual {v1, v2, v3}, Landroid/content/Context;->getSharedPreferences(Ljava/lang/String;I)Landroid/content/SharedPreferences;
+
+    move-result-object v1
+
+    const-string v2, "history"
+
+    const-string v3, "USB 已连接"
+
+    invoke-interface {v1, v2, v3}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v1
+
+    iget-object v2, p0, Lcom/smartisanos/smartfolder/aoa/view/ConnectInfoView;->d:Landroid/widget/TextView;
+
+    invoke-virtual {v2, v1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
     .line 125
     :goto_0

@@ -64,6 +64,12 @@
     if-nez v0, :cond_1
 
     .line 151
+    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/MainActivity$c;->a:Lcom/smartisanos/smartfolder/aoa/MainActivity;
+
+    const-string v1, "USB 授权被拒绝, 请重新插拔数据线后选择允许"
+
+    invoke-static {v0, v1}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->a(Lcom/smartisanos/smartfolder/aoa/MainActivity;Ljava/lang/String;)V
+
     const-string v0, "MainActivity"
 
     const-string v1, "usb accessory permission denied"
@@ -82,7 +88,13 @@
 
     check-cast v0, Landroid/hardware/usb/UsbAccessory;
 
-    if-eqz v0, :cond_2
+    if-eqz v0, :cond_3
+
+    iget-object v1, p0, Lcom/smartisanos/smartfolder/aoa/MainActivity$c;->a:Lcom/smartisanos/smartfolder/aoa/MainActivity;
+
+    const-string v2, "USB 已授权, 正在打开连接通道"
+
+    invoke-static {v1, v2}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->a(Lcom/smartisanos/smartfolder/aoa/MainActivity;Ljava/lang/String;)V
 
     .line 156
     new-instance v1, Landroid/content/Intent;
@@ -123,4 +135,13 @@
     .line 164
     :cond_2
     return-void
+
+    :cond_3
+    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/MainActivity$c;->a:Lcom/smartisanos/smartfolder/aoa/MainActivity;
+
+    const-string v1, "USB 授权结果缺少设备信息, 请重新插拔数据线"
+
+    invoke-static {v0, v1}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->a(Lcom/smartisanos/smartfolder/aoa/MainActivity;Ljava/lang/String;)V
+
+    goto :cond_2
 .end method

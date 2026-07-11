@@ -145,6 +145,18 @@
     .line 29
     invoke-super {p0}, Landroid/app/Application;->onCreate()V
 
+    invoke-static {}, Ljava/lang/Thread;->getDefaultUncaughtExceptionHandler()Ljava/lang/Thread$UncaughtExceptionHandler;
+
+    move-result-object v0
+
+    new-instance v1, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagCrashHandler;
+
+    invoke-direct {v1, p0, v0}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagCrashHandler;-><init>(Landroid/content/Context;Ljava/lang/Thread$UncaughtExceptionHandler;)V
+
+    invoke-static {v1}, Ljava/lang/Thread;->setDefaultUncaughtExceptionHandler(Ljava/lang/Thread$UncaughtExceptionHandler;)V
+
+    invoke-static {p0}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagCrashHandler;->recordExitReasons(Landroid/content/Context;)V
+
     .line 2030
     invoke-static {}, Lcom/smartisan/trackerlib/a;->a()Lcom/smartisan/trackerlib/a;
 

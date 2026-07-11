@@ -58,6 +58,20 @@
     return-object p1
 .end method
 
+.method static synthetic a(Lcom/smartisanos/smartfolder/aoa/activity/c;Ljava/lang/String;)V
+    .locals 1
+
+    .prologue
+    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/activity/c;->d:Landroid/widget/TextView;
+
+    if-eqz v0, :cond_0
+
+    invoke-virtual {v0, p1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+
+    :cond_0
+    return-void
+.end method
+
 .method private a()V
     .locals 4
 
@@ -263,6 +277,90 @@
     return-void
 .end method
 
+.method private d()V
+    .locals 6
+
+    .prologue
+    invoke-virtual {p0}, Lcom/smartisanos/smartfolder/aoa/activity/c;->getActivity()Landroid/app/Activity;
+
+    move-result-object v0
+
+    if-eqz v0, :cond_1
+
+    const-string v1, "connection_tips"
+
+    const/4 v2, 0x0
+
+    invoke-virtual {v0, v1, v2}, Landroid/app/Activity;->getSharedPreferences(Ljava/lang/String;I)Landroid/content/SharedPreferences;
+
+    move-result-object v1
+
+    invoke-static {}, Lcom/smartisanos/smartfolder/aoa/h/d;->i()Ljava/lang/String;
+
+    move-result-object v2
+
+    const-string v3, "usb_tip_version"
+
+    const-string v4, ""
+
+    invoke-interface {v1, v3, v4}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v3
+
+    invoke-static {v2, v3}, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Z
+
+    move-result v3
+
+    if-nez v3, :cond_1
+
+    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/view/a;->a(Landroid/content/Context;)Lcom/smartisanos/smartfolder/aoa/view/a;
+
+    move-result-object v3
+
+    const v4, 0x7f0900c3
+
+    invoke-virtual {v3, v4}, Lcom/smartisanos/smartfolder/aoa/view/a;->a(I)Lcom/smartisanos/smartfolder/aoa/view/a;
+
+    const v4, 0x7f0900c4
+
+    invoke-virtual {v3, v4}, Lcom/smartisanos/smartfolder/aoa/view/a;->b(I)Lcom/smartisanos/smartfolder/aoa/view/a;
+
+    const v4, 0x7f090061
+
+    const/4 v5, 0x0
+
+    invoke-virtual {v3, v4, v5}, Lcom/smartisanos/smartfolder/aoa/view/a;->a(ILandroid/view/View$OnClickListener;)Lcom/smartisanos/smartfolder/aoa/view/a;
+
+    invoke-virtual {v3}, Lcom/smartisanos/smartfolder/aoa/view/a;->create()Landroid/app/AlertDialog;
+
+    move-result-object v3
+
+    iput-object v3, p0, Lcom/smartisanos/smartfolder/aoa/activity/c;->e:Landroid/app/AlertDialog;
+
+    iget-object v3, p0, Lcom/smartisanos/smartfolder/aoa/activity/c;->e:Landroid/app/AlertDialog;
+
+    invoke-virtual {v3, v5}, Landroid/app/AlertDialog;->setCanceledOnTouchOutside(Z)V
+
+    iget-object v3, p0, Lcom/smartisanos/smartfolder/aoa/activity/c;->e:Landroid/app/AlertDialog;
+
+    invoke-virtual {v3}, Landroid/app/AlertDialog;->show()V
+
+    invoke-interface {v1}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v1
+
+    const-string v3, "usb_tip_version"
+
+    invoke-interface {v1, v3, v2}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v1
+
+    invoke-interface {v1}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    :cond_1
+    return-void
+.end method
+
 .method static synthetic c(Lcom/smartisanos/smartfolder/aoa/activity/c;)V
     .locals 0
 
@@ -434,6 +532,14 @@
 
     iput-object v0, p0, Lcom/smartisanos/smartfolder/aoa/activity/c;->d:Landroid/widget/TextView;
 
+    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/activity/c;->d:Landroid/widget/TextView;
+
+    new-instance v2, Lcom/smartisanos/smartfolder/aoa/activity/o;
+
+    invoke-direct {v2}, Lcom/smartisanos/smartfolder/aoa/activity/o;-><init>()V
+
+    invoke-virtual {v0, v2}, Landroid/widget/TextView;->setOnLongClickListener(Landroid/view/View$OnLongClickListener;)V
+
     .line 1075
     const v0, 0x7f0e003b
 
@@ -492,6 +598,10 @@
     const-string v2, "android.net.conn.CONNECTIVITY_CHANGE"
 
     invoke-direct {v0, v2}, Landroid/content/IntentFilter;-><init>(Ljava/lang/String;)V
+
+    const-string v2, "com.smartisanos.smartfolder.aoa.action.USB_STATUS"
+
+    invoke-virtual {v0, v2}, Landroid/content/IntentFilter;->addAction(Ljava/lang/String;)V
 
     .line 2067
     invoke-virtual {p0}, Lcom/smartisanos/smartfolder/aoa/activity/c;->getActivity()Landroid/app/Activity;
@@ -572,6 +682,8 @@
 
     .line 62
     :cond_1
+    invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/activity/c;->d()V
+
     return-object v1
 .end method
 
