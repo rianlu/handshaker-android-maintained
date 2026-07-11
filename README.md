@@ -1,207 +1,99 @@
 <div align="center">
-  <img src="./ic_launcher.png" alt="HandShaker Android Maintained Logo" width="124" height="124" />
-
+  <img src="./ic_launcher.png" alt="HandShaker Android Maintained" width="120" height="120">
   <h1>HandShaker Android Maintained</h1>
-
-  <p><strong>面向新版 Android 的 HandShaker 非官方维护版</strong></p>
-  <p>在保留原有连接体验的基础上，修复新版 Android 上的启动、权限、媒体访问与 USB 连接兼容问题。</p>
-
+  <p>面向现代 Android 的 HandShaker 非官方维护版.</p>
   <p>
-    <a href="https://github.com/rianlu/handshaker-android-maintained/releases/latest">
-      <img alt="Release" src="https://img.shields.io/github/v/release/rianlu/handshaker-android-maintained?display_name=tag&style=for-the-badge" />
-    </a>
-    <img alt="Android 16" src="https://img.shields.io/badge/Android-16%20Compatible-4CAF50?style=for-the-badge" />
-    <img alt="Windows" src="https://img.shields.io/badge/Windows-Tested-1E88E5?style=for-the-badge" />
-    <img alt="macOS" src="https://img.shields.io/badge/macOS-Maintained%20Client-43A047?style=for-the-badge" />
+    <a href="https://github.com/rianlu/handshaker-android-maintained/releases/latest"><img alt="Release" src="https://img.shields.io/github/v/release/rianlu/handshaker-android-maintained?display_name=tag"></a>
+    <img alt="Android 16" src="https://img.shields.io/badge/Android%2016-tested-3DDC84">
   </p>
 </div>
 
 > [!IMPORTANT]
-> 本仓库是 HandShaker Android 的非官方维护项目，与原厂无官方关联。仓库内容主要用于个人学习、兼容性分析和非商业研究。详细说明见 [NOTICE.md](NOTICE.md)。
+> 本项目与 HandShaker 原厂无官方关联, 仅用于兼容性维护, 学习和非商业研究. 详见 [NOTICE.md](NOTICE.md).
 
-## 相关项目
+## 项目简介
 
-- Android 端维护版仓库：当前仓库
-- Mac 端维护版仓库：[handshaker-mac-maintained](https://github.com/rianlu/handshaker-mac-maintained)
-- Mac 端最新发布页：[Latest Release](https://github.com/rianlu/handshaker-mac-maintained/releases/latest)
-
-## 截图预览
+本项目基于 HandShaker Android 客户端的反编译结果进行维护, 修复现代 Android 上的启动, 权限, 媒体访问, USB 连接和剪切板兼容问题.
 
 <table>
   <tr>
-    <td align="center" width="50%">
-      <img src="./assets/readme/screenshot-usb.jpg" alt="USB connection restored" width="280" />
-      <br />
-      <strong>USB 连接已恢复</strong>
-    </td>
-    <td align="center" width="50%">
-      <img src="./assets/readme/screenshot-wifi.jpg" alt="Wi-Fi connection screen" width="280" />
-      <br />
-      <strong>Wi-Fi 连接页与维护版标识</strong>
-    </td>
+    <td align="center"><img src="./assets/readme/screenshot-usb.jpg" alt="USB 连接" width="280"><br>USB 连接</td>
+    <td align="center"><img src="./assets/readme/screenshot-wifi.jpg" alt="Wi-Fi 连接" width="280"><br>Wi-Fi 连接</td>
   </tr>
 </table>
 
-## 项目亮点
+## 功能状态
 
-- 修复 Android 16 上应用无法打开的问题
-- 补齐定位、媒体读取、文件访问与 USB Accessory 的权限流程
-- 修复新版 Android 上的媒体查询兼容问题
-- 修复 USB 有线连接授权链路问题
-- 修复连接页 Wi-Fi 名称显示异常问题
-- 在线更新已改为对接 GitHub Release，并保留启动时自动静默检查
-- **解锁剪切板功能**：通过硬编码 Smartisan 设备标识，使 Mac/Windows 客户端的剪切板 Tab 在任意 Android 设备上正常显示，并为非锤子设备补充“前台监听 + 主页面重新拿到窗口焦点时兜底同步”的兼容能力
-- 保留原始结构，适合继续做后续兼容性维护
+- 支持现代 Android 系统启动和基础权限授权.
+- 支持 USB 和 Wi-Fi 连接 HandShaker 桌面端.
+- 修复媒体查询, Wi-Fi 名称显示和 USB Accessory 授权链路.
+- 支持通过 GitHub Releases 检查和下载维护版更新.
+- 在非锤子设备上显示桌面端剪切板页签, 支持电脑向手机写入剪切板.
+- 在 HandShaker 主页面位于前台时, 支持将手机当前剪切板同步到电脑.
 
-## 当前状态
-
-- Android 端已经可以在新版系统上正常启动，并补齐了一批权限与连接兼容修复
-- Windows 客户端已经实测可正常连接和使用
-- Mac 端也已经独立完成维护修复，可前往 [handshaker-mac-maintained](https://github.com/rianlu/handshaker-mac-maintained) 获取可用版本
-- APK 已加入“非官方维护版”视觉标识，便于与原版区分
-- 在线更新当前已切换到本仓库 GitHub Release；设置页可手动检查，应用启动时也会自动静默检查，每天最多一次
-- 非锤子设备的剪切板能力目前以“实用可用”为目标，并非完全复刻锤子系统的私有剪切板历史能力
-
-## 已实测环境
-
-- Redmi Note 12 Turbo / Evolution X / Android 16
-- Xiaomi Pad 5 Pro / HyperOS 1.0.2.0 / Android 13
-
-> [!NOTE]
-> 当前仓库明确实测的是以上设备与系统组合。其他品牌、ROM、Android 版本以及不同桌面端环境下的表现可能存在差异，请不要默认视为所有设备都完全一致。
-
-## 剪切板行为说明
-
-### 为什么锤子手机和非锤子手机表现不同
-
-- 原版 HandShaker 的手机→电脑剪切板同步，本质上依赖锤子系统提供的私有能力，例如 `getCopyHistory()` 和 `android.intent.action.CopyHistoryChange`
-- 标准 Android 10 及以上系统对后台读取剪切板做了更严格限制，普通应用无法稳定实现“后台持续监听并实时同步历史剪切板”
-- 因此维护版只能在保留原有锤子逻辑的前提下，为非锤子设备增加更符合系统限制的兼容方案
-
-### 当前版本的实际表现
-
-- **锤子手机 / Smartisan 系设备**
-  原有私有剪切板逻辑仍然保留，理论上应继续支持原版的剪切板行为。
-- **非锤子手机**
-  桌面端剪切板 Tab 可以正常显示；电脑→手机方向已可正常写入系统剪切板；手机→电脑方向则改为“HandShaker 主页面在前台时监听当前剪切板变化，并在主页面重新拿到窗口焦点时兜底同步当前一条最新内容”。
-- 非锤子设备上的这套方案更适合验证码、短文本、链接这类“复制后切回 HandShaker 再同步到电脑”的场景
-- 非锤子设备目前**不是**系统级实时云剪切板，也不保证后台持续同步多条历史记录
-- 非锤子设备当前的监听仅在 HandShaker 主页面处于前台时生效；应用退到后台后，仍然受 Android 标准剪切板访问限制约束
-- 为避免“刚回到前台但连接尚未恢复完成”时把同步请求误丢掉，当前版本只会在桌面端连接仍然活跃时执行手机→电脑方向的主动推送
-
-### 测试覆盖范围
-
-- 当前维护者手头**没有锤子手机**，因此无法对锤子设备做实际回归验证
-- 锤子手机相关描述基于代码路径分析：此次改动没有移除原有锤子私有接口和广播处理逻辑，所以通常**应该仍然可用**
-- 当前已确认可用的是**非锤子设备**路径，尤其是“桌面端显示剪切板页签”“电脑→手机写入剪切板”“停留在 HandShaker 主页面时同步最新一条”“手机复制后切回 HandShaker 且主页面重新获得窗口焦点后兜底同步一条到电脑端”这几个场景
-
-## 在线更新说明
-
-- 当前版本已移除旧版 Smartisan 更新地址，改为直接检查本仓库的 GitHub Release 最新版本
-- 设置页中的“检查更新”会立即请求最新 release，并在有新版本时弹出更新提示
-- 应用启动时也会自动静默检查更新，但同一天内最多只会真正检查一次
-- 更新下载地址当前使用 GitHub Release 资产，并对 GitHub 原始下载链接自动套用 `gh-proxy`
+非锤子设备受 Android 10 及以上系统限制, 无法保证后台持续读取或同步多条剪切板历史. 原版锤子系统私有剪切板路径仍保留, 但当前缺少锤子设备进行回归验证.
 
 ## 下载与使用
 
-### 获取 APK
+从 [Releases](https://github.com/rianlu/handshaker-android-maintained/releases) 下载已签名 APK. 最新版本见 [Latest Release](https://github.com/rianlu/handshaker-android-maintained/releases/latest).
 
-- 推荐直接前往 [Releases](https://github.com/rianlu/handshaker-android-maintained/releases) 页面下载已签名 APK
-- 当前最新版本可在 [Latest Release](https://github.com/rianlu/handshaker-android-maintained/releases/latest) 获取
-- 如果你需要 Mac 桌面端，请前往 [HandShaker Mac Maintained](https://github.com/rianlu/handshaker-mac-maintained) 下载对应 DMG
+Windows USB 连接建议按以下顺序操作:
 
-### 适用场景
+1. 打开手机端 HandShaker.
+2. 使用 USB 数据线连接电脑.
+3. 将手机 USB 用途切换为"文件传输".
+4. 打开或重试 Windows 端 HandShaker, 并确认手机上的 USB 配件授权弹窗.
 
-- 如果你主要在 Windows 上使用 HandShaker，可以直接测试当前 APK
-- 如果你主要在 macOS 上使用 HandShaker，建议搭配 [Mac 端维护版](https://github.com/rianlu/handshaker-mac-maintained) 一起使用
+Mac 通常无需切换 USB 用途. 如无响应, 请重新插拔数据线并重试.
 
-### Windows 使用建议
+## 兼容性
 
-使用 USB 有线连接时，建议按下面顺序操作：
+已实测:
 
-1. 手机插入电脑
-2. 在手机 USB 选项中切换到“文件传输”
-3. 等 Windows 先识别出设备
-4. 再打开或重试 Windows 版 HandShaker
+- Redmi Note 12 Turbo, Evolution X, Android 16.
+- Xiaomi Pad 5 Pro, HyperOS 1.0.2.0, Android 13.
 
-## 已修复问题
+其他设备, ROM 和系统版本可能存在差异.
 
-- Android 16 上应用无法打开
-- 连接页 Wi-Fi 名称显示异常
-- 部分定位、媒体读取、文件访问、USB Accessory 权限流程缺失
-- 部分新版 Android 上的媒体查询兼容问题
-- USB 有线连接授权链路问题
-- **剪切板功能在非锤子设备上不显示**（Mac/Windows 桌面端通过 SSP 握手中的 `productBrand`、`productManufacturer`、`smartisanVersion` 字段判断是否为锤子设备，非锤子设备不展示剪切板 Tab；当前版本已在握手信息中硬编码为 Smartisan 标识，使剪切板 Tab 在任意 Android 设备上正常展示）
-- **非锤子设备手机→电脑剪切板只有锤子私有接口缺失时无法同步**（当前版本在保留锤子私有逻辑的同时，为非锤子设备补充了“主页面前台监听 + 窗口重新获得焦点时兜底读取当前一条剪切板内容”的兼容方案；PC→手机方向粘贴已可用）
+## 构建
 
-## 仓库结构
+环境要求:
 
-- `smali/`：反编译后的 Android 逻辑代码
-- `res/`：资源文件、布局、文案、图标
-- `AndroidManifest.xml`：应用清单
-- `tools/`：检查、构建、签名、发布相关脚本
-- `assets/readme/`：README 展示截图
-
-## 开发者说明
-
-### 环境要求
-
-- `apktool`
-- JDK，且命令行可用 `keytool` 和 `jarsigner`
-- `adb`
-
-### 常用命令
-
-先做兼容性检查：
+- apktool.
+- JDK, 包含 `keytool` 和 `jarsigner`.
+- adb.
 
 ```sh
 ./tools/check_install_compat.sh
-```
-
-本地调试构建并安装：
-
-```sh
+./tools/check_usb_connection_tip.sh
 ./tools/build_and_install.sh
+./tools/build_release.sh
 ```
 
-构建 release APK：
+版本号统一在 `tools/release.conf` 中维护. 发布产物输出到 `build/release/`.
 
-```sh
-sh ./tools/build_release.sh
+## 仓库结构
+
+```text
+.
+├── smali/              # 反编译后的应用逻辑
+├── res/                # Android 资源和文案
+├── assets/             # 应用及 README 资源
+├── original/           # 原始签名和清单参考
+├── tools/              # 检查, 构建, 签名和发布脚本
+├── AndroidManifest.xml
+└── apktool.yml
 ```
 
-### Release 版本维护
+## 相关项目
 
-- 日常不要手动改 `apktool.yml`
-- 版本入口统一在 `tools/release.conf`
-- 修改 `RELEASE_SUFFIX` 和 `RELEASE_VERSION_CODE` 后，再运行 `sh ./tools/build_release.sh`
-- release 构建产物会输出到 `build/release/`
-
-### 后续二次修改建议优先查看
-
-- `AndroidManifest.xml`
-- `smali/com/smartisanos/smartfolder/aoa/MainActivity.smali`
-- `smali/com/smartisanos/smartfolder/aoa/service/`
-- `smali/com/smartisanos/smartfolder/aoa/d/`
-- `res/`
-- `tools/build_release.sh`
-- `tools/release.conf`
-
-## 图标与视觉标识
-
-- 原始官方图标仍保留在 `res/drawable-*/ic_launcher.png`
-- 当前清单改为引用 `@drawable/ic_launcher_custom`
-- 维护版图标资源位于 `res/drawable-*/ic_launcher_custom.png`
-- 仓库根目录的 `ic_launcher.png` 用于 README 与维护版视觉展示
+- [HandShaker Mac Maintained](https://github.com/rianlu/handshaker-mac-maintained)
+- [HandShaker Windows Maintained](https://github.com/rianlu/handshaker-windows-maintained)
 
 ## 友情链接
 
-- [LINUX DO](https://linux.do/)
-  社区文化：真诚、友善、团结、专业，共建你我引以为荣之社区。
+- [LINUX DO](https://linux.do/): 真诚, 友善, 团结, 专业, 共建你我引以为荣之社区.
 
 ## 版权与免责声明
 
-- 原始应用及相关商标、名称、资源和版权归原权利人所有
-- 本仓库不主张对原始应用本体及其相关知识产权拥有任何权利
-- 当前仓库未对整体内容附加通用开源许可证
-- 如你计划基于本仓库进行公开分发、商用集成或其他超出个人研究范围的用途，请自行评估相关风险
+原始应用及相关名称, 商标, 代码和资源归原权利人所有. 本仓库不对原始应用主张权利, 未对整体内容授予通用开源许可证. 公开分发, 商业使用或二次集成前, 请自行评估相关风险.
