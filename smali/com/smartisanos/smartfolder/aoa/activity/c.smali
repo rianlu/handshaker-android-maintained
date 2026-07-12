@@ -325,9 +325,11 @@
 
     invoke-virtual {v3, v4}, Lcom/smartisanos/smartfolder/aoa/view/a;->b(I)Lcom/smartisanos/smartfolder/aoa/view/a;
 
-    const v4, 0x7f090061
+    const v4, 0x7f090060
 
-    const/4 v5, 0x0
+    new-instance v5, Lcom/smartisanos/smartfolder/aoa/activity/UsbSettingsClick;
+
+    invoke-direct {v5, v0}, Lcom/smartisanos/smartfolder/aoa/activity/UsbSettingsClick;-><init>(Landroid/app/Activity;)V
 
     invoke-virtual {v3, v4, v5}, Lcom/smartisanos/smartfolder/aoa/view/a;->a(ILandroid/view/View$OnClickListener;)Lcom/smartisanos/smartfolder/aoa/view/a;
 
@@ -338,6 +340,8 @@
     iput-object v3, p0, Lcom/smartisanos/smartfolder/aoa/activity/c;->e:Landroid/app/AlertDialog;
 
     iget-object v3, p0, Lcom/smartisanos/smartfolder/aoa/activity/c;->e:Landroid/app/AlertDialog;
+
+    const/4 v5, 0x0
 
     invoke-virtual {v3, v5}, Landroid/app/AlertDialog;->setCanceledOnTouchOutside(Z)V
 
