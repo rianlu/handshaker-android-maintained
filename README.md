@@ -71,6 +71,7 @@ Mac 通常无需切换 USB 用途. 如无响应, 请重新插拔数据线并重�
 ```
 
 版本号统一在 `tools/release.conf` 中维护. 发布产物输出到 `build/release/`.
+构建同时生成 `build/release/handshaker-android-release.env`, 供 Mac 构建校验并同步同一份正式 APK.
 
 ## 仓库结构
 

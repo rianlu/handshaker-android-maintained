@@ -753,69 +753,153 @@
 .end method
 
 .method private static b(J)[B
-    .locals 4
+    .locals 9
 
     .prologue
     const/4 v0, 0x0
 
-    .line 462
-    .line 1480
     invoke-static {}, Lcom/smartisanos/smartfolder/aoa/FolderApp;->a()Lcom/smartisanos/smartfolder/aoa/FolderApp;
 
     move-result-object v1
 
     invoke-virtual {v1}, Lcom/smartisanos/smartfolder/aoa/FolderApp;->getContentResolver()Landroid/content/ContentResolver;
 
-    move-result-object v1
+    move-result-object v2
 
-    .line 1481
-    const/4 v2, 0x1
+    sget-object v3, Landroid/provider/MediaStore$Video$Media;->EXTERNAL_CONTENT_URI:Landroid/net/Uri;
 
-    invoke-static {v1, p0, p1, v2, v0}, Landroid/provider/MediaStore$Video$Thumbnails;->getThumbnail(Landroid/content/ContentResolver;JILandroid/graphics/BitmapFactory$Options;)Landroid/graphics/Bitmap;
+    invoke-static {v3, p0, p1}, Landroid/content/ContentUris;->withAppendedId(Landroid/net/Uri;J)Landroid/net/Uri;
 
-    move-result-object v1
+    move-result-object v3
 
-    .line 464
-    if-eqz v1, :cond_0
+    sget v4, Landroid/os/Build$VERSION;->SDK_INT:I
 
-    .line 465
-    new-instance v2, Ljava/io/ByteArrayOutputStream;
+    const/16 v5, 0x1d
 
-    invoke-direct {v2}, Ljava/io/ByteArrayOutputStream;-><init>()V
+    if-lt v4, v5, :cond_0
 
-    .line 466
-    sget-object v0, Landroid/graphics/Bitmap$CompressFormat;->JPEG:Landroid/graphics/Bitmap$CompressFormat;
-
-    sget v3, Lcom/smartisanos/smartfolder/aoa/d/h;->a:I
-
-    invoke-virtual {v1, v0, v3, v2}, Landroid/graphics/Bitmap;->compress(Landroid/graphics/Bitmap$CompressFormat;ILjava/io/OutputStream;)Z
-
-    .line 467
-    invoke-virtual {v2}, Ljava/io/ByteArrayOutputStream;->toByteArray()[B
+    invoke-static {v2, v3}, Lcom/smartisanos/smartfolder/aoa/d/ModernVideoThumbnail;->a(Landroid/content/ContentResolver;Landroid/net/Uri;)Landroid/graphics/Bitmap;
 
     move-result-object v0
 
-    .line 469
-    invoke-virtual {v1}, Landroid/graphics/Bitmap;->recycle()V
-
-    .line 471
-    :try_start_0
-    invoke-virtual {v2}, Ljava/io/ByteArrayOutputStream;->close()V
-    :try_end_0
-    .catch Ljava/io/IOException; {:try_start_0 .. :try_end_0} :catch_0
-
-    .line 476
     :cond_0
-    :goto_0
-    return-object v0
+    if-nez v0, :cond_1
 
-    .line 473
+    const/4 v4, 0x1
+
+    const/4 v5, 0x0
+
+    invoke-static {v2, p0, p1, v4, v5}, Landroid/provider/MediaStore$Video$Thumbnails;->getThumbnail(Landroid/content/ContentResolver;JILandroid/graphics/BitmapFactory$Options;)Landroid/graphics/Bitmap;
+
+    move-result-object v0
+
+    :cond_1
+    if-nez v0, :cond_4
+
+    const/4 v4, 0x0
+
+    :try_start_0
+    new-instance v5, Landroid/media/MediaMetadataRetriever;
+
+    invoke-direct {v5}, Landroid/media/MediaMetadataRetriever;-><init>()V
+    :try_end_0
+    .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
+
+    :try_start_1
+    invoke-virtual {v5, v1, v3}, Landroid/media/MediaMetadataRetriever;->setDataSource(Landroid/content/Context;Landroid/net/Uri;)V
+
+    const-wide/16 v6, -0x1
+
+    invoke-virtual {v5, v6, v7}, Landroid/media/MediaMetadataRetriever;->getFrameAtTime(J)Landroid/graphics/Bitmap;
+
+    move-result-object v0
+    :try_end_1
+    .catch Ljava/lang/RuntimeException; {:try_start_1 .. :try_end_1} :catch_1
+    .catchall {:try_start_1 .. :try_end_1} :catchall_0
+
+    :try_start_2
+    invoke-virtual {v5}, Landroid/media/MediaMetadataRetriever;->release()V
+    :try_end_2
+    .catch Ljava/lang/RuntimeException; {:try_start_2 .. :try_end_2} :catch_0
+
+    goto :goto_0
+
     :catch_0
     move-exception v1
 
-    invoke-virtual {v1}, Ljava/io/IOException;->printStackTrace()V
+    goto :goto_0
+
+    :catch_1
+    move-exception v1
+
+    :try_start_3
+    invoke-virtual {v5}, Landroid/media/MediaMetadataRetriever;->release()V
+    :try_end_3
+    .catch Ljava/lang/RuntimeException; {:try_start_3 .. :try_end_3} :catch_0
 
     goto :goto_0
+
+    :catchall_0
+    move-exception v0
+
+    :try_start_4
+    invoke-virtual {v5}, Landroid/media/MediaMetadataRetriever;->release()V
+    :try_end_4
+    .catch Ljava/lang/RuntimeException; {:try_start_4 .. :try_end_4} :catch_2
+
+    :catch_2
+    throw v0
+
+    :goto_0
+    if-eqz v0, :cond_3
+
+    const/16 v4, 0xc8
+
+    const/16 v5, 0xc8
+
+    invoke-static {v0, v4, v5}, Landroid/media/ThumbnailUtils;->extractThumbnail(Landroid/graphics/Bitmap;II)Landroid/graphics/Bitmap;
+
+    move-result-object v4
+
+    if-eq v4, v0, :cond_2
+
+    invoke-virtual {v0}, Landroid/graphics/Bitmap;->recycle()V
+
+    :cond_2
+    move-object v0, v4
+
+    :cond_3
+    if-eqz v0, :cond_5
+
+    :cond_4
+    new-instance v4, Ljava/io/ByteArrayOutputStream;
+
+    invoke-direct {v4}, Ljava/io/ByteArrayOutputStream;-><init>()V
+
+    sget-object v5, Landroid/graphics/Bitmap$CompressFormat;->JPEG:Landroid/graphics/Bitmap$CompressFormat;
+
+    sget v6, Lcom/smartisanos/smartfolder/aoa/d/h;->a:I
+
+    invoke-virtual {v0, v5, v6, v4}, Landroid/graphics/Bitmap;->compress(Landroid/graphics/Bitmap$CompressFormat;ILjava/io/OutputStream;)Z
+
+    invoke-virtual {v4}, Ljava/io/ByteArrayOutputStream;->toByteArray()[B
+
+    move-result-object v1
+
+    invoke-virtual {v0}, Landroid/graphics/Bitmap;->recycle()V
+
+    :try_start_5
+    invoke-virtual {v4}, Ljava/io/ByteArrayOutputStream;->close()V
+    :try_end_5
+    .catch Ljava/io/IOException; {:try_start_5 .. :try_end_5} :catch_3
+
+    :catch_3
+    return-object v1
+
+    :cond_5
+    const/4 v0, 0x0
+
+    return-object v0
 .end method
 
 .method private static c(Ljava/lang/String;)J

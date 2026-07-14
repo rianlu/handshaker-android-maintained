@@ -9,6 +9,7 @@ signing_env="$local_signing_dir/release.env"
 apktool_yml="$repo_root/apktool.yml"
 assets_version_props="$repo_root/assets/version.properties"
 build_dir="$repo_root/build/release"
+release_manifest="$build_dir/handshaker-android-release.env"
 
 fail() {
   printf '%s\n' "FAIL: $1" >&2
@@ -142,12 +143,27 @@ print_summary() {
   printf '%s\n' "signed apk: $signed_apk"
 }
 
+write_release_manifest() {
+  apk_sha256=$(shasum -a 256 "$signed_apk" | awk '{print $1}')
+  {
+    printf '%s\n' "HANDSHAKER_ANDROID_APK=$signed_apk"
+    printf '%s\n' "HANDSHAKER_ANDROID_VERSION_NAME=$release_version_name"
+    printf '%s\n' "HANDSHAKER_ANDROID_VERSION_CODE=$RELEASE_VERSION_CODE"
+    printf '%s\n' "HANDSHAKER_ANDROID_SHA256=$apk_sha256"
+  } >"$release_manifest"
+  printf '%s\n' "release manifest: $release_manifest"
+  printf '%s\n' "apk sha256: $apk_sha256"
+}
+
 need_cmd apktool
 need_cmd perl
 need_cmd jarsigner
+need_cmd shasum
+need_cmd awk
 
 load_config
 sync_versions
 build_apk
 sign_apk
+write_release_manifest
 print_summary
