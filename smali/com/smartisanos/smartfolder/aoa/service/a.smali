@@ -75,6 +75,38 @@
 
     invoke-static {v0, v1}, Lcom/smartisanos/smartfolder/aoa/h/t;->b(Ljava/lang/String;Ljava/lang/String;)V
 
+    new-instance v0, Ljava/lang/StringBuilder;
+
+    const-string v1, "OPEN_ACCESSORY_BEGIN accessory="
+
+    invoke-direct {v0, v1}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+
+    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    const-string v1, " hasPermission="
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    iget-object v1, p0, Lcom/smartisanos/smartfolder/aoa/service/a;->b:Landroid/hardware/usb/UsbManager;
+
+    invoke-virtual {v1, p1}, Landroid/hardware/usb/UsbManager;->hasPermission(Landroid/hardware/usb/UsbAccessory;)Z
+
+    move-result v1
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
+
     .line 38
     iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/service/a;->b:Landroid/hardware/usb/UsbManager;
 
@@ -84,6 +116,26 @@
 
     .line 40
     if-eqz v0, :cond_1
+
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    const-string v2, "OPEN_ACCESSORY_OK fd="
+
+    invoke-direct {v1, v2}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+
+    invoke-virtual {v0}, Landroid/os/ParcelFileDescriptor;->getFd()I
+
+    move-result v2
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {v1}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
 
     .line 41
     iget-object v1, p0, Lcom/smartisanos/smartfolder/aoa/service/a;->c:Landroid/os/ParcelFileDescriptor;
@@ -148,10 +200,26 @@
 
     invoke-direct {v1, v0}, Ljava/io/FileOutputStream;-><init>(Ljava/io/FileDescriptor;)V
 
+    new-instance v3, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticOutputStream;
+
+    invoke-direct {v3, v1}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticOutputStream;-><init>(Ljava/io/OutputStream;)V
+
+    move-object v1, v3
+
     .line 48
     new-instance v2, Ljava/io/FileInputStream;
 
     invoke-direct {v2, v0}, Ljava/io/FileInputStream;-><init>(Ljava/io/FileDescriptor;)V
+
+    new-instance v3, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;
+
+    invoke-direct {v3, v2}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;-><init>(Ljava/io/InputStream;)V
+
+    move-object v2, v3
+
+    const-string v3, "ACCESSORY_STREAMS_CREATED"
+
+    invoke-static {v3}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
 
     .line 49
     new-instance v0, Lcom/smartisanos/smartfolder/aoa/service/a$a;
@@ -163,6 +231,10 @@
     invoke-direct {v2, v1}, Lcom/smartisanos/smartfolder/aoa/g/a$c;-><init>(Ljava/io/OutputStream;)V
 
     invoke-virtual {p0, v0, v2}, Lcom/smartisanos/smartfolder/aoa/service/a;->a(Lcom/smartisanos/smartfolder/aoa/service/a$a;Lcom/smartisanos/smartfolder/aoa/g/a$c;)V
+
+    const-string v0, "ACCESSORY_PROTOCOL_PIPELINE_CREATED"
+
+    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
 
     .line 50
     const-string v0, "AoaManager"
@@ -221,6 +293,10 @@
 
     .line 54
     :cond_1
+    const-string v0, "OPEN_ACCESSORY_NULL"
+
+    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
+
     const-string v0, "AoaManager"
 
     const-string v1, "Open accessory FAILED, may be caused by duplicated usb connection intent"
@@ -263,6 +339,8 @@
 
     invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/h/t;->d(Ljava/lang/String;)V
 
+    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
+
     const-string v0, "打开 USB 通道异常, 请重新插拔数据线"
 
     invoke-direct {p0, v0}, Lcom/smartisanos/smartfolder/aoa/service/a;->d(Ljava/lang/String;)V
@@ -277,6 +355,14 @@
     .locals 8
 
     .prologue
+    const-string v7, "SERVICE_STATUS "
+
+    invoke-virtual {v7, p1}, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v7
+
+    invoke-static {v7}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
+
     iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/service/a;->a:Landroid/content/Context;
 
     const-string v1, "usb_status"
@@ -373,16 +459,32 @@
     .prologue
     const/4 v3, 0x0
 
+    const-string v0, "ACCESSORY_CLOSE_BEGIN"
+
+    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
+
     .line 70
     iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/service/a;->c:Landroid/os/ParcelFileDescriptor;
 
-    if-eqz v0, :cond_0
+    if-nez v0, :cond_has_fd
+
+    const-string v0, "ACCESSORY_CLOSE_NO_FD"
+
+    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
+
+    goto :goto_0
+
+    :cond_has_fd
 
     .line 72
     :try_start_0
     iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/service/a;->c:Landroid/os/ParcelFileDescriptor;
 
     invoke-virtual {v0}, Landroid/os/ParcelFileDescriptor;->close()V
+
+    const-string v0, "ACCESSORY_CLOSE_END"
+
+    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
     :try_end_0
     .catch Ljava/io/IOException; {:try_start_0 .. :try_end_0} :catch_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
@@ -406,6 +508,10 @@
     const-string v2, "Close fd of accessory failed."
 
     invoke-static {v1, v2}, Lcom/smartisanos/smartfolder/aoa/h/t;->e(Ljava/lang/String;Ljava/lang/String;)V
+
+    const-string v1, "ACCESSORY_CLOSE_ERROR"
+
+    invoke-static {v1}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
 
     .line 75
     invoke-virtual {v0}, Ljava/io/IOException;->printStackTrace()V

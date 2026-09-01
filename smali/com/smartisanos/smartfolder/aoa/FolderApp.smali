@@ -145,6 +145,8 @@
     .line 29
     invoke-super {p0}, Landroid/app/Application;->onCreate()V
 
+    invoke-static {p0}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->initialize(Landroid/content/Context;)V
+
     invoke-static {}, Ljava/lang/Thread;->getDefaultUncaughtExceptionHandler()Ljava/lang/Thread$UncaughtExceptionHandler;
 
     move-result-object v0

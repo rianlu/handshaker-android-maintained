@@ -571,6 +571,10 @@
     .line 159
     invoke-super {p0}, Landroid/app/Service;->onCreate()V
 
+    const-string v0, "SERVICE_ON_CREATE"
+
+    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
+
     .line 160
     sget-object v0, Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService;->a:Ljava/lang/String;
 
@@ -702,6 +706,10 @@
     .prologue
     .line 229
     invoke-super {p0}, Landroid/app/Service;->onDestroy()V
+
+    const-string v0, "SERVICE_ON_DESTROY"
+
+    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
 
     .line 230
     invoke-static {p0}, Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService;->k(Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService;)V
@@ -890,6 +898,18 @@
     .locals 4
 
     .prologue
+    const-string v0, "SERVICE_ON_START intent="
+
+    invoke-static {p1}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-virtual {v0, v1}, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
+
     .line 188
     const-string v0, "accessory"
 
@@ -916,6 +936,8 @@
 
     move-result-object v2
 
+    invoke-static {v2}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
+
     invoke-static {v1, v2}, Lcom/smartisanos/smartfolder/aoa/h/t;->a(Ljava/lang/String;Ljava/lang/String;)V
 
     .line 194
@@ -925,6 +947,24 @@
     iget-object v1, p0, Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService;->d:Lcom/smartisanos/smartfolder/aoa/service/l;
 
     invoke-virtual {v1, v0}, Lcom/smartisanos/smartfolder/aoa/service/l;->a(Landroid/hardware/usb/UsbAccessory;)Z
+
+    move-result v1
+
+    new-instance v2, Ljava/lang/StringBuilder;
+
+    const-string v3, "OPEN_ACCESSORY_RESULT success="
+
+    invoke-direct {v2, v3}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+
+    invoke-virtual {v2, v1}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {v1}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
 
     .line 196
     new-instance v0, Landroid/content/IntentFilter;
@@ -937,6 +977,10 @@
     iget-object v1, p0, Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService;->k:Landroid/content/BroadcastReceiver;
 
     invoke-virtual {p0, v1, v0}, Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService;->registerReceiver(Landroid/content/BroadcastReceiver;Landroid/content/IntentFilter;)Landroid/content/Intent;
+
+    const-string v0, "ACCESSORY_DETACH_RECEIVER_REGISTERED"
+
+    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
 
     .line 198
     sget-object v0, Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService;->a:Ljava/lang/String;

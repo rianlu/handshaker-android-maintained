@@ -235,6 +235,8 @@
 
     move-result-object v2
 
+    invoke-static {v2}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
+
     invoke-static {v1, v2}, Lcom/smartisanos/smartfolder/aoa/h/t;->a(Ljava/lang/String;Ljava/lang/String;)V
 
     .line 209
@@ -273,6 +275,24 @@
 
     invoke-virtual {p0, v0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->startService(Landroid/content/Intent;)Landroid/content/ComponentName;
 
+    move-result-object v0
+
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    const-string v2, "ACTIVITY_START_SERVICE result="
+
+    invoke-direct {v1, v2}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+
+    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
+
     .line 217
     iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/MainActivity;->i:Landroid/content/Intent;
 
@@ -281,6 +301,24 @@
     const/16 v2, 0x40
 
     invoke-virtual {p0, v0, v1, v2}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->bindService(Landroid/content/Intent;Landroid/content/ServiceConnection;I)Z
+
+    move-result v0
+
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    const-string v2, "ACTIVITY_BIND_SERVICE result="
+
+    invoke-direct {v1, v2}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+
+    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
 
     .line 218
     return-void
@@ -864,6 +902,14 @@
     .locals 8
 
     .prologue
+    const-string v7, "ACTIVITY_STATUS "
+
+    invoke-virtual {v7, p1}, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v7
+
+    invoke-static {v7}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
+
     const-string v0, "usb_status"
 
     const/4 v1, 0x0
@@ -1018,6 +1064,32 @@
 
     move-result v2
 
+    new-instance v3, Ljava/lang/StringBuilder;
+
+    const-string v4, "ACCESSORY_PERMISSION hasPermission="
+
+    invoke-direct {v3, v4}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+
+    invoke-virtual {v3, v2}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+
+    move-result-object v3
+
+    const-string v4, " accessory="
+
+    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v3
+
+    invoke-virtual {v3, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    move-result-object v3
+
+    invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v3
+
+    invoke-static {v3}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
+
     if-nez v2, :cond_1
 
     .line 602
@@ -1073,6 +1145,10 @@
 
     .line 607
     invoke-virtual {v1, v0, v2}, Landroid/hardware/usb/UsbManager;->requestPermission(Landroid/hardware/usb/UsbAccessory;Landroid/app/PendingIntent;)V
+
+    const-string v3, "PERMISSION_REQUEST_SENT"
+
+    invoke-static {v3}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
 
     .line 608
     const/4 v0, 0x0
@@ -1872,6 +1948,10 @@
     .line 172
     invoke-super {p0, p1}, Landroid/app/Activity;->onCreate(Landroid/os/Bundle;)V
 
+    const-string v0, "ACTIVITY_ON_CREATE"
+
+    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
+
     .line 1543
     invoke-virtual {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->getContentResolver()Landroid/content/ContentResolver;
 
@@ -1970,6 +2050,10 @@
     iget-object v2, p0, Lcom/smartisanos/smartfolder/aoa/MainActivity;->t:Landroid/content/BroadcastReceiver;
 
     invoke-virtual {p0, v2, v0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->registerReceiver(Landroid/content/BroadcastReceiver;Landroid/content/IntentFilter;)Landroid/content/Intent;
+
+    const-string v2, "PERMISSION_RECEIVER_REGISTERED"
+
+    invoke-static {v2}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
 
     .line 191
     const/4 v0, 0x1
@@ -2123,6 +2207,10 @@
     const-string v1, "onDestroy"
 
     invoke-static {v0, v1}, Lcom/smartisanos/smartfolder/aoa/h/t;->b(Ljava/lang/String;Ljava/lang/String;)V
+
+    const-string v0, "ACTIVITY_ON_DESTROY"
+
+    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
 
     .line 340
     iget-boolean v0, p0, Lcom/smartisanos/smartfolder/aoa/MainActivity;->j:Z
@@ -2438,6 +2526,18 @@
     const-string v1, "onNewIntent"
 
     invoke-static {v0, v1}, Lcom/smartisanos/smartfolder/aoa/h/t;->a(Ljava/lang/String;Ljava/lang/String;)V
+
+    const-string v0, "ACTIVITY_NEW_INTENT "
+
+    invoke-static {p1}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-virtual {v0, v1}, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
 
     .line 306
     invoke-virtual {p0, p1}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->setIntent(Landroid/content/Intent;)V
