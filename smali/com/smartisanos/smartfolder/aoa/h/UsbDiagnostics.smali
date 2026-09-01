@@ -6,7 +6,7 @@
 # static fields
 .field private static final FILE_NAME:Ljava/lang/String; = "handshaker-usb-diagnostic.log"
 
-.field private static final MAX_FILE_BYTES:J = 0x80000L
+.field private static final MAX_FILE_BYTES:J = 0x200000L
 
 .field private static final TAG:Ljava/lang/String; = "HandShakerUSB"
 
@@ -80,7 +80,7 @@
 
     move-result-wide v1
 
-    const-wide/32 v3, 0x80000
+    const-wide/32 v3, 0x200000
 
     cmp-long v5, v1, v3
 
