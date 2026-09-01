@@ -148,9 +148,6 @@
     <string name="scan_link_error_dialog_content">Please check your network status and try again. You can also try connect via USB if encountering multiple failures.\n\nDevice address: %s\nMake sure Windows Firewall allows HandShaker on private networks and that the computer and phone are on the same subnet.</string>
     <string name="scan_link_error_dialog_title">Connection Failed</string>
     <string name="scan_qrcode_error_toast">Unusable QRCode, please try again</string>
-    <string name="usb_replug_required_tip">Windows: set USB mode to File Transfer. Mac: no change needed.</string>
-    <string name="usb_connection_dialog_title">USB connection</string>
-    <string name="usb_connection_dialog_message">Windows:\nSet the phone USB mode to File Transfer, then open or retry HandShaker on the computer.\n\nMac:\nNo USB mode change is needed. If there is no response, replug the USB cable.</string>
     <string name="scan_qrcode_link_tip">You can try setting up connection manually if your desired device is not discovered</string>
     <string name="scan_qrcode_txt">Manual</string>
     <string name="scan_tips_txt">"Please launch the desktop client of HandShaker

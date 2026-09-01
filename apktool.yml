@@ -7,8 +7,8 @@ sdkInfo:
   minSdkVersion: 17
   targetSdkVersion: 24
 versionInfo:
-  versionCode: 2026071501
-  versionName: 1.2.0-r7d-media
+  versionCode: 2026090101
+  versionName: 1.2.0-r7e
 resourcesInfo:
   packageId: 127
   keepRawValues: true

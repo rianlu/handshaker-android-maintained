@@ -145,9 +145,6 @@
     <string name="scan_link_error_dialog_content">請檢查您的網絡狀況，並確保手機與電腦處在同一無線網絡環境。如多次失敗可嘗試 USB 連接。\n\n本機地址: %s\n請確認 Windows 防火牆允許 HandShaker 存取私人網絡，且電腦與手機在同一網段。</string>
     <string name="scan_link_error_dialog_title">連接失敗</string>
     <string name="scan_qrcode_error_toast">無效的二維碼，請掃描 HandShake r電腦客戶端中無線連接的二維碼。</string>
-    <string name="usb_replug_required_tip">Windows 請將 USB 用途設為"檔案傳輸"; Mac 無需切換。</string>
-    <string name="usb_connection_dialog_title">USB 連接提示</string>
-    <string name="usb_connection_dialog_message">連接 Windows:\n請將手機 USB 用途設定為"檔案傳輸", 再開啟或重試電腦端 HandShaker.\n\n連接 Mac:\n無需修改 USB 用途. 如無回應, 請重新插拔資料線.</string>
     <string name="scan_qrcode_link_tip">電腦無法搜索到此設備時，您可以嘗試手動建立連接</string>
     <string name="scan_qrcode_txt">手動建立連接</string>
     <string name="scan_tips_txt">"打开 HandShaker 電腦客户端
