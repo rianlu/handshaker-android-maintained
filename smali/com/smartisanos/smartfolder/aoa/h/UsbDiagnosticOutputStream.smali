@@ -347,6 +347,9 @@
 
     invoke-virtual {v3, p1, p2, p3}, Ljava/io/OutputStream;->write([BII)V
 
+    # 持续写统计: 每 500 次写操作输出一次累计字节数(此时 p3 仍为干净的长度参数).
+    invoke-direct {p0, p3}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticOutputStream;->accumulateWrite(I)V
+
     .line 55
     if-eqz v0, :cond_1
 
@@ -388,9 +391,6 @@
 
     .line 56
     invoke-static {p1}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
-
-    # 持续写统计: 每 500 次写操作输出一次累计字节数.
-    invoke-direct {p0, p3}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticOutputStream;->accumulateWrite(I)V
     :try_end_0
     .catch Ljava/io/IOException; {:try_start_0 .. :try_end_0} :catch_0
 
