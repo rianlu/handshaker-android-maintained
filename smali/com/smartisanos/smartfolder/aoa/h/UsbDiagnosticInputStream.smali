@@ -8,6 +8,10 @@
 
 .field private firstRead:Z
 
+.field private totalBytes:J
+
+.field private totalOps:I
+
 
 # direct methods
 .method public constructor <init>(Ljava/io/InputStream;)V
@@ -152,6 +156,65 @@
     move-result v0
 
     return v0
+.end method
+
+.method private accumulateRead(I)V
+    .locals 4
+
+    iget-wide v0, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->totalBytes:J
+
+    int-to-long v2, p1
+
+    add-long/2addr v0, v2
+
+    iput-wide v0, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->totalBytes:J
+
+    iget v0, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->totalOps:I
+
+    add-int/lit8 v0, v0, 0x1
+
+    iput v0, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->totalOps:I
+
+    rem-int/lit16 v0, v0, 0x1f4
+
+    if-nez v0, :cond_0
+
+    new-instance v0, Ljava/lang/StringBuilder;
+
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v1, "INPUT_PROGRESS totalBytes="
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    iget-wide v1, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->totalBytes:J
+
+    invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    const-string v1, " totalOps="
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    iget v1, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->totalOps:I
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
+
+    :cond_0
+    return-void
 .end method
 
 .method public read()I
@@ -390,6 +453,9 @@
 
     .line 57
     invoke-static {p2}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
+
+    # 持续读统计: 每 500 次读操作输出一次累计字节数, 覆盖"静默期/断连前"的读活动.
+    invoke-direct {p0, p1}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->accumulateRead(I)V
     :try_end_0
     .catch Ljava/io/IOException; {:try_start_0 .. :try_end_0} :catch_0
 

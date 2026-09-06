@@ -8,6 +8,10 @@
 
 .field private firstWrite:Z
 
+.field private totalBytes:J
+
+.field private totalOps:I
+
 
 # direct methods
 .method public constructor <init>(Ljava/io/OutputStream;)V
@@ -235,6 +239,65 @@
     throw p1
 .end method
 
+.method private accumulateWrite(I)V
+    .locals 4
+
+    iget-wide v0, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticOutputStream;->totalBytes:J
+
+    int-to-long v2, p1
+
+    add-long/2addr v0, v2
+
+    iput-wide v0, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticOutputStream;->totalBytes:J
+
+    iget v0, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticOutputStream;->totalOps:I
+
+    add-int/lit8 v0, v0, 0x1
+
+    iput v0, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticOutputStream;->totalOps:I
+
+    rem-int/lit16 v0, v0, 0x1f4
+
+    if-nez v0, :cond_0
+
+    new-instance v0, Ljava/lang/StringBuilder;
+
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v1, "OUTPUT_PROGRESS totalBytes="
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    iget-wide v1, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticOutputStream;->totalBytes:J
+
+    invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    const-string v1, " totalOps="
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    iget v1, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticOutputStream;->totalOps:I
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
+
+    :cond_0
+    return-void
+.end method
+
 .method public write([BII)V
     .locals 5
     .annotation system Ldalvik/annotation/Throws;
@@ -325,6 +388,9 @@
 
     .line 56
     invoke-static {p1}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
+
+    # 持续写统计: 每 500 次写操作输出一次累计字节数.
+    invoke-direct {p0, p3}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticOutputStream;->accumulateWrite(I)V
     :try_end_0
     .catch Ljava/io/IOException; {:try_start_0 .. :try_end_0} :catch_0
 
