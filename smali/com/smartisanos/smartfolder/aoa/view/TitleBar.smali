@@ -102,6 +102,16 @@
     return-void
 .end method
 
+.method protected onAttachedToWindow()V
+    .locals 0
+
+    invoke-super {p0}, Landroid/widget/RelativeLayout;->onAttachedToWindow()V
+
+    invoke-static {p0}, Lcom/smartisanos/smartfolder/aoa/view/TitleBarInset;->apply(Landroid/view/View;)V
+
+    return-void
+.end method
+
 
 # virtual methods
 .method public final a()V
