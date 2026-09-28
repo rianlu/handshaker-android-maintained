@@ -284,6 +284,9 @@
     .locals 6
 
     .prologue
+    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/decoder/a;->e:Lcom/smartisanos/smartfolder/aoa/g/a;
+    invoke-static {v0, p1, p2, p3}, Lcom/smartisanos/smartfolder/aoa/h/UsbTrace;->decode(Ljava/lang/Object;II[B)V
+
     const/16 v3, 0x80
 
     const/4 v0, 0x0
@@ -354,6 +357,8 @@
     .line 202
     :cond_0
     :goto_0
+    invoke-static {}, Lcom/smartisanos/smartfolder/aoa/h/UsbTrace;->decoded()V
+
     return-void
 
     .line 82

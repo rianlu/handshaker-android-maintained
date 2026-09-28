@@ -147,6 +147,8 @@
 
     invoke-static {p0}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->initialize(Landroid/content/Context;)V
 
+    invoke-static {p0}, Lcom/smartisanos/smartfolder/aoa/h/UsbTrace;->initialize(Landroid/content/Context;)V
+
     invoke-static {}, Ljava/lang/Thread;->getDefaultUncaughtExceptionHandler()Ljava/lang/Thread$UncaughtExceptionHandler;
 
     move-result-object v0

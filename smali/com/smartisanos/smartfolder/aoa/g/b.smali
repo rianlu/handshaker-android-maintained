@@ -23,7 +23,7 @@
 
 # virtual methods
 .method public final run()V
-    .locals 4
+    .locals 5
 
     .prologue
     .line 44
@@ -40,6 +40,9 @@
     move-result-object v1
 
     invoke-virtual {v0, v1}, Ljava/lang/Thread;->setName(Ljava/lang/String;)V
+
+    const-string v0, "started"
+    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/h/UsbTrace;->readerState(Ljava/lang/String;)V
 
     .line 47
     :goto_0
@@ -60,6 +63,8 @@
 
     .line 85
     :goto_1
+    const-string v0, "exiting"
+    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/h/UsbTrace;->readerState(Ljava/lang/String;)V
     invoke-static {}, Lcom/smartisanos/smartfolder/aoa/g/a;->j()Ljava/lang/String;
 
     move-result-object v0
@@ -101,6 +106,22 @@
     .line 57
     if-eqz v0, :cond_1
 
+    iget-object v1, p0, Lcom/smartisanos/smartfolder/aoa/g/b;->a:Lcom/smartisanos/smartfolder/aoa/g/a;
+    invoke-virtual {v0}, Lcom/smartisanos/smartfolder/aoa/g/i;->a()I
+    move-result v2
+    invoke-virtual {v0}, Lcom/smartisanos/smartfolder/aoa/g/i;->b()B
+    move-result v3
+    invoke-virtual {v0}, Lcom/smartisanos/smartfolder/aoa/g/i;->c()Ljava/nio/ByteBuffer;
+    move-result-object v4
+    if-eqz v4, :diagnostic_empty_packet
+    invoke-virtual {v4}, Ljava/nio/ByteBuffer;->limit()I
+    move-result v4
+    goto :diagnostic_packet_ready
+    :diagnostic_empty_packet
+    const/4 v4, -0x1
+    :diagnostic_packet_ready
+    invoke-static {v1, v2, v3, v4}, Lcom/smartisanos/smartfolder/aoa/h/UsbTrace;->parsed(Ljava/lang/Object;III)V
+
     .line 58
     iget-object v1, p0, Lcom/smartisanos/smartfolder/aoa/g/b;->a:Lcom/smartisanos/smartfolder/aoa/g/a;
 
@@ -120,6 +141,8 @@
     .line 63
     :catch_0
     move-exception v0
+
+    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/h/UsbTrace;->readerError(Ljava/lang/Throwable;)V
 
     .line 64
     invoke-virtual {v0}, Ljava/io/IOException;->printStackTrace()V
@@ -169,6 +192,8 @@
     :catch_1
     move-exception v0
 
+    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/h/UsbTrace;->readerError(Ljava/lang/Throwable;)V
+
     .line 68
     invoke-virtual {v0}, Lcom/smartisanos/smartfolder/aoa/c/a;->printStackTrace()V
 
@@ -198,6 +223,8 @@
     .line 71
     :catch_2
     move-exception v0
+
+    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/h/UsbTrace;->readerError(Ljava/lang/Throwable;)V
 
     .line 72
     invoke-virtual {v0}, Lcom/smartisanos/smartfolder/aoa/c/b;->printStackTrace()V
@@ -252,6 +279,8 @@
     .line 78
     :catch_3
     move-exception v0
+
+    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/h/UsbTrace;->readerError(Ljava/lang/Throwable;)V
 
     .line 79
     invoke-virtual {v0}, Ljava/lang/Exception;->printStackTrace()V

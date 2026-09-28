@@ -230,6 +230,93 @@
 
     goto :goto_0
 
+    :sswitch_a
+    new-instance v0, Landroid/content/Intent;
+
+    const-string v1, "android.intent.action.VIEW"
+
+    const-string v2, "https://github.com/rianlu/handshaker-android-maintained"
+
+    invoke-static {v2}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
+
+    move-result-object v2
+
+    invoke-direct {v0, v1, v2}, Landroid/content/Intent;-><init>(Ljava/lang/String;Landroid/net/Uri;)V
+
+    const/high16 v1, 0x30000000
+
+    invoke-virtual {v0, v1}, Landroid/content/Intent;->setFlags(I)Landroid/content/Intent;
+
+    invoke-virtual {p0, v0}, Lcom/smartisanos/smartfolder/aoa/activity/SettingsActivity;->startActivity(Landroid/content/Intent;)V
+
+    goto :goto_0
+
+    :sswitch_b
+    new-instance v0, Landroid/content/Intent;
+
+    const-string v1, "android.intent.action.VIEW"
+
+    const-string v2, "https://www.coolapk.com/u/435353"
+
+    invoke-static {v2}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
+
+    move-result-object v2
+
+    invoke-direct {v0, v1, v2}, Landroid/content/Intent;-><init>(Ljava/lang/String;Landroid/net/Uri;)V
+
+    const/high16 v1, 0x30000000
+
+    invoke-virtual {v0, v1}, Landroid/content/Intent;->setFlags(I)Landroid/content/Intent;
+
+    invoke-virtual {p0, v0}, Lcom/smartisanos/smartfolder/aoa/activity/SettingsActivity;->startActivity(Landroid/content/Intent;)V
+
+    goto :goto_0
+
+    :sswitch_c
+    new-instance v0, Landroid/content/Intent;
+
+    const-string v1, "android.intent.action.VIEW"
+
+    const-string v2, "bilibili://space/20656755"
+
+    invoke-static {v2}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
+
+    move-result-object v2
+
+    invoke-direct {v0, v1, v2}, Landroid/content/Intent;-><init>(Ljava/lang/String;Landroid/net/Uri;)V
+
+    const/high16 v1, 0x30000000
+
+    invoke-virtual {v0, v1}, Landroid/content/Intent;->setFlags(I)Landroid/content/Intent;
+
+    :try_start_bili
+    invoke-virtual {p0, v0}, Lcom/smartisanos/smartfolder/aoa/activity/SettingsActivity;->startActivity(Landroid/content/Intent;)V
+    :try_end_bili
+    .catch Landroid/content/ActivityNotFoundException; {:try_start_bili .. :try_end_bili} :catch_bili
+
+    goto :goto_0
+
+    :catch_bili
+    new-instance v0, Landroid/content/Intent;
+
+    const-string v1, "android.intent.action.VIEW"
+
+    const-string v2, "https://space.bilibili.com/20656755"
+
+    invoke-static {v2}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
+
+    move-result-object v2
+
+    invoke-direct {v0, v1, v2}, Landroid/content/Intent;-><init>(Ljava/lang/String;Landroid/net/Uri;)V
+
+    const/high16 v1, 0x30000000
+
+    invoke-virtual {v0, v1}, Landroid/content/Intent;->setFlags(I)Landroid/content/Intent;
+
+    invoke-virtual {p0, v0}, Lcom/smartisanos/smartfolder/aoa/activity/SettingsActivity;->startActivity(Landroid/content/Intent;)V
+
+    goto :goto_0
+
     .line 2196
     :sswitch_4
     new-instance v0, Landroid/content/Intent;
@@ -404,6 +491,9 @@
         0x7f0e008a -> :sswitch_8
         0x7f0e008d -> :sswitch_9
         0x7f0e00a2 -> :sswitch_0
+        0x7f0e00e3 -> :sswitch_a
+        0x7f0e00e4 -> :sswitch_b
+        0x7f0e00e5 -> :sswitch_c
     .end sparse-switch
 
     .line 2217
@@ -491,26 +581,6 @@
 
     iput-object v0, p0, Lcom/smartisanos/smartfolder/aoa/activity/SettingsActivity;->c:Landroid/widget/TextView;
 
-    .line 1069
-    const v0, 0x7f0e0039
-
-    invoke-virtual {p0, v0}, Lcom/smartisanos/smartfolder/aoa/activity/SettingsActivity;->findViewById(I)Landroid/view/View;
-
-    move-result-object v0
-
-    check-cast v0, Lcom/smartisan/moreapps/AppsView;
-
-    iput-object v0, p0, Lcom/smartisanos/smartfolder/aoa/activity/SettingsActivity;->d:Lcom/smartisan/moreapps/AppsView;
-
-    .line 1070
-    const v0, 0x7f0e00b4
-
-    invoke-virtual {p0, v0}, Lcom/smartisanos/smartfolder/aoa/activity/SettingsActivity;->findViewById(I)Landroid/view/View;
-
-    move-result-object v0
-
-    invoke-virtual {v0, v2}, Landroid/view/View;->setFocusable(Z)V
-
     .line 1172
     const v0, 0x7f0e0032
 
@@ -560,25 +630,31 @@
 
     .line 1073
     :goto_0
-    const v0, 0x7f0e002f
-
-    invoke-virtual {p0, v0}, Lcom/smartisanos/smartfolder/aoa/activity/SettingsActivity;->findViewById(I)Landroid/view/View;
-
-    move-result-object v0
-
-    invoke-virtual {v0, p0}, Landroid/view/View;->setOnClickListener(Landroid/view/View$OnClickListener;)V
-
-    .line 1074
-    const v0, 0x7f0e0030
-
-    invoke-virtual {p0, v0}, Lcom/smartisanos/smartfolder/aoa/activity/SettingsActivity;->findViewById(I)Landroid/view/View;
-
-    move-result-object v0
-
-    invoke-virtual {v0, p0}, Landroid/view/View;->setOnClickListener(Landroid/view/View$OnClickListener;)V
-
-    .line 1075
     const v0, 0x7f0e0031
+
+    invoke-virtual {p0, v0}, Lcom/smartisanos/smartfolder/aoa/activity/SettingsActivity;->findViewById(I)Landroid/view/View;
+
+    move-result-object v0
+
+    invoke-virtual {v0, p0}, Landroid/view/View;->setOnClickListener(Landroid/view/View$OnClickListener;)V
+
+    const v0, 0x7f0e00e3
+
+    invoke-virtual {p0, v0}, Lcom/smartisanos/smartfolder/aoa/activity/SettingsActivity;->findViewById(I)Landroid/view/View;
+
+    move-result-object v0
+
+    invoke-virtual {v0, p0}, Landroid/view/View;->setOnClickListener(Landroid/view/View$OnClickListener;)V
+
+    const v0, 0x7f0e00e4
+
+    invoke-virtual {p0, v0}, Lcom/smartisanos/smartfolder/aoa/activity/SettingsActivity;->findViewById(I)Landroid/view/View;
+
+    move-result-object v0
+
+    invoke-virtual {v0, p0}, Landroid/view/View;->setOnClickListener(Landroid/view/View$OnClickListener;)V
+
+    const v0, 0x7f0e00e5
 
     invoke-virtual {p0, v0}, Lcom/smartisanos/smartfolder/aoa/activity/SettingsActivity;->findViewById(I)Landroid/view/View;
 
@@ -595,44 +671,8 @@
 
     invoke-virtual {v0, p0}, Landroid/view/View;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
-    .line 1077
-    const v0, 0x7f0e0037
-
-    invoke-virtual {p0, v0}, Lcom/smartisanos/smartfolder/aoa/activity/SettingsActivity;->findViewById(I)Landroid/view/View;
-
-    move-result-object v0
-
-    invoke-virtual {v0, p0}, Landroid/view/View;->setOnClickListener(Landroid/view/View$OnClickListener;)V
-
     .line 1078
     const v0, 0x7f0e0038
-
-    invoke-virtual {p0, v0}, Lcom/smartisanos/smartfolder/aoa/activity/SettingsActivity;->findViewById(I)Landroid/view/View;
-
-    move-result-object v0
-
-    invoke-virtual {v0, p0}, Landroid/view/View;->setOnClickListener(Landroid/view/View$OnClickListener;)V
-
-    .line 1079
-    const v0, 0x7f0e0087
-
-    invoke-virtual {p0, v0}, Lcom/smartisanos/smartfolder/aoa/activity/SettingsActivity;->findViewById(I)Landroid/view/View;
-
-    move-result-object v0
-
-    invoke-virtual {v0, p0}, Landroid/view/View;->setOnClickListener(Landroid/view/View$OnClickListener;)V
-
-    .line 1080
-    const v0, 0x7f0e008a
-
-    invoke-virtual {p0, v0}, Lcom/smartisanos/smartfolder/aoa/activity/SettingsActivity;->findViewById(I)Landroid/view/View;
-
-    move-result-object v0
-
-    invoke-virtual {v0, p0}, Landroid/view/View;->setOnClickListener(Landroid/view/View$OnClickListener;)V
-
-    .line 1081
-    const v0, 0x7f0e008d
 
     invoke-virtual {p0, v0}, Lcom/smartisanos/smartfolder/aoa/activity/SettingsActivity;->findViewById(I)Landroid/view/View;
 

@@ -227,4 +227,7 @@
     <id name="zxing_status_view" />
     <id name="zxing_barcode_scanner" />
     <id name="action_settings" />
+    <id name="setting_project_page" />
+    <id name="setting_author_coolapk" />
+    <id name="setting_author_bilibili" />
 </resources>

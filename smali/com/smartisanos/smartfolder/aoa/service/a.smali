@@ -137,6 +137,12 @@
 
     invoke-static {v1}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
 
+    invoke-virtual {v0}, Landroid/os/ParcelFileDescriptor;->getFd()I
+
+    move-result v1
+
+    invoke-static {v1}, Lcom/smartisanos/smartfolder/aoa/h/UsbTrace;->accessoryOpened(I)V
+
     .line 41
     iget-object v1, p0, Lcom/smartisanos/smartfolder/aoa/service/a;->c:Landroid/os/ParcelFileDescriptor;
 

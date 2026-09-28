@@ -6,74 +6,68 @@
 # instance fields
 .field private final delegate:Ljava/io/InputStream;
 
-.field private firstRead:Z
-
-.field private totalBytes:J
-
-.field private totalOps:I
+.field private trace:Lcom/smartisanos/smartfolder/aoa/h/UsbTrace$Stream;
 
 
 # direct methods
 .method public constructor <init>(Ljava/io/InputStream;)V
-    .locals 1
-
-    .line 12
-    invoke-direct {p0}, Ljava/io/InputStream;-><init>()V
+    .locals 0
 
     .line 10
-    const/4 v0, 0x1
+    invoke-direct {p0}, Ljava/io/InputStream;-><init>()V
 
-    iput-boolean v0, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->firstRead:Z
-
-    .line 13
     iput-object p1, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->delegate:Ljava/io/InputStream;
 
-    .line 14
     return-void
 .end method
 
-.method private declared-synchronized takeFirstRead()Z
+.method private trace()Lcom/smartisanos/smartfolder/aoa/h/UsbTrace$Stream;
     .locals 2
 
-    monitor-enter p0
+    .line 13
+    invoke-static {}, Lcom/smartisanos/smartfolder/aoa/h/UsbTrace;->detailed()Z
 
-    .line 17
-    :try_start_0
-    iget-boolean v0, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->firstRead:Z
-    :try_end_0
-    .catchall {:try_start_0 .. :try_end_0} :catchall_0
-
-    const/4 v1, 0x0
+    move-result v0
 
     if-nez v0, :cond_0
 
-    .line 18
-    monitor-exit p0
+    const/4 v0, 0x0
 
-    return v1
+    return-object v0
 
-    .line 20
+    .line 14
     :cond_0
-    :try_start_1
-    iput-boolean v1, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->firstRead:Z
-    :try_end_1
-    .catchall {:try_start_1 .. :try_end_1} :catchall_0
+    monitor-enter p0
 
-    .line 21
-    monitor-exit p0
+    .line 15
+    :try_start_0
+    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->trace:Lcom/smartisanos/smartfolder/aoa/h/UsbTrace$Stream;
 
-    const/4 v0, 0x1
+    if-nez v0, :cond_1
 
-    return v0
+    new-instance v0, Lcom/smartisanos/smartfolder/aoa/h/UsbTrace$Stream;
+
+    const-string v1, "INPUT"
+
+    invoke-direct {v0, v1}, Lcom/smartisanos/smartfolder/aoa/h/UsbTrace$Stream;-><init>(Ljava/lang/String;)V
+
+    iput-object v0, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->trace:Lcom/smartisanos/smartfolder/aoa/h/UsbTrace$Stream;
 
     .line 16
+    :cond_1
+    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->trace:Lcom/smartisanos/smartfolder/aoa/h/UsbTrace$Stream;
+
+    monitor-exit p0
+
+    return-object v0
+
     :catchall_0
     move-exception v0
 
-    :try_start_2
+    .line 17
     monitor-exit p0
-    :try_end_2
-    .catchall {:try_start_2 .. :try_end_2} :catchall_0
+    :try_end_0
+    .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
     throw v0
 .end method
@@ -88,7 +82,7 @@
         }
     .end annotation
 
-    .line 77
+    .line 44
     iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->delegate:Ljava/io/InputStream;
 
     invoke-virtual {v0}, Ljava/io/InputStream;->available()I
@@ -99,56 +93,78 @@
 .end method
 
 .method public close()V
-    .locals 1
+    .locals 3
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
         }
     .end annotation
 
-    .line 82
+    .line 50
+    invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->trace()Lcom/smartisanos/smartfolder/aoa/h/UsbTrace$Stream;
+
+    move-result-object v0
+
+    if-nez v0, :cond_0
+
+    .line 51
     iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->delegate:Ljava/io/InputStream;
 
     invoke-virtual {v0}, Ljava/io/InputStream;->close()V
 
-    .line 83
     return-void
+
+    .line 52
+    :cond_0
+    invoke-virtual {v0}, Lcom/smartisanos/smartfolder/aoa/h/UsbTrace$Stream;->beginClose()Lcom/smartisanos/smartfolder/aoa/h/UsbTrace$Call;
+
+    move-result-object v1
+
+    .line 53
+    :try_start_0
+    iget-object v2, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->delegate:Ljava/io/InputStream;
+
+    invoke-virtual {v2}, Ljava/io/InputStream;->close()V
+
+    const/4 v2, 0x0
+
+    invoke-virtual {v0, v1, v2}, Lcom/smartisanos/smartfolder/aoa/h/UsbTrace$Stream;->close(Lcom/smartisanos/smartfolder/aoa/h/UsbTrace$Call;Ljava/lang/Throwable;)V
+    :try_end_0
+    .catch Ljava/io/IOException; {:try_start_0 .. :try_end_0} :catch_1
+    .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
+
+    return-void
+
+    :catch_0
+    move-exception v2
+
+    goto :goto_0
+
+    :catch_1
+    move-exception v2
+
+    .line 54
+    :goto_0
+    invoke-virtual {v0, v1, v2}, Lcom/smartisanos/smartfolder/aoa/h/UsbTrace$Stream;->close(Lcom/smartisanos/smartfolder/aoa/h/UsbTrace$Call;Ljava/lang/Throwable;)V
+
+    throw v2
 .end method
 
-.method public declared-synchronized mark(I)V
+.method public mark(I)V
     .locals 1
 
-    monitor-enter p0
-
-    .line 87
-    :try_start_0
+    .line 47
     iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->delegate:Ljava/io/InputStream;
 
     invoke-virtual {v0, p1}, Ljava/io/InputStream;->mark(I)V
-    :try_end_0
-    .catchall {:try_start_0 .. :try_end_0} :catchall_0
-
-    .line 88
-    monitor-exit p0
 
     return-void
-
-    .line 86
-    :catchall_0
-    move-exception p1
-
-    :try_start_1
-    monitor-exit p0
-    :try_end_1
-    .catchall {:try_start_1 .. :try_end_1} :catchall_0
-
-    throw p1
 .end method
 
 .method public markSupported()Z
     .locals 1
 
-    .line 97
+    .line 46
     iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->delegate:Ljava/io/InputStream;
 
     invoke-virtual {v0}, Ljava/io/InputStream;->markSupported()Z
@@ -158,210 +174,7 @@
     return v0
 .end method
 
-.method private accumulateRead(I)V
-    .locals 4
-
-    iget-wide v0, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->totalBytes:J
-
-    int-to-long v2, p1
-
-    add-long/2addr v0, v2
-
-    iput-wide v0, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->totalBytes:J
-
-    iget v0, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->totalOps:I
-
-    add-int/lit8 v0, v0, 0x1
-
-    iput v0, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->totalOps:I
-
-    rem-int/lit16 v0, v0, 0x1f4
-
-    if-nez v0, :cond_0
-
-    new-instance v0, Ljava/lang/StringBuilder;
-
-    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v1, "INPUT_PROGRESS totalBytes="
-
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
-
-    iget-wide v1, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->totalBytes:J
-
-    invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
-
-    move-result-object v0
-
-    const-string v1, " totalOps="
-
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
-
-    iget v1, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->totalOps:I
-
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v0
-
-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v0
-
-    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
-
-    :cond_0
-    return-void
-.end method
-
 .method public read()I
-    .locals 7
-    .annotation system Ldalvik/annotation/Throws;
-        value = {
-            Ljava/io/IOException;
-        }
-    .end annotation
-
-    .line 26
-    invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->takeFirstRead()Z
-
-    move-result v0
-
-    .line 27
-    invoke-static {}, Landroid/os/SystemClock;->elapsedRealtime()J
-
-    move-result-wide v1
-
-    .line 28
-    if-eqz v0, :cond_0
-
-    .line 29
-    const-string v3, "INPUT_FIRST_READ_BEGIN requested=1"
-
-    invoke-static {v3}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
-
-    .line 32
-    :cond_0
-    :try_start_0
-    iget-object v3, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->delegate:Ljava/io/InputStream;
-
-    invoke-virtual {v3}, Ljava/io/InputStream;->read()I
-
-    move-result v3
-
-    .line 33
-    if-eqz v0, :cond_2
-
-    .line 34
-    new-instance v4, Ljava/lang/StringBuilder;
-
-    invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v5, "INPUT_FIRST_READ_END bytes="
-
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    if-gez v3, :cond_1
-
-    const/4 v5, -0x1
-
-    goto :goto_0
-
-    :cond_1
-    const/4 v5, 0x1
-
-    :goto_0
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    const-string v5, " elapsedMs="
-
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    .line 35
-    invoke-static {}, Landroid/os/SystemClock;->elapsedRealtime()J
-
-    move-result-wide v5
-
-    sub-long/2addr v5, v1
-
-    invoke-virtual {v4, v5, v6}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v4
-
-    .line 34
-    invoke-static {v4}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
-    :try_end_0
-    .catch Ljava/io/IOException; {:try_start_0 .. :try_end_0} :catch_0
-
-    .line 37
-    :cond_2
-    return v3
-
-    .line 38
-    :catch_0
-    move-exception v3
-
-    .line 39
-    if-eqz v0, :cond_3
-
-    .line 40
-    new-instance v0, Ljava/lang/StringBuilder;
-
-    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v4, "INPUT_FIRST_READ_ERROR elapsedMs="
-
-    invoke-virtual {v0, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
-
-    .line 41
-    invoke-static {}, Landroid/os/SystemClock;->elapsedRealtime()J
-
-    move-result-wide v4
-
-    sub-long/2addr v4, v1
-
-    invoke-virtual {v0, v4, v5}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
-
-    move-result-object v0
-
-    const-string v1, " error="
-
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
-
-    invoke-virtual {v0, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
-
-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v0
-
-    .line 40
-    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
-
-    .line 43
-    :cond_3
-    throw v3
-.end method
-
-.method public read([BII)I
     .locals 5
     .annotation system Ldalvik/annotation/Throws;
         value = {
@@ -369,152 +182,156 @@
         }
     .end annotation
 
-    .line 49
-    invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->takeFirstRead()Z
+    .line 21
+    invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->trace()Lcom/smartisanos/smartfolder/aoa/h/UsbTrace$Stream;
+
+    move-result-object v0
+
+    if-nez v0, :cond_0
+
+    .line 22
+    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->delegate:Ljava/io/InputStream;
+
+    invoke-virtual {v0}, Ljava/io/InputStream;->read()I
 
     move-result v0
 
-    .line 50
-    invoke-static {}, Landroid/os/SystemClock;->elapsedRealtime()J
+    return v0
 
-    move-result-wide v1
-
-    .line 51
-    if-eqz v0, :cond_0
-
-    .line 52
-    new-instance v3, Ljava/lang/StringBuilder;
-
-    invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v4, "INPUT_FIRST_READ_BEGIN requested="
-
-    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v3
-
-    invoke-virtual {v3, p3}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v3
-
-    invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v3
-
-    invoke-static {v3}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
-
-    .line 55
     :cond_0
+    const/4 v1, 0x1
+
+    .line 23
+    invoke-virtual {v0, v1}, Lcom/smartisanos/smartfolder/aoa/h/UsbTrace$Stream;->begin(I)Lcom/smartisanos/smartfolder/aoa/h/UsbTrace$Call;
+
+    move-result-object v2
+
+    .line 25
     :try_start_0
     iget-object v3, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->delegate:Ljava/io/InputStream;
 
-    invoke-virtual {v3, p1, p2, p3}, Ljava/io/InputStream;->read([BII)I
+    invoke-virtual {v3}, Ljava/io/InputStream;->read()I
+
+    move-result v3
+
+    if-gez v3, :cond_1
+
+    const/4 v1, -0x1
+
+    :cond_1
+    const/4 v4, 0x0
+
+    .line 26
+    invoke-virtual {v0, v2, v1, v4}, Lcom/smartisanos/smartfolder/aoa/h/UsbTrace$Stream;->end(Lcom/smartisanos/smartfolder/aoa/h/UsbTrace$Call;ILjava/lang/Throwable;)V
+    :try_end_0
+    .catch Ljava/io/IOException; {:try_start_0 .. :try_end_0} :catch_1
+    .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
+
+    return v3
+
+    :catch_0
+    move-exception v1
+
+    goto :goto_0
+
+    :catch_1
+    move-exception v1
+
+    :goto_0
+    const/4 v3, 0x0
+
+    .line 28
+    invoke-virtual {v0, v2, v3, v1}, Lcom/smartisanos/smartfolder/aoa/h/UsbTrace$Stream;->end(Lcom/smartisanos/smartfolder/aoa/h/UsbTrace$Call;ILjava/lang/Throwable;)V
+
+    throw v1
+.end method
+
+.method public read([B)I
+    .locals 2
+    .annotation system Ldalvik/annotation/Throws;
+        value = {
+            Ljava/io/IOException;
+        }
+    .end annotation
+
+    const/4 v0, 0x0
+
+    .line 31
+    array-length v1, p1
+
+    invoke-virtual {p0, p1, v0, v1}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->read([BII)I
 
     move-result p1
 
-    .line 56
-    if-eqz v0, :cond_1
+    return p1
+.end method
 
-    .line 57
-    new-instance p2, Ljava/lang/StringBuilder;
+.method public read([BII)I
+    .locals 3
+    .annotation system Ldalvik/annotation/Throws;
+        value = {
+            Ljava/io/IOException;
+        }
+    .end annotation
 
-    invoke-direct {p2}, Ljava/lang/StringBuilder;-><init>()V
+    .line 34
+    invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->trace()Lcom/smartisanos/smartfolder/aoa/h/UsbTrace$Stream;
 
-    const-string p3, "INPUT_FIRST_READ_END bytes="
+    move-result-object v0
 
-    invoke-virtual {p2, p3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    if-nez v0, :cond_0
 
-    move-result-object p2
+    .line 35
+    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->delegate:Ljava/io/InputStream;
 
-    invoke-virtual {p2, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+    invoke-virtual {v0, p1, p2, p3}, Ljava/io/InputStream;->read([BII)I
 
-    move-result-object p2
+    move-result p1
 
-    const-string p3, " elapsedMs="
-
-    invoke-virtual {p2, p3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object p2
-
-    .line 58
-    invoke-static {}, Landroid/os/SystemClock;->elapsedRealtime()J
-
-    move-result-wide v3
-
-    sub-long/2addr v3, v1
-
-    invoke-virtual {p2, v3, v4}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
-
-    move-result-object p2
-
-    invoke-virtual {p2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object p2
-
-    .line 57
-    invoke-static {p2}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
-
-    # 持续读统计: 每 500 次读操作输出一次累计字节数, 覆盖"静默期/断连前"的读活动.
-    invoke-direct {p0, p1}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->accumulateRead(I)V
-    :try_end_0
-    .catch Ljava/io/IOException; {:try_start_0 .. :try_end_0} :catch_0
-
-    .line 60
-    :cond_1
     return p1
 
-    .line 61
+    .line 36
+    :cond_0
+    invoke-virtual {v0, p3}, Lcom/smartisanos/smartfolder/aoa/h/UsbTrace$Stream;->begin(I)Lcom/smartisanos/smartfolder/aoa/h/UsbTrace$Call;
+
+    move-result-object v1
+
+    .line 38
+    :try_start_0
+    iget-object v2, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->delegate:Ljava/io/InputStream;
+
+    invoke-virtual {v2, p1, p2, p3}, Ljava/io/InputStream;->read([BII)I
+
+    move-result p1
+
+    const/4 p2, 0x0
+
+    .line 39
+    invoke-virtual {v0, v1, p1, p2}, Lcom/smartisanos/smartfolder/aoa/h/UsbTrace$Stream;->end(Lcom/smartisanos/smartfolder/aoa/h/UsbTrace$Call;ILjava/lang/Throwable;)V
+    :try_end_0
+    .catch Ljava/io/IOException; {:try_start_0 .. :try_end_0} :catch_1
+    .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
+
+    return p1
+
     :catch_0
     move-exception p1
 
-    .line 62
-    if-eqz v0, :cond_2
+    goto :goto_0
 
-    .line 63
-    new-instance p2, Ljava/lang/StringBuilder;
+    :catch_1
+    move-exception p1
 
-    invoke-direct {p2}, Ljava/lang/StringBuilder;-><init>()V
+    :goto_0
+    const/4 p2, 0x0
 
-    const-string p3, "INPUT_FIRST_READ_ERROR elapsedMs="
+    .line 41
+    invoke-virtual {v0, v1, p2, p1}, Lcom/smartisanos/smartfolder/aoa/h/UsbTrace$Stream;->end(Lcom/smartisanos/smartfolder/aoa/h/UsbTrace$Call;ILjava/lang/Throwable;)V
 
-    invoke-virtual {p2, p3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object p2
-
-    .line 64
-    invoke-static {}, Landroid/os/SystemClock;->elapsedRealtime()J
-
-    move-result-wide v3
-
-    sub-long/2addr v3, v1
-
-    invoke-virtual {p2, v3, v4}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
-
-    move-result-object p2
-
-    const-string p3, " error="
-
-    invoke-virtual {p2, p3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object p2
-
-    invoke-virtual {p2, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    move-result-object p2
-
-    invoke-virtual {p2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object p2
-
-    .line 63
-    invoke-static {p2}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
-
-    .line 66
-    :cond_2
     throw p1
 .end method
 
-.method public declared-synchronized reset()V
+.method public reset()V
     .locals 1
     .annotation system Ldalvik/annotation/Throws;
         value = {
@@ -522,31 +339,12 @@
         }
     .end annotation
 
-    monitor-enter p0
-
-    .line 92
-    :try_start_0
+    .line 48
     iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->delegate:Ljava/io/InputStream;
 
     invoke-virtual {v0}, Ljava/io/InputStream;->reset()V
-    :try_end_0
-    .catchall {:try_start_0 .. :try_end_0} :catchall_0
-
-    .line 93
-    monitor-exit p0
 
     return-void
-
-    .line 91
-    :catchall_0
-    move-exception v0
-
-    :try_start_1
-    monitor-exit p0
-    :try_end_1
-    .catchall {:try_start_1 .. :try_end_1} :catchall_0
-
-    throw v0
 .end method
 
 .method public skip(J)J
@@ -557,7 +355,7 @@
         }
     .end annotation
 
-    .line 72
+    .line 45
     iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnosticInputStream;->delegate:Ljava/io/InputStream;
 
     invoke-virtual {v0, p1, p2}, Ljava/io/InputStream;->skip(J)J

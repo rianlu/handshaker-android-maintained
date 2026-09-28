@@ -1,9 +1,9 @@
 #!/bin/sh
 set -eu
 
-script_dir=$(CDPATH= cd -- "$(dirname "$0")" && pwd)
-repo_root=$(CDPATH= cd -- "$script_dir/.." && pwd)
-build_dir="$repo_root/build"
+script_dir=$(CDPATH='' cd -- "$(dirname "$0")" && pwd)
+repo_root=$(CDPATH='' cd -- "$script_dir/.." && pwd)
+build_dir="${HANDSHAKER_ANDROID_DEBUG_BUILD_DIR:-$repo_root/build}"
 unsigned_apk="$build_dir/handshaker-debug-unsigned.apk"
 signed_apk="$build_dir/handshaker-debug-signed.apk"
 keystore_dir="$build_dir/signing"
@@ -17,6 +17,7 @@ need_cmd() {
 }
 
 build_apk() {
+  "$script_dir/build_release.sh" --diagnostics-only
   mkdir -p "$build_dir"
   rm -f "$unsigned_apk" "$signed_apk"
   apktool b "$repo_root" -o "$unsigned_apk"
@@ -38,14 +39,13 @@ ensure_keystore() {
 }
 
 sign_apk() {
-  cp "$unsigned_apk" "$signed_apk"
-  jarsigner \
-    -keystore "$keystore_path" \
-    -storepass android \
-    -keypass android \
-    "$signed_apk" \
-    androiddebugkey >/dev/null
-  jarsigner -verify "$signed_apk" >/dev/null
+  sdk_dir="${ANDROID_SDK_ROOT:-${ANDROID_HOME:-$HOME/Library/Android/sdk}}"
+  apksigner_path="${HANDSHAKER_APKSIGNER:-$sdk_dir/build-tools/36.0.0/apksigner}"
+  zipalign_path="${HANDSHAKER_ZIPALIGN:-$sdk_dir/build-tools/36.0.0/zipalign}"
+  "$zipalign_path" -f 4 "$unsigned_apk" "$build_dir/handshaker-debug-aligned.apk"
+  "$apksigner_path" sign --ks "$keystore_path" --ks-key-alias androiddebugkey \
+    --ks-pass pass:android --key-pass pass:android --out "$signed_apk" "$build_dir/handshaker-debug-aligned.apk"
+  "$apksigner_path" verify "$signed_apk" >/dev/null
 }
 
 select_device() {
@@ -91,11 +91,12 @@ install_apk() {
 
 need_cmd apktool
 need_cmd keytool
-need_cmd jarsigner
+
+case "${1:-}" in ''|--build-only) ;; *) echo 'Usage: build_and_install.sh [--build-only]' >&2; exit 2 ;; esac
 
 build_apk
 ensure_keystore
 sign_apk
 
 echo "signed apk: $signed_apk"
-install_apk
+if [ "${1:-}" != --build-only ]; then install_apk; fi

@@ -1948,6 +1948,12 @@
     .line 172
     invoke-super {p0, p1}, Landroid/app/Activity;->onCreate(Landroid/os/Bundle;)V
 
+    invoke-virtual {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->getIntent()Landroid/content/Intent;
+
+    move-result-object v0
+
+    invoke-static {p0, v0}, Lcom/smartisanos/smartfolder/aoa/h/UsbTrace;->activity(Landroid/content/Context;Landroid/content/Intent;)V
+
     const-string v0, "ACTIVITY_ON_CREATE"
 
     invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/h/UsbDiagnostics;->record(Ljava/lang/String;)V
@@ -2519,6 +2525,8 @@
     .prologue
     .line 304
     invoke-super {p0, p1}, Landroid/app/Activity;->onNewIntent(Landroid/content/Intent;)V
+
+    invoke-static {p0, p1}, Lcom/smartisanos/smartfolder/aoa/h/UsbTrace;->activity(Landroid/content/Context;Landroid/content/Intent;)V
 
     .line 305
     const-string v0, "MainActivity"

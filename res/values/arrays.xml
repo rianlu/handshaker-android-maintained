@@ -4,15 +4,18 @@
         <item>跟随系统语言</item>
         <item>English</item>
         <item>中文(简体)</item>
+        <item>中文(繁體)</item>
     </string-array>
     <string-array name="language_current_string">
         <item>default</item>
         <item>en</item>
         <item>zh_CN</item>
+        <item>zh_TW</item>
     </string-array>
     <integer-array name="language_id">
         <item>0</item>
         <item>1</item>
         <item>2</item>
+        <item>3</item>
     </integer-array>
 </resources>

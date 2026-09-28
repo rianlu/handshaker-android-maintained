@@ -61,7 +61,8 @@ Mac 如无响应, 请重新插拔数据线并重试.
 环境要求:
 
 - apktool.
-- JDK, 包含 `keytool` 和 `jarsigner`.
+- JDK 17, 包含 `javac`, `java` 和 `keytool`.
+- Android SDK Platform 36 和 Build Tools 36.0.0, 包含 D8, apksigner 和 zipalign.
 - adb.
 
 ```sh
@@ -73,12 +74,18 @@ Mac 如无响应, 请重新插拔数据线并重试.
 
 版本号统一在 `tools/release.conf` 中维护. 发布产物输出到 `build/release/`.
 构建同时生成 `build/release/handshaker-android-release.env`, 供 Mac 构建校验并同步同一份正式 APK.
+通过 `HANDSHAKER_ANDROID_BUILD_DIR` 指定发布输出目录. 只构建调试 APK 时执行 `./tools/build_and_install.sh --build-only`, 避免触发设备安装.
+
+USB 诊断 Java 源码位于 `diagnostics/java/`. 在该目录修改读写计数, 权限快照和阻塞线程记录, 不要手工修改对应生成的 `UsbTrace*.smali` 和诊断流包装类. 构建脚本会先编译并转换这些类, 再组装原有 smali 应用. 单独更新生成类时执行 `./tools/build_release.sh --diagnostics-only`. 正式包始终记录 USB 状态、配件打开和关闭. 逐次读写、协议包和阻塞线程只在联合诊断启动后记录: 诊断脚本传入 `handshaker_diagnostic_run`, 本次及随后 24 小时内的进程会打开详细追踪. USB 状态广播缺失的字段记录为 unknown, 配件数量和实际授权数量独立记录. 联合诊断脚本在保存旧记录后, 经用户确认卸载旧应用和列出的分身, 再安装当前版本检查首次权限流程.
+
+通过 `ANDROID_SDK_ROOT` 或 `ANDROID_HOME` 指定 SDK. 如使用其他已安装工具版本, 显式设置 `HANDSHAKER_ANDROID_JAR`, `HANDSHAKER_D8`, `HANDSHAKER_APKSIGNER` 和 `HANDSHAKER_ZIPALIGN`. 诊断仅记录权限, 连接和协议元数据, 不记录传输载荷.
 
 ## 仓库结构
 
 ```text
 .
 ├── smali/              # 反编译后的应用逻辑
+├── diagnostics/java/   # 维护的 USB 诊断源码, 构建时生成 smali
 ├── res/                # Android 资源和文案
 ├── assets/             # 应用及 README 资源
 ├── original/           # 原始签名和清单参考

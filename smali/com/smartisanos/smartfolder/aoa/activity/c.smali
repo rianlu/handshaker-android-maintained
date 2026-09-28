@@ -449,14 +449,6 @@
 
     iput-object v0, p0, Lcom/smartisanos/smartfolder/aoa/activity/c;->d:Landroid/widget/TextView;
 
-    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/activity/c;->d:Landroid/widget/TextView;
-
-    new-instance v2, Lcom/smartisanos/smartfolder/aoa/activity/o;
-
-    invoke-direct {v2}, Lcom/smartisanos/smartfolder/aoa/activity/o;-><init>()V
-
-    invoke-virtual {v0, v2}, Landroid/widget/TextView;->setOnLongClickListener(Landroid/view/View$OnLongClickListener;)V
-
     .line 1075
     const v0, 0x7f0e003b
 
@@ -515,10 +507,6 @@
     const-string v2, "android.net.conn.CONNECTIVITY_CHANGE"
 
     invoke-direct {v0, v2}, Landroid/content/IntentFilter;-><init>(Ljava/lang/String;)V
-
-    const-string v2, "com.smartisanos.smartfolder.aoa.action.USB_STATUS"
-
-    invoke-virtual {v0, v2}, Landroid/content/IntentFilter;->addAction(Ljava/lang/String;)V
 
     .line 2067
     invoke-virtual {p0}, Lcom/smartisanos/smartfolder/aoa/activity/c;->getActivity()Landroid/app/Activity;

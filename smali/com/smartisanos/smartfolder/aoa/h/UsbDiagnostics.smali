@@ -6,7 +6,7 @@
 # static fields
 .field private static final FILE_NAME:Ljava/lang/String; = "handshaker-usb-diagnostic.log"
 
-.field private static final MAX_FILE_BYTES:J = 0x200000L
+.field private static final MAX_FILE_BYTES:J = 0x800000L
 
 .field private static final TAG:Ljava/lang/String; = "HandShakerUSB"
 
@@ -415,6 +415,18 @@
 
 .method private static recordLocked(Ljava/lang/String;)V
     .locals 4
+
+    invoke-static {}, Lcom/smartisanos/smartfolder/aoa/h/UsbTrace;->contextFields()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {p0}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;
+
+    move-result-object p0
+
+    invoke-virtual {v0, p0}, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object p0
 
     .line 43
     invoke-static {p0}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;
