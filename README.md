@@ -17,8 +17,15 @@
 
 <table>
   <tr>
-    <td align="center"><img src="./assets/readme/screenshot-usb.jpg" alt="USB 连接" width="280"><br>USB 连接</td>
-    <td align="center"><img src="./assets/readme/screenshot-wifi.jpg" alt="Wi-Fi 连接" width="280"><br>Wi-Fi 连接</td>
+    <td align="center"><img src="./assets/readme/screenshot-home.jpg" alt="主界面" width="280"><br>主界面</td>
+    <td align="center"><img src="./assets/readme/screenshot-usb-permission.jpg" alt="USB 配件授权" width="280"><br>USB 配件授权</td>
+  </tr>
+  <tr>
+    <td align="center"><img src="./assets/readme/screenshot-usb-connected.jpg" alt="USB 已连接" width="280"><br>USB 已连接</td>
+    <td align="center"><img src="./assets/readme/screenshot-wifi-connected.jpg" alt="Wi-Fi 已连接" width="280"><br>Wi-Fi 已连接</td>
+  </tr>
+  <tr>
+    <td align="center" colspan="2"><img src="./assets/readme/screenshot-settings.jpg" alt="设置" width="280"><br>设置</td>
   </tr>
 </table>
 
