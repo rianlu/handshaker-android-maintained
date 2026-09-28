@@ -51,6 +51,7 @@ compile_diagnostics() (
     "$temp_dir/classes/$namespace/"UsbDiagnosticInputStream*.class \
     "$temp_dir/classes/$namespace/"UsbDiagnosticOutputStream*.class \
     "$temp_dir/classes/$view_namespace/"TitleBarInset*.class \
+    "$temp_dir/classes/$view_namespace/"DialogFill*.class \
     "$temp_dir/classes/$service_namespace/"ConnectionForeground*.class \
     "$temp_dir/classes/$file_namespace/"StorageRoots*.class
   cp "$repo_root/original/AndroidManifest.xml" "$temp_dir/dex/AndroidManifest.xml"
@@ -59,6 +60,7 @@ compile_diagnostics() (
   cp "$temp_dir/decoded/smali/$namespace/"*.smali "$repo_root/smali/$namespace/"
   mkdir -p "$repo_root/smali/$view_namespace" "$repo_root/smali/$service_namespace" "$repo_root/smali/$file_namespace"
   cp "$temp_dir/decoded/smali/$view_namespace/"TitleBarInset*.smali "$repo_root/smali/$view_namespace/"
+  cp "$temp_dir/decoded/smali/$view_namespace/"DialogFill*.smali "$repo_root/smali/$view_namespace/"
   cp "$temp_dir/decoded/smali/$service_namespace/"ConnectionForeground*.smali "$repo_root/smali/$service_namespace/"
   cp "$temp_dir/decoded/smali/$file_namespace/"StorageRoots*.smali "$repo_root/smali/$file_namespace/"
   printf '%s\n' 'USB diagnostic classes compiled and disassembled.'

@@ -530,6 +530,12 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/view/Window;->setLayout(II)V
 
+    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/view/a;->l:Landroid/app/AlertDialog;
+
+    iget-object v1, p0, Lcom/smartisanos/smartfolder/aoa/view/a;->b:Landroid/view/View;
+
+    invoke-static {v0, v1}, Lcom/smartisanos/smartfolder/aoa/view/DialogFill;->apply(Landroid/app/Dialog;Landroid/view/View;)V
+
     .line 258
     iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/view/a;->l:Landroid/app/AlertDialog;
 
