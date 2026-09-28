@@ -18,8 +18,8 @@ case "$target_sdk" in
     ;;
 esac
 
-if [ "$target_sdk" -lt 24 ]; then
-  fail "targetSdkVersion must be at least 24 for fresh installs on Android 15+ (found $target_sdk)"
+if [ "$target_sdk" -lt 34 ]; then
+  fail "targetSdkVersion must be at least 34 so Android 16 Play Protect does not warn on install (found $target_sdk)"
 fi
 
 if grep -q 'android:sharedUserId=' "$manifest"; then

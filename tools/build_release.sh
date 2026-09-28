@@ -35,22 +35,32 @@ compile_diagnostics() (
   trap 'rm -rf "$temp_dir"' EXIT
   namespace=com/smartisanos/smartfolder/aoa/h
   view_namespace=com/smartisanos/smartfolder/aoa/view
-  mkdir -p "$temp_dir/stub/$namespace" "$temp_dir/classes" "$temp_dir/dex" "$temp_dir/smali"
+  service_namespace=com/smartisanos/smartfolder/aoa/service
+  file_namespace=com/smartisanos/smartfolder/aoa/d
+  mkdir -p "$temp_dir/stub/$namespace" "$temp_dir/stub/com/smartisanos/smartfolder/aoa" "$temp_dir/classes" "$temp_dir/dex" "$temp_dir/smali"
   printf '%s\n' 'package com.smartisanos.smartfolder.aoa.h; public final class UsbDiagnostics { public static native void record(String message); }' >"$temp_dir/stub/$namespace/UsbDiagnostics.java"
+  printf '%s\n' 'package com.smartisanos.smartfolder.aoa; public class MainActivity extends android.app.Activity {}' >"$temp_dir/stub/com/smartisanos/smartfolder/aoa/MainActivity.java"
   javac -encoding UTF-8 --release 8 -classpath "$android_jar" -d "$temp_dir/classes" \
-    "$temp_dir/stub/$namespace/UsbDiagnostics.java" "$repo_root/diagnostics/java/$namespace/"*.java \
-    "$repo_root/diagnostics/java/$view_namespace/"*.java
+    "$temp_dir/stub/$namespace/UsbDiagnostics.java" "$temp_dir/stub/com/smartisanos/smartfolder/aoa/MainActivity.java" \
+    "$repo_root/diagnostics/java/$namespace/"*.java \
+    "$repo_root/diagnostics/java/$view_namespace/"*.java \
+    "$repo_root/diagnostics/java/$service_namespace/"*.java \
+    "$repo_root/diagnostics/java/$file_namespace/"*.java
   "$d8_path" --release --min-api 17 --lib "$android_jar" --output "$temp_dir/dex" \
     "$temp_dir/classes/$namespace/"UsbTrace*.class \
     "$temp_dir/classes/$namespace/"UsbDiagnosticInputStream*.class \
     "$temp_dir/classes/$namespace/"UsbDiagnosticOutputStream*.class \
-    "$temp_dir/classes/$view_namespace/"TitleBarInset*.class
+    "$temp_dir/classes/$view_namespace/"TitleBarInset*.class \
+    "$temp_dir/classes/$service_namespace/"ConnectionForeground*.class \
+    "$temp_dir/classes/$file_namespace/"StorageRoots*.class
   cp "$repo_root/original/AndroidManifest.xml" "$temp_dir/dex/AndroidManifest.xml"
   (cd "$temp_dir/dex" && zip -q "$temp_dir/diagnostics.apk" classes.dex AndroidManifest.xml)
   apktool d --no-res --no-assets --force "$temp_dir/diagnostics.apk" --output "$temp_dir/decoded"
   cp "$temp_dir/decoded/smali/$namespace/"*.smali "$repo_root/smali/$namespace/"
-  mkdir -p "$repo_root/smali/$view_namespace"
+  mkdir -p "$repo_root/smali/$view_namespace" "$repo_root/smali/$service_namespace" "$repo_root/smali/$file_namespace"
   cp "$temp_dir/decoded/smali/$view_namespace/"TitleBarInset*.smali "$repo_root/smali/$view_namespace/"
+  cp "$temp_dir/decoded/smali/$service_namespace/"ConnectionForeground*.smali "$repo_root/smali/$service_namespace/"
+  cp "$temp_dir/decoded/smali/$file_namespace/"StorageRoots*.smali "$repo_root/smali/$file_namespace/"
   printf '%s\n' 'USB diagnostic classes compiled and disassembled.'
 )
 
@@ -119,7 +129,17 @@ build_apk() {
   # Apktool reuses build intermediates and can keep stale version metadata.
   rm -rf "$repo_root/build/apk" "$repo_root/build/resources.zip"
   rm -f "$unsigned_apk" "$aligned_apk" "$signed_apk"
-  apktool b "$repo_root" -o "$unsigned_apk"
+  # The stock apktool framework predates foregroundServiceType. Link against API 34
+  # without replacing the user's global framework.
+  sdk_dir="${ANDROID_SDK_ROOT:-${ANDROID_HOME:-$HOME/Library/Android/sdk}}"
+  frame_dir="$repo_root/.local/apktool-framework"
+  frame_jar="${HANDSHAKER_AAPT_FRAMEWORK_JAR:-$sdk_dir/platforms/android-34/android.jar}"
+  require_file "$frame_jar"
+  if [ ! -f "$frame_dir/1.apk" ]; then
+    mkdir -p "$frame_dir"
+    apktool if "$frame_jar" -p "$frame_dir"
+  fi
+  apktool b -p "$frame_dir" "$repo_root" -o "$unsigned_apk"
 }
 
 sign_with_apksigner() {

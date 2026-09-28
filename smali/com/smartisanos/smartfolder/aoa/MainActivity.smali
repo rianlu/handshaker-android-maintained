@@ -1699,6 +1699,8 @@
 
     invoke-virtual {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->b()V
 
+    invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->n()V
+
     goto/16 :goto_0
 
     :cond_0
@@ -2055,7 +2057,22 @@
     .line 190
     iget-object v2, p0, Lcom/smartisanos/smartfolder/aoa/MainActivity;->t:Landroid/content/BroadcastReceiver;
 
+    sget v3, Landroid/os/Build$VERSION;->SDK_INT:I
+
+    const/16 v4, 0x21
+
+    if-lt v3, v4, :cond_permission_legacy
+
+    const/4 v3, 0x4
+
+    invoke-virtual {p0, v2, v0, v3}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->registerReceiver(Landroid/content/BroadcastReceiver;Landroid/content/IntentFilter;I)Landroid/content/Intent;
+
+    goto :cond_permission_done
+
+    :cond_permission_legacy
     invoke-virtual {p0, v2, v0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->registerReceiver(Landroid/content/BroadcastReceiver;Landroid/content/IntentFilter;)Landroid/content/Intent;
+
+    :cond_permission_done
 
     const-string v2, "PERMISSION_RECEIVER_REGISTERED"
 
@@ -2113,6 +2130,8 @@
     if-eqz v0, :cond_3
 
     invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->g()V
+
+    invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->n()V
 
     .line 195
     :cond_3
@@ -2417,102 +2436,32 @@
 
     if-eqz v0, :cond_1
 
-    .line 11471
-    new-instance v0, Landroid/content/Intent;
-
-    const-class v1, Lcom/smartisanos/smartfolder/aoa/MainActivity;
-
-    invoke-direct {v0, p0, v1}, Landroid/content/Intent;-><init>(Landroid/content/Context;Ljava/lang/Class;)V
-
-    .line 11472
-    invoke-static {p0, v4, v0, v4}, Landroid/app/PendingIntent;->getActivity(Landroid/content/Context;ILandroid/content/Intent;I)Landroid/app/PendingIntent;
-
-    move-result-object v0
-
     .line 12130
     invoke-virtual {p0}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
 
-    move-result-object v1
+    move-result-object v0
 
-    const v2, 0x7f09008a
+    const v1, 0x7f09008a
 
-    invoke-virtual {v1, v2}, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+    invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
 
     move-result-object v1
 
     .line 12131
     invoke-virtual {p0}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
 
+    move-result-object v0
+
+    const v2, 0x7f090089
+
+    invoke-virtual {v0, v2}, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+
     move-result-object v2
-
-    const v3, 0x7f090089
-
-    invoke-virtual {v2, v3}, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
-
-    move-result-object v2
-
-    .line 12132
-    new-instance v3, Landroid/app/Notification$Builder;
-
-    invoke-direct {v3, p0}, Landroid/app/Notification$Builder;-><init>(Landroid/content/Context;)V
-
-    const v4, 0x7f0200a1
-
-    .line 12133
-    invoke-virtual {v3, v4}, Landroid/app/Notification$Builder;->setSmallIcon(I)Landroid/app/Notification$Builder;
-
-    move-result-object v3
-
-    .line 12134
-    invoke-virtual {v3, v1}, Landroid/app/Notification$Builder;->setTicker(Ljava/lang/CharSequence;)Landroid/app/Notification$Builder;
-
-    move-result-object v3
-
-    .line 12135
-    invoke-static {}, Ljava/lang/System;->currentTimeMillis()J
-
-    move-result-wide v4
-
-    invoke-virtual {v3, v4, v5}, Landroid/app/Notification$Builder;->setWhen(J)Landroid/app/Notification$Builder;
-
-    move-result-object v3
-
-    .line 12136
-    invoke-virtual {v3, v0}, Landroid/app/Notification$Builder;->setContentIntent(Landroid/app/PendingIntent;)Landroid/app/Notification$Builder;
-
-    move-result-object v0
-
-    .line 12137
-    invoke-virtual {v0, v1}, Landroid/app/Notification$Builder;->setContentTitle(Ljava/lang/CharSequence;)Landroid/app/Notification$Builder;
-
-    move-result-object v0
-
-    .line 12138
-    invoke-virtual {v0, v2}, Landroid/app/Notification$Builder;->setContentText(Ljava/lang/CharSequence;)Landroid/app/Notification$Builder;
-
-    move-result-object v0
-
-    .line 12140
-    invoke-virtual {v0}, Landroid/app/Notification$Builder;->build()Landroid/app/Notification;
-
-    move-result-object v1
-
-    .line 11476
-    const-string v0, "notification"
-
-    invoke-virtual {p0, v0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
-
-    move-result-object v0
-
-    check-cast v0, Landroid/app/NotificationManager;
-
-    .line 11477
-    if-eqz v0, :cond_1
 
     .line 11478
-    const/16 v2, 0x3e9
+    const/16 v0, 0x3e9
 
-    invoke-virtual {v0, v2, v1}, Landroid/app/NotificationManager;->notify(ILandroid/app/Notification;)V
+    invoke-static {p0, v0, v1, v2}, Lcom/smartisanos/smartfolder/aoa/service/ConnectionForeground;->show(Landroid/content/Context;ILjava/lang/String;Ljava/lang/String;)V
 
     .line 532
     :cond_1
@@ -2565,6 +2514,8 @@
 
     invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->g()V
 
+    invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->n()V
+
     .line 308
     :cond_0
     return-void
@@ -2576,6 +2527,8 @@
     .prologue
     .line 311
     invoke-super {p0, p1, p2, p3}, Landroid/app/Activity;->onRequestPermissionsResult(I[Ljava/lang/String;[I)V
+
+    invoke-static {p1, p3}, Lcom/smartisanos/smartfolder/aoa/service/ConnectionForeground;->onResult(I[I)V
 
     .line 312
     const/16 v0, 0x3ea
@@ -2623,8 +2576,20 @@
     .line 318
     invoke-virtual {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->b()V
 
+    invoke-direct {p0}, Lcom/smartisanos/smartfolder/aoa/MainActivity;->n()V
+
     .line 320
     :cond_2
+    return-void
+.end method
+
+.method protected onResume()V
+    .locals 0
+
+    invoke-super {p0}, Landroid/app/Activity;->onResume()V
+
+    invoke-static {p0}, Lcom/smartisanos/smartfolder/aoa/service/ConnectionForeground;->requestAfterResume(Landroid/app/Activity;)V
+
     return-void
 .end method
 
@@ -2634,6 +2599,8 @@
     .prologue
     .line 295
     invoke-super {p0}, Landroid/app/Activity;->onStart()V
+
+    invoke-static {p0}, Lcom/smartisanos/smartfolder/aoa/service/ConnectionForeground;->requestAfterResume(Landroid/app/Activity;)V
 
     .line 4483
     const-string v0, "notification"

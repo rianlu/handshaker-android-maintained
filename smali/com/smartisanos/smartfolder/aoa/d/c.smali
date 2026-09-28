@@ -2754,6 +2754,84 @@
 
     move-result-object v6
 
+    sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
+
+    const/16 v1, 0x1e
+
+    if-lt v0, v1, :legacy_volumes
+
+    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/d/c;->d:Landroid/os/storage/StorageManager;
+
+    invoke-static {v0}, Lcom/smartisanos/smartfolder/aoa/d/StorageRoots;->list(Landroid/os/storage/StorageManager;)[Lcom/smartisanos/smartfolder/aoa/d/StorageRoots$Root;
+
+    move-result-object v0
+
+    if-eqz v0, :legacy_volumes
+
+    array-length v1, v0
+
+    if-lez v1, :legacy_volumes
+
+    new-instance v1, Landroid/support/v4/c/a;
+
+    invoke-direct {v1}, Landroid/support/v4/c/a;-><init>()V
+
+    const/4 v5, 0x0
+
+    :modern_loop
+    array-length v4, v0
+
+    if-ge v5, v4, :modern_done
+
+    aget-object v8, v0, v5
+
+    iget-object v4, v8, Lcom/smartisanos/smartfolder/aoa/d/StorageRoots$Root;->id:Ljava/lang/String;
+
+    invoke-static {v4}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+
+    move-result v7
+
+    if-nez v7, :modern_next
+
+    invoke-virtual {v1, v4}, Landroid/support/v4/c/a;->containsKey(Ljava/lang/Object;)Z
+
+    move-result v7
+
+    if-nez v7, :modern_next
+
+    new-instance v9, Lcom/smartisanos/smartfolder/aoa/d/c$b;
+
+    const/4 v10, 0x0
+
+    invoke-direct {v9, p0, v10}, Lcom/smartisanos/smartfolder/aoa/d/c$b;-><init>(Lcom/smartisanos/smartfolder/aoa/d/c;B)V
+
+    invoke-virtual {v1, v4, v9}, Landroid/support/v4/c/a;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+
+    iput-object v4, v9, Lcom/smartisanos/smartfolder/aoa/d/c$b;->b:Ljava/lang/String;
+
+    iget-object v4, v8, Lcom/smartisanos/smartfolder/aoa/d/StorageRoots$Root;->directory:Ljava/io/File;
+
+    iput-object v4, v9, Lcom/smartisanos/smartfolder/aoa/d/c$b;->a:Ljava/io/File;
+
+    iget-object v4, v9, Lcom/smartisanos/smartfolder/aoa/d/c$b;->a:Ljava/io/File;
+
+    invoke-static {v9, v4}, Lcom/smartisanos/smartfolder/aoa/d/c;->b(Lcom/smartisanos/smartfolder/aoa/d/c$b;Ljava/io/File;)Ljava/lang/String;
+
+    move-result-object v4
+
+    iput-object v4, v9, Lcom/smartisanos/smartfolder/aoa/d/c$b;->c:Ljava/lang/String;
+
+    :modern_next
+    add-int/lit8 v5, v5, 0x1
+
+    goto :modern_loop
+
+    :modern_done
+    move-object v4, v1
+
+    goto :goto_2
+
+    :legacy_volumes
     .line 7275
     :try_start_0
     new-instance v1, Landroid/support/v4/c/a;

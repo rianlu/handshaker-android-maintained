@@ -1070,7 +1070,7 @@
 
 # virtual methods
 .method public final declared-synchronized b()V
-    .locals 4
+    .locals 5
 
     .prologue
     .line 80
@@ -1381,7 +1381,22 @@
 
     iget-object v2, p0, Lcom/smartisanos/smartfolder/aoa/h/f;->n:Lcom/smartisanos/smartfolder/aoa/h/f$b;
 
+    sget v3, Landroid/os/Build$VERSION;->SDK_INT:I
+
+    const/16 v4, 0x21
+
+    if-lt v3, v4, :cond_copy_legacy
+
+    const/4 v3, 0x2
+
+    invoke-virtual {v1, v2, v0, v3}, Landroid/content/Context;->registerReceiver(Landroid/content/BroadcastReceiver;Landroid/content/IntentFilter;I)Landroid/content/Intent;
+
+    goto :cond_copy_done
+
+    :cond_copy_legacy
     invoke-virtual {v1, v2, v0}, Landroid/content/Context;->registerReceiver(Landroid/content/BroadcastReceiver;Landroid/content/IntentFilter;)Landroid/content/Intent;
+
+    :cond_copy_done
 
     .line 129
     new-instance v0, Landroid/content/IntentFilter;

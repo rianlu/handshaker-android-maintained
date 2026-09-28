@@ -2848,6 +2848,7 @@
     invoke-virtual {v1, v2, v3, v0}, Landroid/content/ContentResolver;->registerContentObserver(Landroid/net/Uri;ZLandroid/database/ContentObserver;)V
 
     .line 1402
+    :try_start_provider
     sget-object v2, Lcom/smartisanos/smartfolder/aoa/d/e;->a:Landroid/net/Uri;
 
     const/4 v3, 0x1
@@ -2867,6 +2868,17 @@
     const/4 v3, 0x1
 
     invoke-virtual {v1, v2, v3, v0}, Landroid/content/ContentResolver;->registerContentObserver(Landroid/net/Uri;ZLandroid/database/ContentObserver;)V
+    :try_end_provider
+    .catch Ljava/lang/RuntimeException; {:try_start_provider .. :try_end_provider} :catch_provider
+
+    goto :provider_done
+
+    :catch_provider
+    move-exception v2
+
+    invoke-virtual {v2}, Ljava/lang/RuntimeException;->printStackTrace()V
+
+    :provider_done
 
     .line 367
     sget-object v0, Lcom/smartisanos/smartfolder/aoa/h/v;->b:Ljava/lang/String;

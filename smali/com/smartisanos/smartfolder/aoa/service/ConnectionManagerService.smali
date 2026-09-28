@@ -258,62 +258,7 @@
     move-result-object v1
 
     .line 1288
-    new-instance v2, Landroid/content/Intent;
-
-    const-class v3, Lcom/smartisanos/smartfolder/aoa/MainActivity;
-
-    invoke-direct {v2, p0, v3}, Landroid/content/Intent;-><init>(Landroid/content/Context;Ljava/lang/Class;)V
-
-    invoke-static {p0, v6, v2, v6}, Landroid/app/PendingIntent;->getActivity(Landroid/content/Context;ILandroid/content/Intent;I)Landroid/app/PendingIntent;
-
-    move-result-object v2
-
-    .line 1291
-    new-instance v3, Landroid/app/Notification$Builder;
-
-    invoke-direct {v3, p0}, Landroid/app/Notification$Builder;-><init>(Landroid/content/Context;)V
-
-    .line 1292
-    const v4, 0x7f0200a1
-
-    invoke-virtual {v3, v4}, Landroid/app/Notification$Builder;->setSmallIcon(I)Landroid/app/Notification$Builder;
-
-    .line 1293
-    const-wide/16 v4, 0x0
-
-    invoke-virtual {v3, v4, v5}, Landroid/app/Notification$Builder;->setWhen(J)Landroid/app/Notification$Builder;
-
-    .line 1294
-    invoke-virtual {v3, v7}, Landroid/app/Notification$Builder;->setOngoing(Z)Landroid/app/Notification$Builder;
-
-    .line 1295
-    invoke-virtual {v3, v0}, Landroid/app/Notification$Builder;->setTicker(Ljava/lang/CharSequence;)Landroid/app/Notification$Builder;
-
-    .line 1296
-    invoke-virtual {v3, v6}, Landroid/app/Notification$Builder;->setDefaults(I)Landroid/app/Notification$Builder;
-
-    .line 1297
-    invoke-virtual {v3, v8}, Landroid/app/Notification$Builder;->setSound(Landroid/net/Uri;)Landroid/app/Notification$Builder;
-
-    .line 1298
-    invoke-virtual {v3, v8}, Landroid/app/Notification$Builder;->setVibrate([J)Landroid/app/Notification$Builder;
-
-    .line 1299
-    invoke-virtual {v3, v0}, Landroid/app/Notification$Builder;->setContentTitle(Ljava/lang/CharSequence;)Landroid/app/Notification$Builder;
-
-    .line 1300
-    invoke-virtual {v3, v1}, Landroid/app/Notification$Builder;->setContentText(Ljava/lang/CharSequence;)Landroid/app/Notification$Builder;
-
-    .line 1301
-    invoke-virtual {v3, v2}, Landroid/app/Notification$Builder;->setContentIntent(Landroid/app/PendingIntent;)Landroid/app/Notification$Builder;
-
-    .line 1302
-    invoke-virtual {v3}, Landroid/app/Notification$Builder;->build()Landroid/app/Notification;
-
-    move-result-object v0
-
-    .line 1303
-    invoke-virtual {p0, v7, v0}, Lcom/smartisanos/smartfolder/aoa/service/ConnectionManagerService;->startForeground(ILandroid/app/Notification;)V
+    invoke-static {p0, v0, v1}, Lcom/smartisanos/smartfolder/aoa/service/ConnectionForeground;->start(Landroid/app/Service;Ljava/lang/String;Ljava/lang/String;)V
 
     .line 47
     return-void
