@@ -1618,10 +1618,8 @@
     .locals 4
 
     .prologue
-    .line 70
     sget-object v1, Landroid/os/Build;->MANUFACTURER:Ljava/lang/String;
 
-    .line 71
     invoke-static {}, Lcom/smartisanos/smartfolder/aoa/FolderApp;->a()Lcom/smartisanos/smartfolder/aoa/FolderApp;
 
     move-result-object v0
@@ -1630,27 +1628,24 @@
 
     move-result-object v2
 
-    .line 72
     const-string v0, "device_name"
 
     invoke-static {v2, v0}, Landroid/provider/Settings$Global;->getString(Landroid/content/ContentResolver;Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v0
 
-    .line 74
     invoke-static {v0}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
 
     move-result v3
 
-    if-eqz v3, :cond_4
+    if-eqz v3, :cond_use
 
     invoke-static {}, Lcom/smartisanos/smartfolder/aoa/h/d;->m()Z
 
     move-result v3
 
-    if-eqz v3, :cond_4
+    if-eqz v3, :cond_vendor
 
-    .line 76
     invoke-static {}, Lcom/smartisanos/smartfolder/aoa/FolderApp;->a()Lcom/smartisanos/smartfolder/aoa/FolderApp;
 
     move-result-object v0
@@ -1659,81 +1654,64 @@
 
     move-result-object v0
 
-    .line 83
-    :cond_0
-    :goto_0
     invoke-static {v0}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
 
-    move-result v1
+    move-result v3
 
-    if-eqz v1, :cond_1
+    if-eqz v3, :cond_use
 
-    .line 84
-    const-string v0, "bluetooth_name"
-
-    invoke-static {v2, v0}, Landroid/provider/Settings$Secure;->getString(Landroid/content/ContentResolver;Ljava/lang/String;)Ljava/lang/String;
-
-    move-result-object v0
-
-    .line 87
-    :cond_1
-    invoke-static {v0}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
-
-    move-result v1
-
-    if-eqz v1, :cond_2
-
-    .line 88
-    sget-object v0, Landroid/os/Build;->MODEL:Ljava/lang/String;
-
-    .line 90
-    :cond_2
-    if-nez v0, :cond_3
-
-    .line 91
-    const-string v0, ""
-
-    .line 93
-    :cond_3
-    return-object v0
-
-    .line 77
-    :cond_4
+    :cond_vendor
     const-string v3, "OPPO"
 
     invoke-virtual {v1, v3}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
 
     move-result v3
 
-    if-eqz v3, :cond_5
+    if-eqz v3, :cond_huawei
 
-    .line 78
     const-string v0, "oppo_device_name"
 
     invoke-static {v2, v0}, Landroid/provider/Settings$Secure;->getString(Landroid/content/ContentResolver;Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v0
 
-    goto :goto_0
+    invoke-static {v0}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
 
-    .line 79
-    :cond_5
+    move-result v3
+
+    if-eqz v3, :cond_use
+
+    :cond_huawei
     const-string v3, "HUAWEI"
 
     invoke-virtual {v1, v3}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
 
-    move-result v1
+    move-result v3
 
-    if-eqz v1, :cond_0
+    if-eqz v3, :cond_model
 
-    .line 80
     const-string v0, "unified_device_name"
 
     invoke-static {v2, v0}, Landroid/provider/Settings$Global;->getString(Landroid/content/ContentResolver;Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v0
 
-    goto :goto_0
+    invoke-static {v0}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+
+    move-result v3
+
+    if-eqz v3, :cond_use
+
+    :cond_model
+    sget-object v0, Landroid/os/Build;->MODEL:Ljava/lang/String;
+
+    :cond_use
+    if-nez v0, :cond_return
+
+    const-string v0, ""
+
+    :cond_return
+    return-object v0
 .end method
 
 .method public static c()J

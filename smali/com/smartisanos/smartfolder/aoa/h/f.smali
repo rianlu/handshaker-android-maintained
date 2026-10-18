@@ -1196,28 +1196,6 @@
     .line 97
     invoke-virtual {v0, v1, v2, v3}, Landroid/content/ContentResolver;->registerContentObserver(Landroid/net/Uri;ZLandroid/database/ContentObserver;)V
 
-    .line 99
-    iget-object v0, p0, Lcom/smartisanos/smartfolder/aoa/h/f;->j:Landroid/content/Context;
-
-    invoke-virtual {v0}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
-
-    move-result-object v0
-
-    const-string v1, "bluetooth_name"
-
-    .line 100
-    invoke-static {v1}, Landroid/provider/Settings$Secure;->getUriFor(Ljava/lang/String;)Landroid/net/Uri;
-
-    move-result-object v1
-
-    const/4 v2, 0x1
-
-    iget-object v3, p0, Lcom/smartisanos/smartfolder/aoa/h/f;->i:Lcom/smartisanos/smartfolder/aoa/h/f$g;
-
-    .line 99
-    invoke-virtual {v0, v1, v2, v3}, Landroid/content/ContentResolver;->registerContentObserver(Landroid/net/Uri;ZLandroid/database/ContentObserver;)V
-
-    .line 101
     sget-object v0, Landroid/os/Build;->MANUFACTURER:Ljava/lang/String;
 
     const-string v1, "OPPO"
