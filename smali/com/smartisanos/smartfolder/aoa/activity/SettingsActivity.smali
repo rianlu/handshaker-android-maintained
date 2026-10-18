@@ -689,6 +689,8 @@
 
     invoke-virtual {v0, p0}, Landroid/view/View;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
+    invoke-static {p0}, Lcom/smartisanos/smartfolder/aoa/h/UpdateCheck;->bind(Landroid/app/Activity;)V
+
     .line 1084
     new-instance v0, Lcom/smartisanos/smartfolder/aoa/view/e;
 

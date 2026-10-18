@@ -1319,6 +1319,17 @@
 
     if-nez v1, :cond_network_check
 
+    iget-object v1, p0, Lcom/smartisan/updater/a;->a:Landroid/content/Context;
+
+    invoke-static {v1}, Lcom/smartisanos/smartfolder/aoa/h/UpdateCheck;->isEnabled(Landroid/content/Context;)Z
+
+    move-result v1
+
+    if-nez v1, :cond_auto_allowed
+
+    goto :goto_0
+
+    :cond_auto_allowed
     invoke-direct {p0}, Lcom/smartisan/updater/a;->j()Z
 
     move-result v1

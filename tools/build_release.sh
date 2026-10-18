@@ -50,6 +50,7 @@ compile_diagnostics() (
     "$temp_dir/classes/$namespace/"UsbTrace*.class \
     "$temp_dir/classes/$namespace/"UsbDiagnosticInputStream*.class \
     "$temp_dir/classes/$namespace/"UsbDiagnosticOutputStream*.class \
+    "$temp_dir/classes/$namespace/"UpdateCheck*.class \
     "$temp_dir/classes/$view_namespace/"TitleBarInset*.class \
     "$temp_dir/classes/$view_namespace/"DialogFill*.class \
     "$temp_dir/classes/$service_namespace/"ConnectionForeground*.class \

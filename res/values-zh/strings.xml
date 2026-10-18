@@ -70,6 +70,7 @@
     <string name="setting_switch_language_txt">界面语言</string>
     <string name="setting_user_experience_txt">Smartisan 服务条款</string>
     <string name="settings_check_update">检查更新</string>
+    <string name="settings_auto_check_update">自动检查更新</string>
     <string name="settings_project_page">项目主页</string>
     <string name="settings_author_title">联系作者</string>
     <string name="settings_author_coolapk">酷安</string>

@@ -160,6 +160,7 @@ Click the link down below to find the barcode and scan"</string>
     <string name="setting_switch_language_txt">Language</string>
     <string name="setting_user_experience_txt">Smartisan Service Terms</string>
     <string name="settings_check_update">Check Update</string>
+    <string name="settings_auto_check_update">Automatic check</string>
     <string name="settings_project_page">Project Page</string>
     <string name="settings_author_title">Contact</string>
     <string name="settings_author_coolapk">Coolapk</string>
